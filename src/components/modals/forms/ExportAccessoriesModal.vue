@@ -31,12 +31,10 @@
               <!--begin::Input-->
               <div class="input-group mb-5">
                 <select class="form-select" aria-label="Select example" v-model="formData.fromName">
-                  <option value="">Seleziona la lettera...</option>
                   <option v-for="item in alphabet" :key="item.name" :value="item.name">{{ item.name }}</option>
                 </select>
                 <span class="input-group-text">-</span>
                 <select class="form-select" aria-label="Select example" v-model="formData.toName">
-                  <option value="">Seleziona la lettera...</option>
                   <option v-for="item in alphabet" :key="item.name" :value="item.name">{{ item.name }}</option>
                 </select>
               </div>
@@ -47,17 +45,13 @@
             <!--begin::Input group-->
             <div class="fv-row mb-10">
               <!--begin::Label-->
-              <label class="fs-5 fw-semobold form-label mb-5">Select Export Format:</label>
+              <label class="fs-5 fw-semobold form-label mb-5">Seleziona il formato:</label>
               <!--end::Label-->
 
-              <!--begin::Input-->
-              <el-select v-model="formData.exportFormat" class="d-block">
-                <el-option value="excel" key="excel" label="Excel" />
-                <el-option value="pdf" key="pdf" label="PDF" />
-                <el-option value="cvs" key="cvs" label="CVS" />
-                <el-option value="zip" key="zip" label="ZIP" />
-              </el-select>
-              <!--end::Input-->
+              <select class="form-select" aria-label="Select example" v-model="formData.exportFormat">
+                <option value="excel">Excel</option>
+                <option value="csv">CSV</option>
+              </select>
             </div>
             <!--end::Input group-->
 
@@ -114,10 +108,10 @@ export default defineComponent({
     const loading = ref<boolean>(false);
 
     const formData = ref({
-      Filter: "",
-      fromName: "",
-      toName: "",
-      exportFormat: ""
+      Filter: '',
+      fromName: 'A',
+      toName: 'Z',
+      exportFormat: "excel"
     });
 
     const rules = ref({
@@ -138,58 +132,54 @@ export default defineComponent({
       formRef.value.validate((valid: boolean) => {
         if (valid) {
           loading.value = true;
+          let api = ref("");
+          let output = ref("");
+          if (formData.value.exportFormat == "excel") {
+            api.value = "ExportExcel";
+            output.value = ".xlsx"
+          } else if (formData.value.exportFormat == "csv") {
+            api.value = "ExportCsv";
+            output.value = ".csv"
+          } else {
+            Swal.fire({
+              text: "Attenzione, selezionare il formato del file.",
+              icon: "error",
+              buttonsStyling: false,
+              confirmButtonText: "Continua!",
+              heightAuto: false,
+              customClass: {
+                confirmButton: "btn btn-primary",
+              },
+            });
+            loading.value = false;
+            return;
+          }
 
-          // axios({
-          //   url: 'https://localhost:7092/api/Accessories/ExportExcel?fromName=a&toName=z',
-          //   method: 'GET',
-          //   responseType: 'blob',  // Indica che la risposta è un file binario
-          // }).then((response) => {
-          //   console.log(JSON.stringify(response))
-          //   // Crea un oggetto URL per il blob restituito
-          //   const url = window.URL.createObjectURL(new Blob([response.data]));
-
-          //   // Crea un elemento link e simula un clic per scaricare il file
-          //   const link = document.createElement('a');
-          //   link.href = url;
-          //   link.setAttribute('download', 'output.xlsx');
-          //   document.body.appendChild(link);
-          //   link.click();
-
-          //   // Rilascia l'URL oggetto creato
-          //   window.URL.revokeObjectURL(url);
-          // });
-
-          ApiService.get(`Accessories/ExportExcel?fromName=a&toName=z`, "blob")
+          ApiService.get(`Accessories/${api.value}?fromName=${formData.value.fromName}&toName=${formData.value.toName}`, "blob")
             .then((response) => {
 
               const url = URL.createObjectURL(new Blob([response.data]))
               const link = document.createElement('a');
               link.href = url;
-              link.setAttribute('download', 'output.xlsx');
+              link.setAttribute('download', 'export accessori' + output.value);
               document.body.appendChild(link);
               link.click();
 
               window.URL.revokeObjectURL(url);
               document.body.removeChild(link);
 
-              setTimeout(() => {
-                loading.value = false;
+              loading.value = false;
 
-                Swal.fire({
-                  text: "Operazione completata!",
-                  icon: "success",
-                  buttonsStyling: false,
-                  confirmButtonText: "Continua!",
-                  heightAuto: false,
-                  customClass: {
-                    confirmButton: "btn btn-primary",
-                  },
-                })
-                
-                // .then(() => {
-                //   window.location.reload();
-                // });
-              }, 2000);
+              Swal.fire({
+                text: "Operazione completata!",
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: "Continua!",
+                heightAuto: false,
+                customClass: {
+                  confirmButton: "btn btn-primary",
+                },
+              })
             })
             .catch(({ response }) => {
               console.log(response);
