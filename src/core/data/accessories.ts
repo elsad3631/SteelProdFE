@@ -176,6 +176,4 @@ const getAccessory = (id) => {
 
 export { getAccessories, getAccessory };
 
-// export default getAccessories; getAccessory;
-
 export type { IAccessory };

@@ -247,12 +247,12 @@ import Statement from "@/components/customers/cards/statments/Statement.vue";
 
 import { useRoute, useRouter } from "vue-router";
 import { getAccessory } from "@/core/data/accessories";
-import getAccessoryTypes from "@/core/data/accessoryTypes";
-import type { IAccessoryType } from "@/core/data/accessoryTypes";
+import {getAccessoryTypes} from "@/core/data/typologies/accessoryTypes";
+import type { IAccessoryType } from "@/core/data/typologies/accessoryTypes";
 import getSuppliers from "@/core/data/suppliers";
 import type { ISupplier } from "@/core/data/suppliers";
-import getDeliveryTypes from "@/core/data/DeliveryTypes";
-import type { IDeliveryType } from "@/core/data/DeliveryTypes";
+import getDeliveryTypes from "@/core/data/typologies/DeliveryTypes";
+import type { IDeliveryType } from "@/core/data/typologies/DeliveryTypes";
 import ApiService from "@/core/services/ApiService";
 import * as Yup from "yup";
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -322,7 +322,7 @@ export default defineComponent({
     let DeliveryTypes = ref<IDeliveryType[]>([]);
 
     async function getItem() {
-      AccessoryTypes.value = await getAccessoryTypes();
+      AccessoryTypes.value = await getAccessoryTypes("");
       Suppliers.value = await getSuppliers("");
       DeliveryTypes.value = await getDeliveryTypes();
 

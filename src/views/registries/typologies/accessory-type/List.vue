@@ -1,493 +1,214 @@
 <template>
-  <!--begin::Layout-->
-  <div class="d-flex flex-column flex-xl-row">
-    <!--begin::Sidebar-->
-    <div class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10">
-      <!--begin::Card-->
-      <div class="card mb-5 mb-xl-8">
-        <!--begin::Card body-->
-        <div class="card-body pt-15">
-          <!--begin::Summary-->
-          <div class="d-flex flex-center flex-column mb-5">
-            <!--begin::Avatar-->
-            <div class="symbol symbol-100px symbol-circle mb-7">
-              <img :src="getAssetPath('media/avatars/300-1.jpg')" alt="image" />
-            </div>
-            <!--end::Avatar-->
-
-            <!--begin::Name-->
-            <a
-              href="#"
-              class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1"
-            >
-              Max Smith
-            </a>
-            <!--end::Name-->
-
-            <!--begin::Position-->
-            <div class="fs-5 fw-semobold text-muted mb-6">Software Enginer</div>
-            <!--end::Position-->
-
-            <!--begin::Info-->
-            <div class="d-flex flex-wrap flex-center">
-              <!--begin::Stats-->
-              <div
-                class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
-              >
-                <div class="fs-4 fw-bold text-gray-700">
-                  <span class="w-75px">6,900</span>
-                  <KTIcon icon-name="arrow-up" icon-class="fs-3 text-success" />
+    <div class="card">
+        <div class="card-header border-0 pt-6">
+            <!--begin::Card title-->
+            <div class="card-title">
+                <!--begin::Search-->
+                <div class="d-flex align-items-center position-relative my-1">
+                    <KTIcon icon-name="magnifier" icon-class="fs-1 position-absolute ms-6" />
+                    <input type="text" v-model="search" @input="searchItems()"
+                        class="form-control form-control-solid w-250px ps-15" placeholder="Ricerca" />
                 </div>
-                <div class="fw-semobold text-muted">Earnings</div>
-              </div>
-              <!--end::Stats-->
-
-              <!--begin::Stats-->
-              <div
-                class="border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3"
-              >
-                <div class="fs-4 fw-bold text-gray-700">
-                  <span class="w-50px">130</span>
-                  <KTIcon
-                    icon-name="arrow-down"
-                    icon-class="fs-3 text-danger"
-                  />
+                <!--end::Search-->
+            </div>
+            <!--begin::Card title-->
+            <!--begin::Card toolbar-->
+            <div class="card-toolbar">
+                <!--begin::Toolbar-->
+                <div v-if="selectedIds.length === 0" class="d-flex justify-content-end"
+                    data-kt-customer-table-toolbar="base">
+                    <!--begin::Add customer-->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#kt_modal_add_type">
+                        <KTIcon icon-name="plus" icon-class="fs-2" />
+                        Aggiungi tipologia accessorio
+                    </button>
+                    <!--end::Add customer-->
                 </div>
-                <div class="fw-semobold text-muted">Tasks</div>
-              </div>
-              <!--end::Stats-->
-
-              <!--begin::Stats-->
-              <div
-                class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
-              >
-                <div class="fs-4 fw-bold text-gray-700">
-                  <span class="w-50px">500</span>
-                  <KTIcon icon-name="arrow-up" icon-class="fs-3 text-success" />
+                <!--end::Toolbar-->
+                <!--begin::Group actions-->
+                <div v-else class="d-flex justify-content-end align-items-center" data-kt-customer-table-toolbar="selected">
+                    <div class="fw-bold me-5">
+                        <span class="me-2">{{ selectedIds.length }}</span>Selezionati
+                    </div>
+                    <button type="button" class="btn btn-danger" @click="deleteFewItems()">
+                        Elimina Selezionati
+                    </button>
                 </div>
-                <div class="fw-semobold text-muted">Hours</div>
-              </div>
-              <!--end::Stats-->
+                <!--end::Group actions-->
+                <!--begin::Group actions-->
+                <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
+                    <div class="fw-bold me-5">
+                        <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selezionati
+                    </div>
+                    <button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">
+                        Elimina Selezionati
+                    </button>
+                </div>
+                <!--end::Group actions-->
             </div>
-            <!--end::Info-->
-          </div>
-          <!--end::Summary-->
-
-          <!--begin::Details toggle-->
-          <div class="d-flex flex-stack fs-4 py-3">
-            <div
-              class="fw-bold rotate collapsible"
-              data-bs-toggle="collapse"
-              href="#kt_customer_view_details"
-              role="button"
-              aria-expanded="false"
-              aria-controls="kt_customer_view_details"
-            >
-              Details
-              <span class="ms-2 rotate-180">
-                <KTIcon icon-name="down" icon-class="fs-3" />
-              </span>
-            </div>
-
-            <span
-              data-bs-toggle="tooltip"
-              data-bs-trigger="hover"
-              title="Edit customer details"
-            >
-              <a
-                href="#"
-                class="btn btn-sm btn-light-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#kt_modal_update_customer"
-              >
-                Edit
-              </a>
-            </span>
-          </div>
-          <!--end::Details toggle-->
-
-          <div class="separator separator-dashed my-3"></div>
-
-          <!--begin::Details content-->
-          <div id="kt_customer_view_details" class="collapse show">
-            <div class="py-5 fs-6">
-              <!--begin::Badge-->
-              <div class="badge badge-light-info d-inline">Premium user</div>
-              <!--begin::Badge-->
-              <!--begin::Details item-->
-              <div class="fw-bold mt-5">Account ID</div>
-              <div class="text-gray-600">ID-45453423</div>
-              <!--begin::Details item-->
-              <!--begin::Details item-->
-              <div class="fw-bold mt-5">Billing Email</div>
-              <div class="text-gray-600">
-                <a href="#" class="text-gray-600 text-hover-primary"
-                  >info@keenthemes.com</a
-                >
-              </div>
-              <!--begin::Details item-->
-              <!--begin::Details item-->
-              <div class="fw-bold mt-5">Billing Address</div>
-              <div class="text-gray-600">
-                101 Collin Street, <br />Melbourne 3000 VIC <br />Australia
-              </div>
-              <!--begin::Details item-->
-              <!--begin::Details item-->
-              <div class="fw-bold mt-5">Language</div>
-              <div class="text-gray-600">English</div>
-              <!--begin::Details item-->
-              <!--begin::Details item-->
-              <div class="fw-bold mt-5">Upcoming Invoice</div>
-              <div class="text-gray-600">54238-8693</div>
-              <!--begin::Details item-->
-              <!--begin::Details item-->
-              <div class="fw-bold mt-5">Tax ID</div>
-              <div class="text-gray-600">TX-8674</div>
-              <!--begin::Details item-->
-            </div>
-          </div>
-          <!--end::Details content-->
+            <!--end::Card toolbar-->
         </div>
-        <!--end::Card body-->
-      </div>
-      <!--end::Card-->
-
-      <!--begin::Connected Accounts-->
-      <div class="card mb-5 mb-xl-8">
-        <!--begin::Card header-->
-        <div class="card-header border-0">
-          <div class="card-title">
-            <h3 class="fw-bold m-0">Connected Accounts</h3>
-          </div>
+        <div class="card-body pt-0">
+            <Datatable @on-sort="sort" @on-items-select="onItemSelect" :data="tableData" :header="tableHeader"
+                :enable-items-per-page-dropdown="true" :checkbox-enabled="true" checkbox-label="id" :loading="loading">
+                <template v-slot:code="{ row: item }">
+                    {{ item.code }}
+                </template>
+                <template v-slot:name="{ row: item }">
+                    <router-link :to="{ name: 'update-accessory', params: { id: item.id } }"
+                        class="text-gray-600 text-hover-primary mb-1">
+                        {{ item.name }}
+                    </router-link>
+                </template>
+                <template v-slot:actions="{ row: item }">
+                    <button class="btn btn-light-info me-1" data-bs-toggle="modal"
+                        data-bs-target="#kt_modal_update_type"
+                        @click="showUpdateModal(item.id, item.name)">Dettagli</button>
+                    <button @click="deleteItem(item.id)" class="btn btn-light-danger me-1">Elimina</button>
+                </template>
+            </Datatable>
         </div>
-        <!--end::Card header-->
-
-        <!--begin::Card body-->
-        <div class="card-body pt-2">
-          <div
-            class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6"
-          >
-            <KTIcon
-              icon-name="design-frame"
-              icon-class="fs-2tx text-primary me-4"
-            />
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-stack flex-grow-1">
-              <!--begin::Content-->
-              <div class="fw-semobold">
-                <div class="fs-6 text-gray-700">
-                  By connecting an account, you hereby agree to our
-                  <a href="#" class="me-1">privacy policy</a>and
-                  <a href="#">terms of use</a>.
-                </div>
-              </div>
-              <!--end::Content-->
-            </div>
-            <!--end::Wrapper-->
-          </div>
-
-          <!--begin::Items-->
-          <div class="py-2">
-            <!--begin::Item-->
-            <div class="d-flex flex-stack">
-              <div class="d-flex">
-                <img
-                  :src="getAssetPath('media/svg/brand-logos/google-icon.svg')"
-                  class="w-30px me-6"
-                  alt=""
-                />
-
-                <div class="d-flex flex-column">
-                  <a href="#" class="fs-5 text-dark text-hover-primary fw-bold"
-                    >Google</a
-                  >
-                  <div class="fs-6 fw-semobold text-muted">
-                    Plan properly your workflow
-                  </div>
-                </div>
-              </div>
-
-              <div class="d-flex justify-content-end">
-                <!--begin::Switch-->
-                <label
-                  class="form-check form-switch form-switch-sm form-check-custom form-check-solid"
-                >
-                  <!--begin::Input-->
-                  <input
-                    class="form-check-input"
-                    name="google"
-                    type="checkbox"
-                    value="1"
-                    id="kt_modal_connected_accounts_google"
-                    checked
-                  />
-                  <!--end::Input-->
-
-                  <!--begin::Label-->
-                  <span
-                    class="form-check-label fw-semobold text-muted"
-                    for="kt_modal_connected_accounts_google"
-                  ></span>
-                  <!--end::Label-->
-                </label>
-                <!--end::Switch-->
-              </div>
-            </div>
-            <!--end::Item-->
-
-            <div class="separator separator-dashed my-5"></div>
-
-            <!--begin::Item-->
-            <div class="d-flex flex-stack">
-              <div class="d-flex">
-                <img
-                  :src="getAssetPath('media/svg/brand-logos/github.svg')"
-                  class="w-30px me-6"
-                  alt=""
-                />
-
-                <div class="d-flex flex-column">
-                  <a href="#" class="fs-5 text-dark text-hover-primary fw-bold"
-                    >Github</a
-                  >
-                  <div class="fs-6 fw-semobold text-muted">
-                    Keep eye on on your Repositories
-                  </div>
-                </div>
-              </div>
-
-              <div class="d-flex justify-content-end">
-                <!--begin::Switch-->
-                <label
-                  class="form-check form-switch form-switch-sm form-check-custom form-check-solid"
-                >
-                  <!--begin::Input-->
-                  <input
-                    class="form-check-input"
-                    name="github"
-                    type="checkbox"
-                    value="1"
-                    id="kt_modal_connected_accounts_github"
-                    checked
-                  />
-                  <!--end::Input-->
-
-                  <!--begin::Label-->
-                  <span
-                    class="form-check-label fw-semobold text-muted"
-                    for="kt_modal_connected_accounts_github"
-                  ></span>
-                  <!--end::Label-->
-                </label>
-                <!--end::Switch-->
-              </div>
-            </div>
-            <!--end::Item-->
-
-            <div class="separator separator-dashed my-5"></div>
-
-            <!--begin::Item-->
-            <div class="d-flex flex-stack">
-              <div class="d-flex">
-                <img
-                  :src="getAssetPath('media/svg/brand-logos/slack-icon.svg')"
-                  class="w-30px me-6"
-                  alt=""
-                />
-
-                <div class="d-flex flex-column">
-                  <a href="#" class="fs-5 text-dark text-hover-primary fw-bold"
-                    >Slack</a
-                  >
-                  <div class="fs-6 fw-semobold text-muted">
-                    Integrate Projects Discussions
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-end">
-                <!--begin::Switch-->
-                <label
-                  class="form-check form-switch form-switch-sm form-check-custom form-check-solid"
-                >
-                  <!--begin::Input-->
-                  <input
-                    class="form-check-input"
-                    name="slack"
-                    type="checkbox"
-                    value="1"
-                    id="kt_modal_connected_accounts_slack"
-                  />
-                  <!--end::Input-->
-
-                  <!--begin::Label-->
-                  <span
-                    class="form-check-label fw-semobold text-muted"
-                    for="kt_modal_connected_accounts_slack"
-                  ></span>
-                  <!--end::Label-->
-                </label>
-                <!--end::Switch-->
-              </div>
-            </div>
-            <!--end::Item-->
-          </div>
-          <!--end::Items-->
-        </div>
-        <!--end::Card body-->
-
-        <!--begin::Card footer-->
-        <div class="card-footer border-0 d-flex justify-content-center pt-0">
-          <button class="btn btn-sm btn-light-primary">Save Changes</button>
-        </div>
-        <!--end::Card footer-->
-      </div>
-      <!--end::Connected Accounts-->
     </div>
-    <!--end::Sidebar-->
-
-    <!--begin::Content-->
-    <div class="flex-lg-row-fluid ms-lg-15">
-      <!--begin:::Tabs-->
-      <ul
-        class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semobold mb-8"
-      >
-        <!--begin:::Tab item-->
-        <li class="nav-item">
-          <a
-            class="nav-link text-active-primary pb-4 active"
-            data-bs-toggle="tab"
-            href="#kt_customer_view_overview_tab"
-            >Overview</a
-          >
-        </li>
-        <!--end:::Tab item-->
-
-        <!--begin:::Tab item-->
-        <li class="nav-item">
-          <a
-            class="nav-link text-active-primary pb-4"
-            data-bs-toggle="tab"
-            href="#kt_customer_view_overview_events_and_logs_tab"
-            >Events & Logs</a
-          >
-        </li>
-        <!--end:::Tab item-->
-
-        <!--begin:::Tab item-->
-        <li class="nav-item">
-          <a
-            class="nav-link text-active-primary pb-4"
-            data-kt-countup-tabs="true"
-            data-bs-toggle="tab"
-            href="#kt_customer_view_overview_statements"
-            >Statements</a
-          >
-        </li>
-        <!--end:::Tab item-->
-
-        <!--begin:::Tab item-->
-        <li class="nav-item ms-auto">
-          <!--begin::Action menu-->
-          <a
-            href="#"
-            class="btn btn-primary ps-7"
-            data-kt-menu-trigger="click"
-            data-kt-menu-attach="parent"
-            data-kt-menu-placement="bottom-end"
-          >
-            Actions
-            <KTIcon icon-name="down" icon-class="fs-2 me-0" />
-          </a>
-          <Dropdown3></Dropdown3>
-          <!--end::Menu-->
-        </li>
-        <!--end:::Tab item-->
-      </ul>
-      <!--end:::Tabs-->
-
-      <!--begin:::Tab content-->
-      <div class="tab-content" id="myTabContent">
-        <!--begin:::Tab pane-->
-        <div
-          class="tab-pane fade show active"
-          id="kt_customer_view_overview_tab"
-          role="tabpanel"
-        >
-          <PaymentRecords card-classes="mb-6 mb-xl-9"></PaymentRecords>
-
-          <PaymentMethods card-classes="mb-6 mb-xl-9"></PaymentMethods>
-
-          <CreditBalance card-classes="mb-6 mb-xl-9"></CreditBalance>
-
-          <Invoices card-classes="mb-6 mb-xl-9"></Invoices>
-        </div>
-        <!--end:::Tab pane-->
-
-        <!--begin:::Tab pane-->
-        <div
-          class="tab-pane fade"
-          id="kt_customer_view_overview_events_and_logs_tab"
-          role="tabpanel"
-        >
-          <Logs card-classes="mb-6 mb-xl-9"></Logs>
-          <Events card-classes="mb-6 mb-xl-9"></Events>
-        </div>
-        <!--end:::Tab pane-->
-
-        <!--begin:::Tab pane-->
-        <div
-          class="tab-pane fade"
-          id="kt_customer_view_overview_statements"
-          role="tabpanel"
-        >
-          <Earnings card-classes="mb-6 mb-xl-9"></Earnings>
-          <Statement card-classes="mb-6 mb-xl-9"></Statement>
-        </div>
-        <!--end:::Tab pane-->
-      </div>
-      <!--end:::Tab content-->
-    </div>
-    <!--end::Content-->
-  </div>
-  <!--end::Layout-->
-
-  <NewCardModal></NewCardModal>
+    <UpdateAccessoryTypeModal :id="selectedId" :name="selectedName" @formUpdateSubmitted="getItems('')"></UpdateAccessoryTypeModal>
+    <AddAccessoryTypeModal @formAddSubmitted="getItems('')"></AddAccessoryTypeModal>
 </template>
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent } from "vue";
-import Dropdown3 from "@/components/dropdown/Dropdown3.vue";
-import NewCardModal from "@/components/modals/forms/NewCardModal.vue";
-import PaymentRecords from "@/components/customers/cards/overview/PaymentRecords.vue";
-import PaymentMethods from "@/components/customers/cards/overview/PaymentMethods.vue";
-import CreditBalance from "@/components/customers/cards/overview/CreditBalance.vue";
-import Invoices from "@/components/customers/cards/overview/Invoices.vue";
-
-import Events from "@/components/customers/cards/events-and-logs/Events.vue";
-import Logs from "@/components/customers/cards/events-and-logs/Logs.vue";
-
-import Earnings from "@/components/customers/cards/statments/Earnings.vue";
-import Statement from "@/components/customers/cards/statments/Statement.vue";
+import { defineComponent, onMounted, ref } from "vue";
+import Datatable from "@/components/kt-datatable/KTDataTable.vue";
+import type { Sort } from "@/components/kt-datatable//table-partials/models";
+import UpdateAccessoryTypeModal from "@/components/modals/forms/typologies/UpdateAccessoryTypeModal.vue";
+import AddAccessoryTypeModal from "@/components/modals/forms/typologies/AddAccessoryTypeModal.vue";
+import arraySort from "array-sort";
+import { MenuComponent } from "@/assets/ts/components";
+import ApiService from "@/core/services/ApiService";
+import Loading from "@/components/kt-datatable/table-partials/Loading.vue"
+import { getAccessoryTypes } from "@/core/data/typologies/accessoryTypes";
+import type { IAccessoryType } from "@/core/data/typologies/accessoryTypes";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 export default defineComponent({
-  name: "customer-details",
-  components: {
-    PaymentRecords,
-    PaymentMethods,
-    CreditBalance,
-    Invoices,
-    Events,
-    Logs,
-    Earnings,
-    Statement,
-    Dropdown3,
-    NewCardModal,
-  },
-  setup() {
-    return {
-      getAssetPath,
-    };
-  },
+    name: "accessory-type-list",
+    components: {
+        Datatable,
+        UpdateAccessoryTypeModal,
+        AddAccessoryTypeModal,
+        Loading
+    },
+    setup() {
+        let loading = ref<boolean>(true);
+        let selectedId = ref(0);
+        let selectedName = ref("");
+        const tableHeader = ref([
+            {
+                columnName: "Nome",
+                columnLabel: "name",
+                sortEnabled: true,
+                columnWidth: 300,
+            },
+            {
+                columnName: "Azioni",
+                columnLabel: "actions",
+                sortEnabled: false,
+                columnWidth: 135,
+            },
+        ]);
+
+        const selectedIds = ref<Array<number>>([]);
+
+        let tableData = ref<IAccessoryType[]>([]);
+
+        async function getItems(filterRequest: string) {
+            tableData.value = await getAccessoryTypes(filterRequest);
+            loading.value = false;
+        };
+
+        onMounted(() => {
+            loading.value = true;
+            getItems("");
+        });
+
+        const deleteFewItems = () => {
+            selectedIds.value.forEach((item) => {
+                deleteItem(item);
+            });
+            selectedIds.value.length = 0;
+        };
+
+        const deleteItem = (id: number) => {
+            loading.value = true;
+            ApiService.post(`AccessoryType/Delete?id=${id}`, {})
+                .then(() => {
+                   
+                    Swal.fire({
+                        text: "Operazione completata!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Continua!",
+                        heightAuto: false,
+                        customClass: {
+                            confirmButton: "btn btn-primary",
+                        },
+                    }).then(() => {
+                        getItems("");
+                    });
+                })
+                .catch(({ response }) => {
+                    Swal.fire({
+                        text: response.data.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Continua!",
+                        heightAuto: false,
+                        customClass: {
+                            confirmButton: "btn btn-primary",
+                        },
+                    }).then(() => {
+                        getItems("");
+                    });
+                });
+        };
+
+        const search = ref<string>("");
+        const searchItems = () => {
+            getItems(search.value);
+            MenuComponent.reinitialization();
+        };
+
+        const sort = (sort: Sort) => {
+            const reverse: boolean = sort.order === "asc";
+            if (sort.label) {
+                arraySort(tableData.value, sort.label, { reverse });
+            }
+        };
+        const onItemSelect = (selectedItems: Array<number>) => {
+            selectedIds.value = selectedItems;
+        };
+
+        function showUpdateModal(id, name) {
+            selectedId.value = id;
+            selectedName.value = name;
+        }
+
+        return {
+            tableData,
+            tableHeader,
+            deleteItem,
+            search,
+            searchItems,
+            selectedIds,
+            deleteFewItems,
+            sort,
+            onItemSelect,
+            getAssetPath,
+            loading,
+            selectedId,
+            selectedName,
+            showUpdateModal,
+            getItems
+        };
+    },
 });
 </script>
