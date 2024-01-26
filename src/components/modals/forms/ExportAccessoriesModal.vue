@@ -98,7 +98,6 @@ import { defineComponent, ref } from "vue";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { alphabet } from "@/core/data/alphabet";
 import ApiService from "@/core/services/ApiService";
-import axios from "axios";
 
 export default defineComponent({
   name: "export-accessories-modal",

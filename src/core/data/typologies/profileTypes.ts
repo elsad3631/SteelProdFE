@@ -1,14 +1,14 @@
 import ApiService from "@/core/services/ApiService";
 
-interface IDeliveryType {
+interface IProfileType {
   id: number;
   name: string;
 }
 
-const getDeliveryTypes = (filterRequest: string) => {
-  return ApiService.get(`DeliveryType/Get?currentPage=0&filterRequest=${filterRequest}`, '')
+const getProfileTypes = (filterRequest: string) => {
+  return ApiService.get(`ProfileType/Get?currentPage=0&filterRequest=${filterRequest}`, '')
     .then(({ data }) => {
-      const results: Array<IDeliveryType> = data.data.map(item => ({
+      const results: Array<IProfileType> = data.data.map(item => ({
         id: item.id,
         name: item.name
       }));
@@ -20,11 +20,11 @@ const getDeliveryTypes = (filterRequest: string) => {
     });
 };
 
-const getDeliveryType = (id) => {
-  return ApiService.get(`DeliveryType/GetById?id=${id}`, '')
+const getProfileType = (id) => {
+  return ApiService.get(`ProfileType/GetById?id=${id}`, '')
     .then(({ data }) => {
       const item = data;
-      const result: IDeliveryType = {
+      const result: IProfileType = {
         id: item.id,
         name: item.name,
       };
@@ -37,6 +37,6 @@ const getDeliveryType = (id) => {
 };
 
 
-export { getDeliveryTypes, getDeliveryType };
+export { getProfileTypes, getProfileType };
 
-export type { IDeliveryType };
+export type { IProfileType };

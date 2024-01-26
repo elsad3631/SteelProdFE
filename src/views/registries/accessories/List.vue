@@ -28,7 +28,7 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#kt_modal_add_customer">
                         <KTIcon icon-name="plus" icon-class="fs-2" />
-                        Aggiungi cliente
+                        Aggiungi accessorio
                     </button>
                     <!--end::Add customer-->
                 </div>

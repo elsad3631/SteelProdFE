@@ -1,14 +1,14 @@
 import ApiService from "@/core/services/ApiService";
 
-interface IDeliveryType {
+interface IGoodReceiptType {
   id: number;
   name: string;
 }
 
-const getDeliveryTypes = (filterRequest: string) => {
-  return ApiService.get(`DeliveryType/Get?currentPage=0&filterRequest=${filterRequest}`, '')
+const getGoodReceiptTypes = (filterRequest: string) => {
+  return ApiService.get(`GoodReceiptType/Get?currentPage=0&filterRequest=${filterRequest}`, '')
     .then(({ data }) => {
-      const results: Array<IDeliveryType> = data.data.map(item => ({
+      const results: Array<IGoodReceiptType> = data.data.map(item => ({
         id: item.id,
         name: item.name
       }));
@@ -20,11 +20,11 @@ const getDeliveryTypes = (filterRequest: string) => {
     });
 };
 
-const getDeliveryType = (id) => {
-  return ApiService.get(`DeliveryType/GetById?id=${id}`, '')
+const getGoodReceiptType = (id) => {
+  return ApiService.get(`GoodReceiptType/GetById?id=${id}`, '')
     .then(({ data }) => {
       const item = data;
-      const result: IDeliveryType = {
+      const result: IGoodReceiptType = {
         id: item.id,
         name: item.name,
       };
@@ -37,6 +37,6 @@ const getDeliveryType = (id) => {
 };
 
 
-export { getDeliveryTypes, getDeliveryType };
+export { getGoodReceiptTypes, getGoodReceiptType };
 
-export type { IDeliveryType };
+export type { IGoodReceiptType };
