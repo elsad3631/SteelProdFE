@@ -214,29 +214,11 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/registries/typologies/accessory-type/update/:id",
-        name: "update-accessory-typologies",
-        component: () => import("@/views/registries/typologies/accessory-type/Update.vue"),
-        meta: {
-          pageTitle: "Dettagli tipologia accessori",
-          breadcrumbs: ["Apps", "Tipologie accessori"],
-        },
-      },
-      {
         path: "/registries/typologies/customer-type/list",
         name: "customer-typologies-list",
         component: () => import("@/views/registries/typologies/customer-type/List.vue"),
         meta: {
           pageTitle: "Lista tipologie clienti",
-          breadcrumbs: ["Apps", "Tipologie clienti"],
-        },
-      },
-      {
-        path: "/registries/typologies/customer-type/update/:id",
-        name: "update-customer-typologies",
-        component: () => import("@/views/registries/typologies/customer-type/Update.vue"),
-        meta: {
-          pageTitle: "Dettagli tipologie clienti",
           breadcrumbs: ["Apps", "Tipologie clienti"],
         },
       },
@@ -250,29 +232,11 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/registries/typologies/delivery-type/update/:id",
-        name: "update-delivery-typologies",
-        component: () => import("@/views/registries/typologies/delivery-type/Update.vue"),
-        meta: {
-          pageTitle: "Dettagli modalità di consegna",
-          breadcrumbs: ["Apps", "Modalità di consegna"],
-        },
-      },
-      {
         path: "/registries/typologies/good-receipt-type/list",
         name: "good-receipt-typologies-list",
         component: () => import("@/views/registries/typologies/good-receipt-type/List.vue"),
         meta: {
           pageTitle: "Lista tipologie entrata merce",
-          breadcrumbs: ["Apps", "Tipologie entrata merce"],
-        },
-      },
-      {
-        path: "/registries/typologies/good-receipt-type/update/:id",
-        name: "update-good-receipt-typologies",
-        component: () => import("@/views/registries/typologies/good-receipt-type/Update.vue"),
-        meta: {
-          pageTitle: "Dettagli tipologie entrata merce",
           breadcrumbs: ["Apps", "Tipologie entrata merce"],
         },
       },
@@ -286,15 +250,6 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/registries/typologies/material-type/update/:id",
-        name: "update-material-typologies",
-        component: () => import("@/views/registries/typologies/material-type/Update.vue"),
-        meta: {
-          pageTitle: "Dettagli tipologie materiali",
-          breadcrumbs: ["Apps", "Tipologie materiali"],
-        },
-      },
-      {
         path: "/registries/typologies/payment-type/list",
         name: "payment-typologies-list",
         component: () => import("@/views/registries/typologies/payment-type/List.vue"),
@@ -304,29 +259,11 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/registries/typologies/payment-type/update/:id",
-        name: "update-payment-typologies",
-        component: () => import("@/views/registries/typologies/payment-type/Update.vue"),
-        meta: {
-          pageTitle: "Dettagli tipologie pagamento",
-          breadcrumbs: ["Apps", "Tipologie pagamento"],
-        },
-      },
-      {
         path: "/registries/typologies/profile-type/list",
         name: "profile-typologies-list",
         component: () => import("@/views/registries/typologies/profile-type/List.vue"),
         meta: {
           pageTitle: "Lista tipologie profili",
-          breadcrumbs: ["Apps", "Tipologie profili"],
-        },
-      },
-      {
-        path: "/registries/typologies/profile-type/update/:id",
-        name: "update-profile-typologies",
-        component: () => import("@/views/registries/typologies/profile-type/Update.vue"),
-        meta: {
-          pageTitle: "Dettagli tipologie profili",
           breadcrumbs: ["Apps", "Tipologie profili"],
         },
       },

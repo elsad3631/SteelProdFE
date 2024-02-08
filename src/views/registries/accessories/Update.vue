@@ -251,7 +251,7 @@ import {getAccessoryTypes} from "@/core/data/typologies/accessoryTypes";
 import type { IAccessoryType } from "@/core/data/typologies/accessoryTypes";
 import getSuppliers from "@/core/data/suppliers";
 import type { ISupplier } from "@/core/data/suppliers";
-import getDeliveryTypes from "@/core/data/typologies/deliveryTypes";
+import {getDeliveryTypes} from "@/core/data/typologies/deliveryTypes";
 import type { IDeliveryType } from "@/core/data/typologies/deliveryTypes";
 import ApiService from "@/core/services/ApiService";
 import * as Yup from "yup";
@@ -324,7 +324,7 @@ export default defineComponent({
     async function getItem() {
       AccessoryTypes.value = await getAccessoryTypes("");
       Suppliers.value = await getSuppliers("");
-      DeliveryTypes.value = await getDeliveryTypes();
+      DeliveryTypes.value = await getDeliveryTypes('');
 
       const accessory = await getAccessory(id);
       item.value = {
