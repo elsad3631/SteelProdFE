@@ -28,7 +28,7 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#kt_modal_add_customer">
                         <KTIcon icon-name="plus" icon-class="fs-2" />
-                        Aggiungi accessorio
+                        Aggiungi fornitore
                     </button>
                     <!--end::Add customer-->
                 </div>
@@ -84,8 +84,8 @@
     </div>
 
 
-    <ExportAccessoriesModal></ExportAccessoriesModal>
-    <AddAccessoryModal @formAddSubmitted="getItems('')"></AddAccessoryModal>
+    <ExportSuppliersModal></ExportSuppliersModal>
+    <AddSupplierModal @formAddSubmitted="getItems('')"></AddSupplierModal>
 </template>
 
 <script lang="ts">
@@ -93,21 +93,21 @@ import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent, onMounted, ref } from "vue";
 import Datatable from "@/components/kt-datatable/KTDataTable.vue";
 import type { Sort } from "@/components/kt-datatable//table-partials/models";
-import ExportAccessoriesModal from "@/components/modals/forms/ExportAccessoriesModal.vue";
-import AddAccessoryModal from "@/components/modals/forms/AddAccessoryModal.vue";
+import ExportSuppliersModal from "@/components/modals/forms/ExportSuppliersModal.vue";
+import AddSupplierModal from "@/components/modals/forms/AddSupplierModal.vue";
 import arraySort from "array-sort";
 import { MenuComponent } from "@/assets/ts/components";
 import ApiService from "@/core/services/ApiService";
 import Loading from "@/components/kt-datatable/table-partials/Loading.vue"
-import { getAccessories } from "@/core/data/accessories";
-import type { IAccessory } from "@/core/data/accessories";
+import { getSuppliers }  from "@/core/data/suppliers";
+import type { ISupplier } from "@/core/data/suppliers";
 
 export default defineComponent({
-    name: "accessories-list",
+    name: "suppliers-list",
     components: {
         Datatable,
-        ExportAccessoriesModal,
-        AddAccessoryModal,
+        ExportSuppliersModal,
+        AddSupplierModal,
         Loading
     },
     setup() {
@@ -147,10 +147,10 @@ export default defineComponent({
 
         const selectedIds = ref<Array<number>>([]);
         
-        let tableData = ref<IAccessory[]>([]);
+        let tableData = ref<ISupplier[]>([]);
 
         async function getItems(filterRequest: string) {
-            tableData.value = await getAccessories(filterRequest);
+            tableData.value = await getSuppliers(filterRequest);
             loading.value = false;
         };
 
@@ -168,7 +168,7 @@ export default defineComponent({
 
         const deleteItem = (id: number) => {
             loading.value = true;
-            ApiService.post(`Accessories/Delete?id=${id}`, {})
+            ApiService.post(`Suppliers/Delete?id=${id}`, {})
                 .then(() => {
                     getItems("");
                 })
@@ -204,7 +204,8 @@ export default defineComponent({
             sort,
             onItemSelect,
             getAssetPath,
-            loading
+            loading,
+            getItems
         };
     },
 });

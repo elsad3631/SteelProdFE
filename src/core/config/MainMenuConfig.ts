@@ -18,6 +18,12 @@ const MainMenuConfig: Array<MenuItem> = [
         bootstrapIcon: "bi-app-indicator",
       },
       {
+        heading: "Commesse",
+        route: "/orders/list",
+        keenthemesIcon: "element-11",
+        bootstrapIcon: "bi-app-indicator",
+      },
+      {
         sectionTitle: "Anagrafiche",
         route: "/pages",
         keenthemesIcon: "element-plus",
@@ -30,6 +36,10 @@ const MainMenuConfig: Array<MenuItem> = [
           {
             heading: "Accessori",
             route: "/registries/accessories/list",
+          },
+          {
+            heading: "Fornitori",
+            route: "/registries/suppliers/list",
           },
         ],
       },

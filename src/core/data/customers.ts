@@ -5,6 +5,7 @@ interface ICustomer {
   code: string;
   name: string;
   customerTypeId?: number;
+  cap?: string;
   address?: string;
   zipCode?: string;
   city?: string;
@@ -13,7 +14,7 @@ interface ICustomer {
   administrativeOfficeAddress?: string;
   administrativeOfficeZipCode?: string;
   administrativeOfficeCity?: string;
-  administrativeOfficeCountr?: string;
+  administrativeOfficeCountry?: string;
   administrativeOfficeProvince?: string;
   operatingOfficeAddress?: string;
   operatingOfficeZipCode?: string;
@@ -25,13 +26,13 @@ interface ICustomer {
   recipientCity?: string;
   recipientCountry?: string;
   recipientProvince?: string;
-  vATNumber?: string;
+  vatNumber?: string;
   fiscalCode?: string;
   contactPerson?: string;
   phone?: string;
   mobile?: string;
   email: string;
-  pEC?: string;
+  pec?: string;
   uniqueCode?: string;
   zone?: string;
   referenceAgent?: string;
@@ -74,6 +75,7 @@ const getCustomers = (filterRequest: string) => {
         code: item.code,
         name: item.name,
         customerTypeId: item.costomerTypeId,
+        cap: item.cap,
         address: item.address,
         zipCode: item.zipCode,
         city: item.city,
@@ -82,7 +84,7 @@ const getCustomers = (filterRequest: string) => {
         administrativeOfficeAddress: item.administrativeOfficeAddress,
         administrativeOfficeZipCode: item.administrativeOfficeZipCode,
         administrativeOfficeCity: item.administrativeOfficeCity,
-        administrativeOfficeCountr: item.administrativeOfficeCountr,
+        administrativeOfficeCountry: item.administrativeOfficeCountry,
         administrativeOfficeProvince: item.administrativeOfficeProvince,
         operatingOfficeAddress: item.operatingOfficeAddress,
         operatingOfficeZipCode: item.operatingOfficeZipCode,
@@ -94,13 +96,13 @@ const getCustomers = (filterRequest: string) => {
         recipientCity: item.recipientCity,
         recipientCountry: item.recipientCountry,
         recipientProvince: item.recipientProvince,
-        vATNumber: item.vATNumber,
+        vatNumber: item.vatNumber,
         fiscalCode: item.fiscalCode,
         contactPerson: item.contactPerson,
         phone: item.phone,
         mobile: item.mobile,
         email: item.email,
-        pEC: item.pEC,
+        pec: item.pec,
         uniqueCode: item.uniqueCode,
         zone: item.zone,
         referenceAgent: item.referenceAgent,
@@ -148,6 +150,7 @@ const getCustomer = (id) => {
         code: item.code,
         name: item.name,
         customerTypeId: item.costomerTypeId,
+        cap: item.cap,
         address: item.address,
         zipCode: item.zipCode,
         city: item.city,
@@ -156,7 +159,7 @@ const getCustomer = (id) => {
         administrativeOfficeAddress: item.administrativeOfficeAddress,
         administrativeOfficeZipCode: item.administrativeOfficeZipCode,
         administrativeOfficeCity: item.administrativeOfficeCity,
-        administrativeOfficeCountr: item.administrativeOfficeCountr,
+        administrativeOfficeCountry: item.administrativeOfficeCountry,
         administrativeOfficeProvince: item.administrativeOfficeProvince,
         operatingOfficeAddress: item.operatingOfficeAddress,
         operatingOfficeZipCode: item.operatingOfficeZipCode,
@@ -168,13 +171,13 @@ const getCustomer = (id) => {
         recipientCity: item.recipientCity,
         recipientCountry: item.recipientCountry,
         recipientProvince: item.recipientProvince,
-        vATNumber: item.vATNumber,
+        vatNumber: item.vatNumber,
         fiscalCode: item.fiscalCode,
         contactPerson: item.contactPerson,
         phone: item.phone,
         mobile: item.mobile,
         email: item.email,
-        pEC: item.pEC,
+        pec: item.pec,
         uniqueCode: item.uniqueCode,
         zone: item.zone,
         referenceAgent: item.referenceAgent,

@@ -211,33 +211,33 @@ import { defineComponent, ref, onMounted } from "vue";
 import { hideModal } from "@/core/helpers/dom";
 import { getAccessoryTypes } from "@/core/data/typologies/accessoryTypes";
 import type { IAccessoryType } from "@/core/data/typologies/accessoryTypes";
-import getSuppliers from "@/core/data/suppliers";
+import { getSuppliers } from "@/core/data/suppliers";
 import type { ISupplier } from "@/core/data/suppliers";
 import { getDeliveryTypes } from "@/core/data/typologies/deliveryTypes";
 import type { IDeliveryType } from "@/core/data/typologies/deliveryTypes";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import ApiService from "@/core/services/ApiService";
 interface ICreate {
-      AccessoryType: string,
-      AccessoryTypeId: number,
-      Code: string,
-      SupplierArticleCode: string,
-      Name: string,
-      Description: string,
-      UnitOfMeasure: string,
-      Supplier: string,
-      SupplierId: number,
-      Price: number,
-      PackageQuantity: number,
-      MinimumStock: number,
-      DeliveryTimeframe: string,
-      DeliveryType: string,
-      DeliveryTypeId: number
+    AccessoryType: string,
+    AccessoryTypeId: number,
+    Code: string,
+    SupplierArticleCode: string,
+    Name: string,
+    Description: string,
+    UnitOfMeasure: string,
+    Supplier: string,
+    SupplierId: number,
+    Price: number,
+    PackageQuantity: number,
+    MinimumStock: number,
+    DeliveryTimeframe: string,
+    DeliveryType: string,
+    DeliveryTypeId: number
 }
 export default defineComponent({
   name: "add-accessory-modal",
   components: {},
-  setup() {
+  setup(props, { emit }) {
     const formRef = ref<null | HTMLFormElement>(null);
     const addCustomerModalRef = ref<null | HTMLElement>(null);
     const loading = ref<boolean>(false);
@@ -299,7 +299,7 @@ export default defineComponent({
       try {
         AccessoryTypes.value = await getAccessoryTypes("");
         Suppliers.value = await getSuppliers("");
-        DeliveryTypes.value = await getDeliveryTypes();
+        DeliveryTypes.value = await getDeliveryTypes('');
       } catch (error) {
         console.error(error);
       }
@@ -367,7 +367,6 @@ export default defineComponent({
           console.log(formData.value)
           ApiService.post(`${controller}/Create`, formData.value)
             .then(() => {
-              setTimeout(() => {
                 loading.value = false;
 
                 Swal.fire({
@@ -382,7 +381,7 @@ export default defineComponent({
                 }).then(() => {
                   hideModal(addCustomerModalRef.value);
                 });
-              }, 2000);
+                emit('formAddSubmitted', formData.value);
             })
             .catch(({ response }) => {
               console.log(response);

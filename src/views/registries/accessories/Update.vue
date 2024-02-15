@@ -398,7 +398,7 @@ export default defineComponent({
           });
           return;
         }
-        console.log(item.value.deliveryTimeframe)
+        
         ApiService.post(`Accessories/Update`, item.value)
           .then(() => {
             setTimeout(() => {

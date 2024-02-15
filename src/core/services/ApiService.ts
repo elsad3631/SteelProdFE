@@ -68,6 +68,20 @@ class ApiService {
     return ApiService.vueInstance.axios.post(`${resource}`, params);
   }
 
+   /**
+   * @description set the POST HTTP request
+   * @param resource: file
+   * @param params: AxiosRequestConfig
+   * @returns Promise<AxiosResponse>
+   */
+  public static post_file(resource: string, params: any): Promise<AxiosResponse> {
+    return ApiService.vueInstance.axios.post(`${resource}`, params, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  }
+
   /**
    * @description send the UPDATE HTTP request
    * @param resource: string

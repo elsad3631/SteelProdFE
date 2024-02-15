@@ -72,5 +72,5 @@ const getSuppliers = (filterRequest: string) => {
     });
 };
 
-export default getSuppliers;
+export { getSuppliers };
 export type { ISupplier };
