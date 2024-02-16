@@ -72,5 +72,47 @@ const getSuppliers = (filterRequest: string) => {
     });
 };
 
-export { getSuppliers };
+const getSupplier = (id) => {
+  return ApiService.get(`Suppliers/GetById?id=${id}`, '')
+    .then(({ data }) => {
+      const item = data;
+      const result: ISupplier = {
+        id: item.id,
+        name: item.name,
+        code: item.code,
+        uniqueCode: item.uniqueCode,
+        address:item.address,
+        zipCode: item.zipCode,
+        city: item.city,
+        country: item.country,
+        province: item.province,
+        vatNumber: item.vatNumber,
+        fiscalCode: item.fiscalCode,
+        contactPerson: item.contactPerson,
+        phone: item.phone,
+        mobile: item.mobile,
+        email: item.email,
+        pec: item.pec,
+        fax: item.fax,
+        zone: item.zone,
+        referenceAgent: item.referenceAgent,
+        paymentTypeId: item.paymentTypeId,
+        bankDetails: item.bankDetails,
+        notes: item.notes,
+        creationDate: item.creationDate,
+        updateDate: item.updateDate,
+        paymentMethod: {
+          id: item.paymentMethod.id,
+          name: item.paymentMethod.name
+        }
+      };
+      return result;
+    })
+    .catch(({ response }) => {
+      console.log(response);
+      return undefined;
+    });
+};
+
+export { getSuppliers, getSupplier };
 export type { ISupplier };

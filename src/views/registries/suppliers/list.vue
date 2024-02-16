@@ -63,7 +63,7 @@
                     {{ item.code }}
                 </template>
                 <template v-slot:name="{ row: item }">
-                    <router-link :to="{ name: 'update-accessory', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
+                    <router-link :to="{ name: 'update-supplier', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
                         {{ item.name }}
                     </router-link>
                 </template>
@@ -76,7 +76,7 @@
                     }}
                 </template>
                 <template v-slot:actions="{ row: item }">
-                    <router-link :to="{ name: 'update-accessory', params: { id: item.id } }" class="btn btn-light-info me-1">Dettagli</router-link>
+                    <router-link :to="{ name: 'update-supplier', params: { id: item.id } }" class="btn btn-light-info me-1">Dettagli</router-link>
                     <button @click="deleteItem(item.id)" class="btn btn-light-danger me-1">Elimina</button>
                 </template>
             </Datatable>

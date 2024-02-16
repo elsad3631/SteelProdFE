@@ -216,7 +216,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/registries/suppliers/list",
         name: "suppliers-list",
-        component: () => import("@/views/registries/suppliers/List.vue"),
+        component: () => import("@/views/registries/suppliers/list.vue"),
         meta: {
           pageTitle: "Lista fornitori",
           breadcrumbs: ["Apps", "Fornitori"],
@@ -224,8 +224,8 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: "/registries/suppliers/update/:id",
-        name: "update-suppliers",
-        component: () => import("@/views/registries/suppliers/Update.vue"),
+        name: "update-supplier",
+        component: () => import("@/views/registries/suppliers/update.vue"),
         meta: {
           pageTitle: "Dettagli fornitore",
           breadcrumbs: ["Apps", "Fornitori"],

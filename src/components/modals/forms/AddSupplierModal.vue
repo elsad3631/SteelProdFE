@@ -385,7 +385,7 @@
   
         if (paymentType === undefined) {
                   Swal.fire({
-                      text: "Attenzione, selezionare la tipologia dell'accessorio.",
+                      text: "Attenzione, selezionare la modalità di pagamento.",
                       icon: "error",
                       buttonsStyling: false,
                       confirmButtonText: "Continua!",
