@@ -28,7 +28,7 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#kt_modal_add">
                         <KTIcon icon-name="plus" icon-class="fs-2" />
-                        Aggiungi accessorio
+                        Aggiungi materiale
                     </button>
                     <!--end::Add customer-->
                 </div>
@@ -63,7 +63,7 @@
                     {{ item.code }}
                 </template>
                 <template v-slot:name="{ row: item }">
-                    <router-link :to="{ name: 'update-accessory', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
+                    <router-link :to="{ name: 'update-material', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
                         {{ item.name }}
                     </router-link>
                 </template>
@@ -76,7 +76,7 @@
                     }}
                 </template>
                 <template v-slot:actions="{ row: item }">
-                    <router-link :to="{ name: 'update-accessory', params: { id: item.id } }" class="btn btn-light-info me-1">Dettagli</router-link>
+                    <router-link :to="{ name: 'update-material', params: { id: item.id } }" class="btn btn-light-info me-1">Dettagli</router-link>
                     <button @click="deleteItem(item.id)" class="btn btn-light-danger me-1">Elimina</button>
                 </template>
             </Datatable>
@@ -84,8 +84,8 @@
     </div>
 
 
-    <ExportAccessoriesModal></ExportAccessoriesModal>
-    <AddAccessoryModal @formAddSubmitted="getItems('')"></AddAccessoryModal>
+    <ExportMaterialsModal></ExportMaterialsModal>
+    <AddMaterialModal @formAddSubmitted="getItems('')"></AddMaterialModal>
 </template>
 
 <script lang="ts">
@@ -93,21 +93,21 @@ import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent, onMounted, ref } from "vue";
 import Datatable from "@/components/kt-datatable/KTDataTable.vue";
 import type { Sort } from "@/components/kt-datatable//table-partials/models";
-import ExportAccessoriesModal from "@/components/modals/forms/ExportAccessoriesModal.vue";
-import AddAccessoryModal from "@/components/modals/forms/AddAccessoryModal.vue";
+import ExportMaterialsModal from "@/components/modals/forms/ExportMaterialsModal.vue";
+import AddMaterialModal from "@/components/modals/forms/AddMaterialModal.vue";
 import arraySort from "array-sort";
 import { MenuComponent } from "@/assets/ts/components";
 import ApiService from "@/core/services/ApiService";
 import Loading from "@/components/kt-datatable/table-partials/Loading.vue"
-import { getAccessories } from "@/core/data/accessories";
-import type { IAccessory } from "@/core/data/accessories";
+import { getMaterials } from "@/core/data/materials";
+import type { IMaterial } from "@/core/data/materials";
 
 export default defineComponent({
-    name: "accessories-list",
+    name: "materials-list",
     components: {
         Datatable,
-        ExportAccessoriesModal,
-        AddAccessoryModal,
+        ExportMaterialsModal,
+        AddMaterialModal,
         Loading
     },
     setup() {
@@ -147,10 +147,10 @@ export default defineComponent({
 
         const selectedIds = ref<Array<number>>([]);
         
-        let tableData = ref<IAccessory[]>([]);
+        let tableData = ref<IMaterial[]>([]);
 
         async function getItems(filterRequest: string) {
-            tableData.value = await getAccessories(filterRequest);
+            tableData.value = await getMaterials(filterRequest);
             loading.value = false;
         };
 
@@ -168,7 +168,7 @@ export default defineComponent({
 
         const deleteItem = (id: number) => {
             loading.value = true;
-            ApiService.post(`Accessories/Delete?id=${id}`, {})
+            ApiService.post(`Materials/Delete?id=${id}`, {})
                 .then(() => {
                     getItems("");
                 })

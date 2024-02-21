@@ -7,7 +7,7 @@
         <!--begin::Modal header-->
         <div class="modal-header">
           <!--begin::Modal title-->
-          <h2 class="fw-bold">Export Accessori</h2>
+          <h2 class="fw-bold">Export Materiali</h2>
           <!--end::Modal title-->
 
           <!--begin::Close-->
@@ -154,13 +154,13 @@ export default defineComponent({
             return;
           }
 
-          ApiService.get(`Accessories/${api.value}?fromName=${formData.value.fromName}&toName=${formData.value.toName}`, "blob")
+          ApiService.get(`Materials/${api.value}?fromName=${formData.value.fromName}&toName=${formData.value.toName}`, "blob")
             .then((response) => {
 
               const url = URL.createObjectURL(new Blob([response.data]))
               const link = document.createElement('a');
               link.href = url;
-              link.setAttribute('download', 'export accessori' + output.value);
+              link.setAttribute('download', 'export materiali' + output.value);
               document.body.appendChild(link);
               link.click();
 

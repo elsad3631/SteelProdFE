@@ -7,7 +7,7 @@
         <!--begin::Modal header-->
         <div class="modal-header" id="kt_modal_add_header">
           <!--begin::Modal title-->
-          <h2 class="fw-bold">Aggiungi accessorio</h2>
+          <h2 class="fw-bold">Aggiungi materiale</h2>
           <!--end::Modal title-->
 
           <!--begin::Close-->
@@ -30,9 +30,9 @@
               <!--begin::Input group-->
               <div class="fv-row mb-7">
                 <!--begin::Label-->
-                <label class="required fs-6 fw-semobold mb-2">Codice</label>
+                <label class="required fs-6 fw-semobold mb-2">Codice interno</label>
                 <!--end::Label-->
-                <input class="form-control" v-model="formData.Code" type="text" placeholder="Codice..." />
+                <input class="form-control" v-model="formData.InternalCode" type="text" placeholder="Codice interno..." />
               </div>
               <!--end::Input group-->
 
@@ -72,12 +72,12 @@
               <div class="d-flex flex-column mb-7 fv-row">
                 <!--begin::Label-->
                 <label class="fs-6 fw-semobold mb-2">
-                  <span class="required">Tipologia accessorio</span>
+                  <span class="required">Tipologia materiale</span>
                 </label>
                 <!--end::Label-->
-                <select class="form-select" aria-label="Select example" v-model="formData.AccessoryType">
+                <select class="form-select" aria-label="Select example" v-model="formData.MaterialType">
                   <option value="">Seleziona la tipologia dell'accessorio...</option>
-                  <option v-for="item in AccessoryTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
+                  <option v-for="item in MaterialTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
                 </select>
               </div>
               <!--end::Input group-->
@@ -105,12 +105,21 @@
               </div>
               <!--end::Input group-->
 
+               <!--begin::Input group-->
+               <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Funzione</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.Function" type="text" placeholder="Funzione..." />
+              </div>
+              <!--end::Input group-->
+
               <!--begin::Input group-->
               <div class="fv-row mb-7">
                 <!--begin::Label-->
-                <label class="fs-6 fw-semobold mb-2">Prezzo</label>
+                <label class="fs-6 fw-semobold mb-2">Prezzo unitario</label>
                 <!--end::Label-->
-                <input class="form-control" v-model="formData.Price" type="number" placeholder="Prezzo..." />
+                <input class="form-control" v-model="formData.UnitPrice" type="number" placeholder="Prezzo unitario..." />
               </div>
               <!--end::Input group-->
 
@@ -133,7 +142,7 @@
                   <!--begin::Label-->
                   <label class="fs-6 fw-semobold mb-2">Quantità per confezione</label>
                   <!--end::Label-->
-                  <input class="form-control" v-model="formData.PackageQuantity" type="text" placeholder="Quantità per confezione..." />
+                  <input class="form-control" v-model="formData.PackagingQuantity" type="text" placeholder="Quantità per confezione..." />
                 </div>
                 <!--end::Input group-->
 
@@ -151,7 +160,16 @@
                   <!--begin::Label-->
                   <label class="fs-6 fw-semobold mb-2">Tempistiche di consegna</label>
                   <!--end::Label-->
-                  <input class="form-control" v-model="formData.DeliveryTimeframe" type="text" placeholder="Tempistiche di consegna..." />
+                  <input class="form-control" v-model="formData.DeliveryTiming" type="text" placeholder="Tempistiche di consegna..." />
+                </div>
+                <!--end::Input group-->
+
+                 <!--begin::Input group-->
+                 <div class="fv-row mb-7">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semobold mb-2">Data ultima consegna</label>
+                  <!--end::Label-->
+                  <input class="form-control" v-model="formData.LastDeliveryDate" type="text" placeholder="Data ultima consegna..." />
                 </div>
                 <!--end::Input group-->
 
@@ -209,54 +227,60 @@
 import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent, ref, onMounted } from "vue";
 import { hideModal } from "@/core/helpers/dom";
-import { getAccessoryTypes } from "@/core/data/typologies/accessoryTypes";
-import type { IAccessoryType } from "@/core/data/typologies/accessoryTypes";
-import { getSuppliers } from "@/core/data/suppliers";
-import type { ISupplier } from "@/core/data/suppliers";
-import { getDeliveryTypes } from "@/core/data/typologies/deliveryTypes";
+import {getDeliveryTypes} from "@/core/data/typologies/deliveryTypes";
 import type { IDeliveryType } from "@/core/data/typologies/deliveryTypes";
+import {getMaterialTypes} from "@/core/data/typologies/materialTypes";
+import type { IMaterialType } from "@/core/data/typologies/materialTypes";
+import {getSuppliers} from "@/core/data/suppliers";
+import type { ISupplier } from "@/core/data/suppliers";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import ApiService from "@/core/services/ApiService";
 interface ICreate {
-    AccessoryType: string,
-    AccessoryTypeId: number,
-    Code: string,
-    SupplierArticleCode: string,
-    Name: string,
-    Description: string,
-    UnitOfMeasure: string,
-    Supplier: string,
-    SupplierId: number,
-    Price: number,
-    PackageQuantity: number,
-    MinimumStock: number,
-    DeliveryTimeframe: string,
-    DeliveryType: string,
-    DeliveryTypeId: number
+  InternalCode: string;
+  SupplierArticleCode: string;
+  Name: string;
+  Description?: string;
+  UnitOfMeasure?: string;
+  Function?: string;
+  SupplierId: number;
+  Supplier: string;
+  UnitPrice?: number;
+  PackagingQuantity?: number;
+  MinimumStock?: number;
+  Quantity?: number;
+  DeliveryTiming?: string;
+  DeliveryMethodId: number;
+  DeliveryType: string;
+  MaterialTypeId: number;
+  MaterialType: string;
+  LastDeliveryDate: string;
 }
 export default defineComponent({
-  name: "add-accessory-modal",
+  name: "add-material-modal",
   components: {},
   setup(props, { emit }) {
     const formRef = ref<null | HTMLFormElement>(null);
     const addCustomerModalRef = ref<null | HTMLElement>(null);
     const loading = ref<boolean>(false);
     const formData = ref<ICreate>({
-      AccessoryType: "",
-      AccessoryTypeId: 0,
-      Code: "",
+      InternalCode: "",
       SupplierArticleCode: "",
       Name: "",
       Description: "",
       UnitOfMeasure: "",
-      Supplier: "",
+      Function: "",
       SupplierId: 0,
-      Price: 0,
-      PackageQuantity: 0,
+      Supplier: "",
+      UnitPrice: 0,
+      PackagingQuantity: 0,
       MinimumStock: 0,
-      DeliveryTimeframe: "",
+      Quantity:0,
+      DeliveryTiming: "",
+      DeliveryMethodId: 0,
       DeliveryType: "",
-      DeliveryTypeId: 0
+      MaterialTypeId: 0,
+      MaterialType: "",
+      LastDeliveryDate: ""
     });
 
     const rules = ref({
@@ -267,37 +291,23 @@ export default defineComponent({
           trigger: "change",
         },
       ],
-      Code: [
+      InternalCode: [
         {
           required: true,
-          message: "Inserire il codice",
+          message: "Inserire il codice interno",
           trigger: "change",
         },
       ],
-      AccessoryType: [
-        {
-          required: true,
-          message: "Selezionare la tipologia dell'accessorio",
-          trigger: "change",
-        },
-      ],
-      Supplier: [
-        {
-          required: true,
-          message: "Selezionare il fornitore",
-          trigger: "change",
-        },
-      ]
     });
 
-    const controller = "Accessories"
-    let AccessoryTypes = ref<IAccessoryType[]>([]);
+    const controller = "Materials"
+    let MaterialTypes = ref<IMaterialType[]>([]);
     let Suppliers = ref<ISupplier[]>([]);
     let DeliveryTypes = ref<IDeliveryType[]>([]);
 
     async function _getTypes() {
       try {
-        AccessoryTypes.value = await getAccessoryTypes("");
+        MaterialTypes.value = await getMaterialTypes("");
         Suppliers.value = await getSuppliers("");
         DeliveryTypes.value = await getDeliveryTypes('');
       } catch (error) {
@@ -310,16 +320,16 @@ export default defineComponent({
     });
 
     const submit = () => {
-      const accessoryType = AccessoryTypes.value.find(option => option.name === formData.value.AccessoryType);
+      const materilType = MaterialTypes.value.find(option => option.name === formData.value.MaterialType);
       const supplier = Suppliers.value.find(option => option.name === formData.value.Supplier);
       const deliveryType = DeliveryTypes.value.find(option => option.name === formData.value.DeliveryType);
       if (!formRef.value) {
         return;
       }
 
-      if(accessoryType === undefined){
+      if(materilType === undefined){
         Swal.fire({
-                text: "Attenzione, selezionare la tipologia dell'accessorio.",
+                text: "Attenzione, selezionare la tipologia del materiale.",
                 icon: "error",
                 buttonsStyling: false,
                 confirmButtonText: "Continua!",
@@ -357,9 +367,9 @@ export default defineComponent({
               return;
       }
 
-      formData.value.AccessoryTypeId = accessoryType.id;
+      formData.value.MaterialTypeId = materilType.id;
       formData.value.SupplierId = supplier.id;
-      formData.value.DeliveryTypeId = deliveryType.id;
+      formData.value.DeliveryMethodId = deliveryType.id;
 
       formRef.value.validate((valid: boolean) => {
         if (valid) {
@@ -422,7 +432,7 @@ export default defineComponent({
       loading,
       addCustomerModalRef,
       getAssetPath,
-      AccessoryTypes,
+      MaterialTypes,
       Suppliers,
       DeliveryTypes
     };

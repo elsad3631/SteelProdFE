@@ -41,7 +41,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" name="code" class="form-control form-control-lg " placeholder="Codice"
-              v-model="item.code" />
+              v-model="item.internalCode" />
           </div>
           <!--end::Col-->
         </div>
@@ -61,32 +61,48 @@
         </div>
         <!--end::Input group-->
 
-        <!--begin::Input group-->
-        <div class="row mb-6">
+         <!--begin::Input group-->
+         <div class="row mb-6">
           <!--begin::Label-->
-          <label class="col-lg-4 col-form-label fw-semobold fs-6">Prezzo</label>
+          <label class="col-lg-4 col-form-label fw-semobold fs-6">Unità di misura</label>
           <!--end::Label-->
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <input type="number" name="price" class="form-control form-control-lg " placeholder="Prezzo"
-              v-model="item.price" />
+            <input type="text" name="unitOfMeasure" class="form-control form-control-lg " placeholder="Unità di misura"
+              v-model="item.unitOfMeasure" />
           </div>
           <!--end::Col-->
         </div>
         <!--end::Input group-->
 
-        <!--begin::Input group-->
-        <div class="row mb-6">
+         <!--begin::Input group-->
+         <div class="row mb-6">
           <!--begin::Label-->
-          <label class="col-lg-4 col-form-label required fw-semobold fs-6">Tipologia accessorio</label>
+          <label class="col-lg-4 col-form-label fw-semobold fs-6">Funzione</label>
           <!--end::Label-->
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <select as="select" name="country" class="form-select form-select-lg fw-semobold"
-              v-model="item.accessoryType">
-              <option v-for="option in AccessoryTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
+            <input type="text" name="function" class="form-control form-control-lg " placeholder="Funzione"
+              v-model="item.function" />
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+
+      
+        <!--begin::Input group-->
+        <div class="row mb-6">
+          <!--begin::Label-->
+          <label class="col-lg-4 col-form-label required fw-semobold fs-6">Tipologia materiale</label>
+          <!--end::Label-->
+
+          <!--begin::Col-->
+          <div class="col-lg-8 fv-row">
+            <select as="select" name="materialType" class="form-select form-select-lg fw-semobold"
+              v-model="item.materialType">
+              <option v-for="option in MaterialTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
             </select>
           </div>
           <!--end::Col-->
@@ -109,6 +125,22 @@
         </div>
         <!--end::Input group-->
 
+         <!--begin::Input group-->
+         <div class="row mb-6">
+          <!--begin::Label-->
+          <label class="col-lg-4 col-form-label required fw-semobold fs-6">Modalità di consegna</label>
+          <!--end::Label-->
+
+          <!--begin::Col-->
+          <div class="col-lg-8 fv-row">
+            <select as="select" name="deliveryType" class="form-select form-select-lg fw-semobold"
+              v-model="item.deliveryType">
+              <option v-for="option in DeliveryTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
+            </select>
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
 
         <!--begin::Input group-->
         <div class="row mb-6">
@@ -121,6 +153,36 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <textarea name="description" class="form-control form-control-lg " v-model="item.description"></textarea>
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+
+        <!--begin::Input group-->
+        <div class="row mb-6">
+          <!--begin::Label-->
+          <label class="col-lg-4 col-form-label fw-semobold fs-6">Prezzo unitario</label>
+          <!--end::Label-->
+
+          <!--begin::Col-->
+          <div class="col-lg-8 fv-row">
+            <input type="number" name="unitPrice" class="form-control form-control-lg " placeholder="Prezzo unitario"
+              v-model="item.unitPrice" />
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+
+        <!--begin::Input group-->
+        <div class="row mb-6">
+          <!--begin::Label-->
+          <label class="col-lg-4 col-form-label fw-semobold fs-6">Quantità per confezione</label>
+          <!--end::Label-->
+
+          <!--begin::Col-->
+          <div class="col-lg-8 fv-row">
+            <input type="number" name="packagingQuantity" class="form-control form-control-lg " placeholder="Quantità per confezione"
+              v-model="item.packagingQuantity" />
           </div>
           <!--end::Col-->
         </div>
@@ -144,64 +206,33 @@
         <!--begin::Input group-->
         <div class="row mb-6">
           <!--begin::Label-->
-          <label class="col-lg-4 col-form-label fw-semobold fs-6">Quantità per confezione</label>
-          <!--end::Label-->
-
-          <!--begin::Col-->
-          <div class="col-lg-8 fv-row">
-            <input type="number" name="packageQuantity" class="form-control form-control-lg "
-              placeholder="Quantità per confezione" v-model="item.packageQuantity" />
-          </div>
-          <!--end::Col-->
-        </div>
-        <!--end::Input group-->
-
-        <!--begin::Input group-->
-        <div class="row mb-6">
-          <!--begin::Label-->
-          <label class="col-lg-4 col-form-label fw-semobold fs-6">Unità di misura</label>
-          <!--end::Label-->
-
-          <!--begin::Col-->
-          <div class="col-lg-8 fv-row">
-            <input type="number" name="unitOfMeasure" class="form-control form-control-lg " placeholder="Unità di misura"
-              v-model="item.packageQuantity" />
-          </div>
-          <!--end::Col-->
-        </div>
-        <!--end::Input group-->
-
-        <!--begin::Input group-->
-        <div class="row mb-6">
-          <!--begin::Label-->
           <label class="col-lg-4 col-form-label fw-semobold fs-6">Tempistiche di consegna</label>
           <!--end::Label-->
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <input type="text" name="deliveryTimeframe" class="form-control form-control-lg "
-              placeholder="Tempistiche di consegna" v-model="item.deliveryTimeframe" />
+            <input type="text" name="deliveryTiming" class="form-control form-control-lg "
+              placeholder="Tempistiche di consegna" v-model="item.deliveryTiming" />
           </div>
           <!--end::Col-->
         </div>
         <!--end::Input group-->
 
-        <!--begin::Input group-->
-        <div class="row mb-6">
+         <!--begin::Input group-->
+         <div class="row mb-6">
           <!--begin::Label-->
-          <label class="col-lg-4 col-form-label required fw-semobold fs-6">Modalità di consegna</label>
+          <label class="col-lg-4 col-form-label fw-semobold fs-6">Data ultima consegna</label>
           <!--end::Label-->
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <select as="select" name="deliveryType" class="form-select form-select-lg fw-semobold"
-              v-model="item.deliveryType">
-              <option v-for="option in DeliveryTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
-            </select>
+            <input type="text" name="lastDeliveryDate" class="form-control form-control-lg "
+              placeholder="Data ultima consegna" v-model="item.lastDeliveryDate" />
           </div>
           <!--end::Col-->
         </div>
         <!--end::Input group-->
+       
 
       </div>
       <!--begin::Actions-->
@@ -246,36 +277,16 @@ import Earnings from "@/components/customers/cards/statments/Earnings.vue";
 import Statement from "@/components/customers/cards/statments/Statement.vue";
 
 import { useRoute, useRouter } from "vue-router";
-import { getAccessory } from "@/core/data/accessories";
-import {getAccessoryTypes} from "@/core/data/typologies/accessoryTypes";
-import type { IAccessoryType } from "@/core/data/typologies/accessoryTypes";
-import {getSuppliers} from "@/core/data/suppliers";
-import type { ISupplier } from "@/core/data/suppliers";
+import { getMaterial, emptyMaterial } from "@/core/data/materials";
+import type { IMaterial } from "@/core/data/materials";
 import {getDeliveryTypes} from "@/core/data/typologies/deliveryTypes";
 import type { IDeliveryType } from "@/core/data/typologies/deliveryTypes";
+import {getMaterialTypes} from "@/core/data/typologies/materialTypes";
+import type { IMaterialType } from "@/core/data/typologies/materialTypes";
+import {getSuppliers} from "@/core/data/suppliers";
+import type { ISupplier } from "@/core/data/suppliers";
 import ApiService from "@/core/services/ApiService";
-import * as Yup from "yup";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-
-interface IUpdate {
-  id,
-  accessoryType: string,
-  accessoryTypeId: number,
-  code: string,
-  supplierArticleCode: string,
-  name: string,
-  description: string,
-  unitOfMeasure: string,
-  supplier: string,
-  supplierId: number,
-  price: number,
-  packageQuantity: number,
-  minimumStock: number,
-  quantity: number,
-  deliveryTimeframe: string,
-  deliveryType: string,
-  deliveryTypeId: number
-}
 
 export default defineComponent({
   name: "customer-details",
@@ -297,55 +308,19 @@ export default defineComponent({
     const id = route.params.id;
     let loading = ref<boolean>(true);
 
-    const item = ref<IUpdate>({
-      id: 0,
-      accessoryType: "",
-      accessoryTypeId: 0,
-      code: "",
-      supplierArticleCode: "",
-      name: "",
-      description: "",
-      unitOfMeasure: "",
-      supplier: "",
-      supplierId: 0,
-      price: 0,
-      packageQuantity: 0,
-      minimumStock: 0,
-      deliveryTimeframe: "",
-      deliveryType: "",
-      deliveryTypeId: 0,
-      quantity: 0
-    });
+    const item = ref<IMaterial>(emptyMaterial);
 
-    let AccessoryTypes = ref<IAccessoryType[]>([]);
+    let MaterialTypes = ref<IMaterialType[]>([]);
     let Suppliers = ref<ISupplier[]>([]);
     let DeliveryTypes = ref<IDeliveryType[]>([]);
 
     async function getItem() {
-      AccessoryTypes.value = await getAccessoryTypes("");
+      MaterialTypes.value = await getMaterialTypes("");
       Suppliers.value = await getSuppliers("");
       DeliveryTypes.value = await getDeliveryTypes("");
 
-      const accessory = await getAccessory(id);
-      item.value = {
-        id: id,
-        accessoryType: accessory?.accessoryType?.name || "",
-        accessoryTypeId: accessory?.accessoryTypeId || 0,
-        code: accessory?.code || "",
-        supplierArticleCode: accessory?.supplierArticleCode || "",
-        name: accessory?.name || "",
-        description: accessory?.description || "",
-        unitOfMeasure: accessory?.unitOfMeasure || "",
-        supplier: accessory?.supplier?.name || "",
-        supplierId: accessory?.supplierId || 0,
-        price: accessory?.price || 0,
-        packageQuantity: accessory?.packageQuantity || 0,
-        minimumStock: accessory?.minimumStock || 0,
-        deliveryTimeframe: accessory?.deliveryTimeframe || "",
-        deliveryType: accessory?.deliveryMethod?.name || "",
-        deliveryTypeId: accessory?.deliveryTypeId || 0,
-        quantity: accessory?.quantity || 0
-      }
+      const material = await getMaterial(id);
+      item.value = material || emptyMaterial;
       loading.value = false;
     };
 
@@ -356,12 +331,24 @@ export default defineComponent({
 
     const saveChanges = () => {
         loading.value = true;
-        const accessoryType = AccessoryTypes.value.find(option => option.name === item.value.accessoryType);
-        const supplier = Suppliers.value.find(option => option.name === item.value.supplier);
-        const deliveryType = DeliveryTypes.value.find(option => option.name === item.value.deliveryType);
-        if (accessoryType === undefined) {
+        const MaterialType = item.value?.materialType.name;
+        const materialType = MaterialTypes
+            ? MaterialTypes.value.find(option => option.name === MaterialType)
+            : undefined;
+
+            const DeliveryType = item.value?.deliveryType.name;
+        const deliveryType = DeliveryTypes
+            ? DeliveryTypes.value.find(option => option.name === DeliveryType)
+            : undefined;
+
+            const Supplier = item.value?.supplier.name;
+        const supplier = Suppliers
+            ? Suppliers.value.find(option => option.name === Supplier)
+            : undefined;
+            
+        if (materialType === undefined) {
           Swal.fire({
-            text: "Attenzione, selezionare la tipologia dell'accessorio.",
+            text: "Attenzione, selezionare la tipologia del materiale.",
             icon: "error",
             buttonsStyling: false,
             confirmButtonText: "Continua!",
@@ -399,7 +386,7 @@ export default defineComponent({
           return;
         }
         
-        ApiService.post(`Accessories/Update`, item.value)
+        ApiService.post(`Materials/Update`, item.value)
           .then(() => {
             setTimeout(() => {
               loading.value = false;
@@ -434,7 +421,7 @@ export default defineComponent({
 
     const deleteItem = () => {
       loading.value = true;
-      ApiService.post(`Accessories/Delete?id=${id}`, {})
+      ApiService.post(`Materials/Delete?id=${id}`, {})
         .then(() => {
           setTimeout(() => {
               loading.value = false;
@@ -461,7 +448,7 @@ export default defineComponent({
       getAssetPath,
       item,
       saveChanges,
-      AccessoryTypes,
+      MaterialTypes,
       Suppliers,
       DeliveryTypes,
       deleteItem,

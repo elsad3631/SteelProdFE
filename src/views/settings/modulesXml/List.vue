@@ -28,7 +28,7 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#kt_modal_add">
                         <KTIcon icon-name="plus" icon-class="fs-2" />
-                        Aggiungi accessorio
+                        Aggiungi modulo
                     </button>
                     <!--end::Add customer-->
                 </div>
@@ -59,24 +59,19 @@
         <div class="card-body pt-0">
             <Datatable @on-sort="sort" @on-items-select="onItemSelect" :data="tableData" :header="tableHeader"
                 :enable-items-per-page-dropdown="true" :checkbox-enabled="true" checkbox-label="id" :loading="loading">
-                <template v-slot:code="{ row: item }">
-                    {{ item.code }}
-                </template>
                 <template v-slot:name="{ row: item }">
-                    <router-link :to="{ name: 'update-accessory', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
-                        {{ item.name }}
+                    {{ item.name }}
+                </template>
+                <template v-slot:nameXmlOpera="{ row: item }">
+                    <router-link :to="{ name: 'update-module-xml', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
+                        {{ item.nameXmlOpera }}
                     </router-link>
                 </template>
-                <template v-slot:price="{ row: item }">
-                    {{ item.price }}
-                </template>
-                <template v-slot:description="{ row: item }">
-                    {{
-                        item.description
-                    }}
+                <template v-slot:customer="{ row: item }">
+                    {{ item.customer }}
                 </template>
                 <template v-slot:actions="{ row: item }">
-                    <router-link :to="{ name: 'update-accessory', params: { id: item.id } }" class="btn btn-light-info me-1">Dettagli</router-link>
+                    <router-link :to="{ name: 'update-module-xml', params: { id: item.id } }" class="btn btn-light-info me-1">Dettagli</router-link>
                     <button @click="deleteItem(item.id)" class="btn btn-light-danger me-1">Elimina</button>
                 </template>
             </Datatable>
@@ -84,8 +79,8 @@
     </div>
 
 
-    <ExportAccessoriesModal></ExportAccessoriesModal>
-    <AddAccessoryModal @formAddSubmitted="getItems('')"></AddAccessoryModal>
+    <ExportModulesXmlModal></ExportModulesXmlModal>
+    <AddModuleXmlModal @formAddSubmitted="getItems('')"></AddModuleXmlModal>
 </template>
 
 <script lang="ts">
@@ -93,47 +88,41 @@ import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent, onMounted, ref } from "vue";
 import Datatable from "@/components/kt-datatable/KTDataTable.vue";
 import type { Sort } from "@/components/kt-datatable//table-partials/models";
-import ExportAccessoriesModal from "@/components/modals/forms/ExportAccessoriesModal.vue";
-import AddAccessoryModal from "@/components/modals/forms/AddAccessoryModal.vue";
+import ExportModulesXmlModal from "@/components/modals/forms/ExportModulesXmlModal.vue";
+import AddModuleXmlModal from "@/components/modals/forms/AddModuleXmlModal.vue";
 import arraySort from "array-sort";
 import { MenuComponent } from "@/assets/ts/components";
 import ApiService from "@/core/services/ApiService";
 import Loading from "@/components/kt-datatable/table-partials/Loading.vue"
-import { getAccessories } from "@/core/data/accessories";
-import type { IAccessory } from "@/core/data/accessories";
+import { getModulesXml } from "@/core/data/modulesXml";
+import type { IModuleXml } from "@/core/data/modulesXml";
 
 export default defineComponent({
-    name: "accessories-list",
+    name: "modules-xml-list",
     components: {
         Datatable,
-        ExportAccessoriesModal,
-        AddAccessoryModal,
+        ExportModulesXmlModal,
+        AddModuleXmlModal,
         Loading
     },
     setup() {
         let loading = ref<boolean>(true);
         const tableHeader = ref([
             {
-                columnName: "Codice",
-                columnLabel: "code",
+                columnName: "Nome",
+                columnLabel: "name",
                 sortEnabled: true,
                 columnWidth: 175,
             },
             {
-                columnName: "Nome",
-                columnLabel: "name",
+                columnName: "Nome xml opera",
+                columnLabel: "nameXmlOpera",
                 sortEnabled: true,
                 columnWidth: 230,
             },
             {
-                columnName: "Prezzo",
-                columnLabel: "price",
-                sortEnabled: true,
-                columnWidth: 175,
-            },
-            {
-                columnName: "Descrizione",
-                columnLabel: "description",
+                columnName: "Cliente",
+                columnLabel: "customer",
                 sortEnabled: true,
                 columnWidth: 175,
             },
@@ -147,10 +136,10 @@ export default defineComponent({
 
         const selectedIds = ref<Array<number>>([]);
         
-        let tableData = ref<IAccessory[]>([]);
+        let tableData = ref<IModuleXml[]>([]);
 
         async function getItems(filterRequest: string) {
-            tableData.value = await getAccessories(filterRequest);
+            tableData.value = await getModulesXml(filterRequest);
             loading.value = false;
         };
 
@@ -168,7 +157,7 @@ export default defineComponent({
 
         const deleteItem = (id: number) => {
             loading.value = true;
-            ApiService.post(`Accessories/Delete?id=${id}`, {})
+            ApiService.post(`ModuleXml/Delete?id=${id}`, {})
                 .then(() => {
                     getItems("");
                 })

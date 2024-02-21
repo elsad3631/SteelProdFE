@@ -1,17 +1,17 @@
 <template>
-    <div class="modal fade" id="kt_modal_add_customer" ref="addCustomerModalRef" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="kt_modal_add" ref="addCustomerModalRef" tabindex="-1" aria-hidden="true">
       <!--begin::Modal dialog-->
       <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
         <div class="modal-content">
           <!--begin::Modal header-->
-          <div class="modal-header" id="kt_modal_add_customer_header">
+          <div class="modal-header" id="kt_modal_add_header">
             <!--begin::Modal title-->
             <h2 class="fw-bold">Aggiungi fornitore</h2>
             <!--end::Modal title-->
   
             <!--begin::Close-->
-            <div id="kt_modal_add_customer_close" data-bs-dismiss="modal"
+            <div id="kt_modal_add_close" data-bs-dismiss="modal"
               class="btn btn-icon btn-sm btn-active-icon-primary">
               <KTIcon icon-name="cross" icon-class="fs-1" />
             </div>
@@ -23,10 +23,10 @@
             <!--begin::Modal body-->
             <div class="modal-body py-10 px-lg-17">
               <!--begin::Scroll-->
-              <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true"
+              <div class="scroll-y me-n7 pe-7" id="kt_modal_add_scroll" data-kt-scroll="true"
                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
-                data-kt-scroll-dependencies="#kt_modal_add_customer_header"
-                data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+                data-kt-scroll-dependencies="#kt_modal_add_header"
+                data-kt-scroll-wrappers="#kt_modal_add_scroll" data-kt-scroll-offset="300px">
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
                   <!--begin::Label-->
@@ -164,8 +164,8 @@
 
                 <!--begin::Billing toggle-->
                 <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
-                  href="#kt_modal_add_customer_billing_info" role="button" aria-expanded="false"
-                  aria-controls="kt_customer_view_details">
+                  href="#kt_modal_add_billing_info" role="button" aria-expanded="false"
+                  aria-controls="kt_view_details">
                   Informazioni logistiche
                   <span class="ms-2 rotate-180">
                     <KTIcon icon-name="down" icon-class="fs-3" />
@@ -174,7 +174,7 @@
                 <!--end::Billing toggle-->
   
                 <!--begin::Billing form-->
-                <div id="kt_modal_add_customer_billing_info" class="collapse show">
+                <div id="kt_modal_add_billing_info" class="collapse show">
 
 
                  <!--begin::Input group-->
@@ -247,7 +247,7 @@
             <!--begin::Modal footer-->
             <div class="modal-footer flex-center">
               <!--begin::Button-->
-              <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3">
+              <button type="reset" id="kt_modal_add_cancel" class="btn btn-light me-3">
                 Scarta
               </button>
               <!--end::Button-->

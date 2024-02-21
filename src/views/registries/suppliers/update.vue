@@ -416,7 +416,7 @@
   fax: '',
   zone: '',
   referenceAgent: '',
-  paymentTypeId: '',
+  paymentTypeId: 0,
   bankDetails: '',
   notes: '',
   paymentMethod: {
@@ -468,7 +468,7 @@
       const saveChanges = () => {
           loading.value = true;
           const PaymentMethod = item.value?.paymentMethod.name;
-          console.log(PaymentMethod)
+          
           const paymentType = PaymentMethod
             ? PaymentTypes.value.find(option => option.name === PaymentMethod)
             : undefined;

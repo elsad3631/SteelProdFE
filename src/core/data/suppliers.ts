@@ -20,7 +20,7 @@ interface ISupplier {
   fax?: string;
   zone?: string;
   referenceAgent?: string;
-  paymentTypeId?: string;
+  paymentTypeId: number;
   bankDetails?: string;
   notes?: string;
   creationDate?: string;

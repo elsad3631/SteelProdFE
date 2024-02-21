@@ -19,14 +19,14 @@
                     data-kt-customer-table-toolbar="base">
                     <!--begin::Export-->
                     <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
-                        data-bs-target="#kt_customers_export_modal">
+                        data-bs-target="#kt_export_modal">
                         <KTIcon icon-name="exit-up" icon-class="fs-2" />
                         Export
                     </button>
                     <!--end::Export-->
                     <!--begin::Add customer-->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#kt_modal_add_customer">
+                        data-bs-target="#kt_modal_add">
                         <KTIcon icon-name="plus" icon-class="fs-2" />
                         Aggiungi fornitore
                     </button>

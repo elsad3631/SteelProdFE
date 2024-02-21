@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" id="kt_customers_export_modal" tabindex="-1" aria-hidden="true">
+  <div class="modal fade" id="kt_export_modal" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
       <!--begin::Modal content-->
@@ -11,7 +11,7 @@
           <!--end::Modal title-->
 
           <!--begin::Close-->
-          <div id="kt_customers_export_close" data-bs-dismiss="modal" class="btn btn-icon btn-sm btn-active-icon-primary">
+          <div id="kt_export_close" data-bs-dismiss="modal" class="btn btn-icon btn-sm btn-active-icon-primary">
             <KTIcon icon-name="cross" icon-class="fs-1" />
           </div>
           <!--end::Close-->
@@ -57,7 +57,7 @@
 
             <!--begin::Actions-->
             <div class="text-center">
-              <button type="reset" id="kt_customers_export_cancel" class="btn btn-light me-3">
+              <button type="reset" id="kt_export_cancel" class="btn btn-light me-3">
                 Scarta
               </button>
 

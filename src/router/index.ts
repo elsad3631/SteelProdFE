@@ -232,6 +232,42 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
+        path: "/registries/materials/list",
+        name: "materials-list",
+        component: () => import("@/views/registries/materials/List.vue"),
+        meta: {
+          pageTitle: "Lista materiali",
+          breadcrumbs: ["Apps", "Materiali"],
+        },
+      },
+      {
+        path: "/registries/materials/update/:id",
+        name: "update-material",
+        component: () => import("@/views/registries/materials/Update.vue"),
+        meta: {
+          pageTitle: "Dettagli materiale",
+          breadcrumbs: ["Apps", "Materiali"],
+        },
+      },
+      {
+        path: "/settings/modulesXml/list",
+        name: "modules-xml-list",
+        component: () => import("@/views/settings/modulesXml/List.vue"),
+        meta: {
+          pageTitle: "Lista materiali",
+          breadcrumbs: ["Apps", "Materiali"],
+        },
+      },
+      {
+        path: "/settings/modulesXml/update/:id",
+        name: "update-module-xml",
+        component: () => import("@/views/settings/modulesXml/Update.vue"),
+        meta: {
+          pageTitle: "Dettagli materiale",
+          breadcrumbs: ["Apps", "Materiali"],
+        },
+      },
+      {
         path: "/registries/typologies/accessory-type/list",
         name: "accessory-typologies-list",
         component: () => import("@/views/registries/typologies/accessory-type/List.vue"),
