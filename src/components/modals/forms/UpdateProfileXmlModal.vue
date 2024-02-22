@@ -7,7 +7,7 @@
         <!--begin::Modal header-->
         <div class="modal-header" id="kt_modal_type_header">
           <!--begin::Modal title-->
-          <h2 class="fw-bold">Modifica tipologia accessorio</h2>
+          <h2 class="fw-bold">Modifica profilo xml</h2>
           <!--end::Modal title-->
 
           <!--begin::Close-->
@@ -30,9 +30,20 @@
               <!--begin::Input group-->
               <div class="fv-row mb-7">
                 <!--begin::Label-->
-                <label class="required fs-6 fw-semobold mb-2">Nome</label>
+                <label class="required fs-6 fw-semobold mb-2">Nome materiale</label>
                 <!--end::Label-->
                 <input required class="form-control" v-model="formData.Name" type="text" placeholder="Nome..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <div class="form-check form-switch form-check-custom form-check-solid">
+                  <input class="form-check-input" type="checkbox" v-model="formData.Active" />
+                  <label class="form-check-label">
+                    Attivato
+                  </label>
+                </div>
               </div>
               <!--end::Input group-->
 
@@ -71,13 +82,15 @@ import { defineComponent, ref, watch } from "vue";
 import { hideModal } from "@/core/helpers/dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import ApiService from "@/core/services/ApiService";
+import { boolean } from "yup";
 
 interface IUpdate {
   Id: number,
   Name: string,
+  Active: boolean,
 }
 export default defineComponent({
-  name: "update-accessory-type",
+  name: "update-proflie-xml",
   components: {},
   props: {
     id: {
@@ -87,6 +100,10 @@ export default defineComponent({
     name: {
       type: String,
       required: true
+    },
+    active: {
+      type: Boolean,
+      required: true
     }
   },
   setup(props, { emit }) {
@@ -95,25 +112,27 @@ export default defineComponent({
     const loading = ref<boolean>(false);
     const formData = ref<IUpdate>({
       Id: props.id ?? 0,
-      Name: props.name ?? ""
+      Name: props.name ?? "",
+      Active: props.active ?? false
     });
 
-    watch(() => [props.id, props.name], ([newId, newName]) => {
+    watch(() => [props.id, props.name, props.active], ([newId, newName, newActive]) => {
       formData.value.Id = newId !== undefined ? Number(newId) : 0;
       formData.value.Name = newName !== undefined ? String(newName) : "";
+      formData.value.Active = newName !== undefined ? Boolean(newActive) : "";
     });
 
     const rules = ref({
-      name: [
+      Name: [
         {
           required: true,
-          message: "Inserire il nome",
+          message: "Inserire il nome del materiale",
           trigger: "change",
         },
       ]
     });
 
-    const controller = "AccessoryType"
+    const controller = "ProfileXml"
     
     const submit = () => {
 

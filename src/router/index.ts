@@ -254,8 +254,8 @@ const routes: Array<RouteRecordRaw> = [
         name: "modules-xml-list",
         component: () => import("@/views/settings/modulesXml/List.vue"),
         meta: {
-          pageTitle: "Lista materiali",
-          breadcrumbs: ["Apps", "Materiali"],
+          pageTitle: "Lista moduli",
+          breadcrumbs: ["Apps", "Moduli"],
         },
       },
       {
@@ -263,8 +263,35 @@ const routes: Array<RouteRecordRaw> = [
         name: "update-module-xml",
         component: () => import("@/views/settings/modulesXml/Update.vue"),
         meta: {
-          pageTitle: "Dettagli materiale",
-          breadcrumbs: ["Apps", "Materiali"],
+          pageTitle: "Dettagli modulo",
+          breadcrumbs: ["Apps", "Moduli"],
+        },
+      },
+      {
+        path: "/settings/markings/list",
+        name: "markings-list",
+        component: () => import("@/views/settings/markings/List.vue"),
+        meta: {
+          pageTitle: "Lista marcature",
+          breadcrumbs: ["Apps", "Marcature"],
+        },
+      },
+      {
+        path: "/settings/markings/update/:id",
+        name: "update-marking",
+        component: () => import("@/views/settings/markings/Update.vue"),
+        meta: {
+          pageTitle: "Dettagli marcatura",
+          breadcrumbs: ["Apps", "Marcature"],
+        },
+      },
+      {
+        path: "/settings/profilesXml/list",
+        name: "profiles-xml-list",
+        component: () => import("@/views/settings/profilesXml/List.vue"),
+        meta: {
+          pageTitle: "Lista profili xml",
+          breadcrumbs: ["Apps", "Profili xml"],
         },
       },
       {

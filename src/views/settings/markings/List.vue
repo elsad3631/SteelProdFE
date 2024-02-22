@@ -25,9 +25,10 @@
                     </button>
                     <!--end::Export-->
                     <!--begin::Add customer-->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#kt_modal_add">
                         <KTIcon icon-name="plus" icon-class="fs-2" />
-                        Aggiungi commessa
+                        Aggiungi marcatura
                     </button>
                     <!--end::Add customer-->
                 </div>
@@ -58,35 +59,28 @@
         <div class="card-body pt-0">
             <Datatable @on-sort="sort" @on-items-select="onItemSelect" :data="tableData" :header="tableHeader"
                 :enable-items-per-page-dropdown="true" :checkbox-enabled="true" checkbox-label="id" :loading="loading">
-                <template v-slot:id="{ row: item }">
-                    {{ item.id }}
-                </template>
-                <template v-slot:job_id="{ row: item }">
-                    <router-link :to="{ name: 'update-accessory', params: { id: item.id } }"
-                        class="text-gray-600 text-hover-primary mb-1">
-                        {{ item.job_id }}
+                <template v-slot:materialName="{ row: item }">
+                    <router-link :to="{ name: 'update-marking', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
+                        {{ item.materialName }}
                     </router-link>
                 </template>
-                <template v-slot:job_name="{ row: item }">
-                    {{ item.job_name }}
+                <template v-slot:dx="{ row: item }">
+                    {{ item.dx }}
                 </template>
-                <template v-slot:cst_name="{ row: item }">
-                    {{
-                        item.cst_name
-                    }}
+                <template v-slot:dy="{ row: item }">
+                    {{ item.dy }}
                 </template>
                 <template v-slot:actions="{ row: item }">
-                    <button @click="createXmlFileList(item.id)" class="btn btn-light-success me-1">Crea XFL</button>
-                    <!-- <router-link :to="{ name: 'update-accessory', params: { id: item.id } }"
-                        class="btn btn-light-info me-1">Dettagli</router-link> -->
+                    <router-link :to="{ name: 'update-marking', params: { id: item.id } }" class="btn btn-light-info me-1">Dettagli</router-link>
                     <button @click="deleteItem(item.id)" class="btn btn-light-danger me-1">Elimina</button>
                 </template>
             </Datatable>
         </div>
     </div>
 
-    <AddOrderModal @formAddSubmitted="getItems('')"></AddOrderModal>
-    <ExportOrdersModal></ExportOrdersModal>
+
+    <ExportMarkingsModal></ExportMarkingsModal>
+    <AddMarkingModal @formAddSubmitted="getItems('')"></AddMarkingModal>
 </template>
 
 <script lang="ts">
@@ -94,48 +88,41 @@ import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent, onMounted, ref } from "vue";
 import Datatable from "@/components/kt-datatable/KTDataTable.vue";
 import type { Sort } from "@/components/kt-datatable//table-partials/models";
-import ExportOrdersModal from "@/components/modals/forms/ExportOrdersModal.vue";
-import AddOrderModal from "@/components/modals/forms/AddOrderModal.vue";
+import ExportMarkingsModal from "@/components/modals/forms/ExportMarkingsModal.vue";
+import AddMarkingModal from "@/components/modals/forms/AddMarkingModal.vue";
 import arraySort from "array-sort";
 import { MenuComponent } from "@/assets/ts/components";
 import ApiService from "@/core/services/ApiService";
 import Loading from "@/components/kt-datatable/table-partials/Loading.vue"
-import { getOrders } from "@/core/data/orders";
-import type { IOrder } from "@/core/data/orders";
-import Swal from "sweetalert2/dist/sweetalert2.js";
+import { getMarkings } from "@/core/data/markings";
+import type { IMarking } from "@/core/data/markings";
 
 export default defineComponent({
-    name: "orders-list",
+    name: "modules-xml-list",
     components: {
         Datatable,
-        ExportOrdersModal,
-        AddOrderModal,
+        ExportMarkingsModal,
+        AddMarkingModal,
         Loading
     },
     setup() {
         let loading = ref<boolean>(true);
         const tableHeader = ref([
             {
-                columnName: "Id",
-                columnLabel: "id",
+                columnName: "Nome materiale",
+                columnLabel: "materialName",
                 sortEnabled: true,
                 columnWidth: 175,
             },
             {
-                columnName: "Job id",
-                columnLabel: "job_id",
+                columnName: "Dx",
+                columnLabel: "dx",
                 sortEnabled: true,
                 columnWidth: 230,
             },
             {
-                columnName: "Job name",
-                columnLabel: "job_name",
-                sortEnabled: true,
-                columnWidth: 175,
-            },
-            {
-                columnName: "Cliente",
-                columnLabel: "cst_name",
+                columnName: "Dy",
+                columnLabel: "dy",
                 sortEnabled: true,
                 columnWidth: 175,
             },
@@ -148,11 +135,11 @@ export default defineComponent({
         ]);
 
         const selectedIds = ref<Array<number>>([]);
-
-        let tableData = ref<IOrder[]>([]);
+        
+        let tableData = ref<IMarking[]>([]);
 
         async function getItems(filterRequest: string) {
-            tableData.value = await getOrders(filterRequest);
+            tableData.value = await getMarkings(filterRequest);
             loading.value = false;
         };
 
@@ -170,7 +157,7 @@ export default defineComponent({
 
         const deleteItem = (id: number) => {
             loading.value = true;
-            ApiService.post(`Orders/Delete?id=${id}`, {})
+            ApiService.post(`Marking/Delete?id=${id}`, {})
                 .then(() => {
                     getItems("");
                 })
@@ -195,53 +182,6 @@ export default defineComponent({
             selectedIds.value = selectedItems;
         };
 
-        const createXmlFileList = (id) => {
-
-
-            loading.value = true;
-
-            ApiService.get(`Orders/CreateXmlFileList?id=${id}`, "blob")
-                .then((response) => {
-
-                    const url = URL.createObjectURL(new Blob([response.data]))
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', 'commessa_n_'+ id + ".zip");
-                    document.body.appendChild(link);
-                    link.click();
-
-                    window.URL.revokeObjectURL(url);
-                    document.body.removeChild(link);
-
-                    loading.value = false;
-
-                    Swal.fire({
-                        text: "Operazione completata!",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Continua!",
-                        heightAuto: false,
-                        customClass: {
-                            confirmButton: "btn btn-primary",
-                        },
-                    })
-                })
-                .catch(({ response }) => {
-                    console.log(response);
-                    loading.value = false;
-                    Swal.fire({
-                        text: "Attenzione, si è verificato un errore.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Continua!",
-                        heightAuto: false,
-                        customClass: {
-                            confirmButton: "btn btn-primary",
-                        },
-                    });
-                });
-        };
-
         return {
             tableData,
             tableHeader,
@@ -254,10 +194,14 @@ export default defineComponent({
             onItemSelect,
             getAssetPath,
             loading,
-            getItems,
-            createXmlFileList
+            getItems
         };
     },
 });
 </script>
   
+
+
+
+
+

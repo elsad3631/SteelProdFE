@@ -50,7 +50,7 @@ interface IMaterial {
     id: number;
     name: string;
   };
-  lastDeliveryDate: string;
+  lastDeliveryDate: Date;
 }
 
 const emptyMaterial: IMaterial = {
@@ -103,7 +103,7 @@ const emptyMaterial: IMaterial = {
     id: 0,
     name: "",
   },
-  lastDeliveryDate: ""
+  lastDeliveryDate: new Date()
 }
 
 const getMaterials = (filterRequest: string) => {

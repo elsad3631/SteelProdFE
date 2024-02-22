@@ -226,7 +226,7 @@
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <input type="text" name="lastDeliveryDate" class="form-control form-control-lg "
+            <input type="date" name="lastDeliveryDate" class="form-control form-control-lg "
               placeholder="Data ultima consegna" v-model="item.lastDeliveryDate" />
           </div>
           <!--end::Col-->

@@ -63,6 +63,14 @@ const MainMenuConfig: Array<MenuItem> = [
             heading: "Moduli",
             route: "/settings/modulesXml/list",
           },
+          {
+            heading: "Marcature",
+            route: "/settings/markings/list",
+          },
+          {
+            heading: "Profili per Xml",
+            route: "/settings/profilesXml/list",
+          },
         ],
       },
       {

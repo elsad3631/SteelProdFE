@@ -32,7 +32,7 @@
                   <!--begin::Label-->
                   <label class="required fs-6 fw-semobold mb-2">Nome</label>
                   <!--end::Label-->
-                  <input class="form-control" v-model="formData.Name" type="text" placeholder="Nome..." />
+                  <input required class="form-control" v-model="formData.Name" type="text" placeholder="Nome..." />
                 </div>
                 <!--end::Input group-->
 

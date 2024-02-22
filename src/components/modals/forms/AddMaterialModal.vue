@@ -169,7 +169,7 @@
                   <!--begin::Label-->
                   <label class="fs-6 fw-semobold mb-2">Data ultima consegna</label>
                   <!--end::Label-->
-                  <input class="form-control" v-model="formData.LastDeliveryDate" type="text" placeholder="Data ultima consegna..." />
+                  <input class="form-control" v-model="formData.LastDeliveryDate" type="date" placeholder="Data ultima consegna..." />
                 </div>
                 <!--end::Input group-->
 
@@ -253,7 +253,7 @@ interface ICreate {
   DeliveryType: string;
   MaterialTypeId: number;
   MaterialType: string;
-  LastDeliveryDate: string;
+  LastDeliveryDate: Date;
 }
 export default defineComponent({
   name: "add-material-modal",
@@ -280,7 +280,7 @@ export default defineComponent({
       DeliveryType: "",
       MaterialTypeId: 0,
       MaterialType: "",
-      LastDeliveryDate: ""
+      LastDeliveryDate: new Date()
     });
 
     const rules = ref({
@@ -320,14 +320,14 @@ export default defineComponent({
     });
 
     const submit = () => {
-      const materilType = MaterialTypes.value.find(option => option.name === formData.value.MaterialType);
+      const materialType = MaterialTypes.value.find(option => option.name === formData.value.MaterialType);
       const supplier = Suppliers.value.find(option => option.name === formData.value.Supplier);
       const deliveryType = DeliveryTypes.value.find(option => option.name === formData.value.DeliveryType);
       if (!formRef.value) {
         return;
       }
 
-      if(materilType === undefined){
+      if(materialType === undefined){
         Swal.fire({
                 text: "Attenzione, selezionare la tipologia del materiale.",
                 icon: "error",
@@ -367,14 +367,14 @@ export default defineComponent({
               return;
       }
 
-      formData.value.MaterialTypeId = materilType.id;
+      formData.value.MaterialTypeId = materialType.id;
       formData.value.SupplierId = supplier.id;
       formData.value.DeliveryMethodId = deliveryType.id;
-
+      console.log(formData.value)
       formRef.value.validate((valid: boolean) => {
         if (valid) {
           loading.value = true;
-          console.log(formData.value)
+         
           ApiService.post(`${controller}/Create`, formData.value)
             .then(() => {
                 loading.value = false;

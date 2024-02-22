@@ -309,7 +309,7 @@ interface ICreate {
   ByModel: boolean;
 }
 export default defineComponent({
-  name: "add-material-modal",
+  name: "add-module-xml-modal",
   components: {},
   setup(props, { emit }) {
     const formRef = ref<null | HTMLFormElement>(null);
