@@ -8,21 +8,21 @@
     <div class="menu-item px-3">
       <div class="menu-content d-flex align-items-center px-3">
         <!--begin::Avatar-->
-        <div class="symbol symbol-50px me-5">
+        <!-- <div class="symbol symbol-50px me-5">
           <img alt="Logo" :src="getAssetPath('media/avatars/300-1.jpg')" />
-        </div>
+        </div> -->
         <!--end::Avatar-->
 
         <!--begin::Username-->
         <div class="d-flex flex-column">
           <div class="fw-bold d-flex align-items-center fs-5">
-            Max Smith
-            <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2"
+            Admin
+            <!-- <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2"
               >Pro</span
-            >
+            > -->
           </div>
           <a href="#" class="fw-semobold text-muted text-hover-primary fs-7"
-            >max@kt.com</a
+            >admin@admin.com</a
           >
         </div>
         <!--end::Username-->
@@ -35,15 +35,15 @@
     <!--end::Menu separator-->
 
     <!--begin::Menu item-->
-    <div class="menu-item px-5">
+    <!-- <div class="menu-item px-5">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
         My Profile
       </router-link>
-    </div>
+    </div> -->
     <!--end::Menu item-->
 
     <!--begin::Menu item-->
-    <div class="menu-item px-5">
+    <!-- <div class="menu-item px-5">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
         <span class="menu-text">My Projects</span>
         <span class="menu-badge">
@@ -52,7 +52,7 @@
           >
         </span>
       </router-link>
-    </div>
+    </div> -->
     <!--end::Menu item-->
 
     <!--begin::Menu item-->
@@ -62,10 +62,10 @@
       data-kt-menu-placement="left-start"
       data-kt-menu-flip="center, top"
     >
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
+      <!-- <router-link to="/pages/profile/overview" class="menu-link px-5">
         <span class="menu-title">My Subscription</span>
         <span class="menu-arrow"></span>
-      </router-link>
+      </router-link> -->
 
       <!--begin::Menu sub-->
       <div class="menu-sub menu-sub-dropdown w-175px py-4">
@@ -94,7 +94,7 @@
         <!--end::Menu item-->
 
         <!--begin::Menu item-->
-        <div class="menu-item px-3">
+        <!-- <div class="menu-item px-3">
           <router-link
             to="/pages/profile/overview"
             class="menu-link d-flex flex-stack px-5"
@@ -107,15 +107,15 @@
               title="View your statements"
             ></i>
           </router-link>
-        </div>
+        </div> -->
         <!--end::Menu item-->
 
         <!--begin::Menu separator-->
-        <div class="separator my-2"></div>
+        <!-- <div class="separator my-2"></div> -->
         <!--end::Menu separator-->
 
         <!--begin::Menu item-->
-        <div class="menu-item px-3">
+        <!-- <div class="menu-item px-3">
           <div class="menu-content px-3">
             <label
               class="form-check form-switch form-check-custom form-check-solid"
@@ -132,7 +132,7 @@
               </span>
             </label>
           </div>
-        </div>
+        </div> -->
         <!--end::Menu item-->
       </div>
       <!--end::Menu sub-->
@@ -140,15 +140,15 @@
     <!--end::Menu item-->
 
     <!--begin::Menu item-->
-    <div class="menu-item px-5">
+    <!-- <div class="menu-item px-5">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
         My Statements
       </router-link>
-    </div>
+    </div> -->
     <!--end::Menu item-->
 
     <!--begin::Menu separator-->
-    <div class="separator my-2"></div>
+    <!-- <div class="separator my-2"></div> -->
     <!--end::Menu separator-->
 
     <!--begin::Menu item-->
@@ -158,7 +158,7 @@
       data-kt-menu-placement="left-start"
       data-kt-menu-flip="center, top"
     >
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
+      <!-- <router-link to="/pages/profile/overview" class="menu-link px-5">
         <span class="menu-title position-relative">
           Language
           <span
@@ -172,7 +172,7 @@
             />
           </span>
         </span>
-      </router-link>
+      </router-link> -->
 
       <!--begin::Menu sub-->
       <div class="menu-sub menu-sub-dropdown w-175px py-4">
@@ -281,11 +281,11 @@
     <!--end::Menu item-->
 
     <!--begin::Menu item-->
-    <div class="menu-item px-5 my-1">
+    <!-- <div class="menu-item px-5 my-1">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
         Account Settings
       </router-link>
-    </div>
+    </div> -->
     <!--end::Menu item-->
 
     <!--begin::Menu item-->

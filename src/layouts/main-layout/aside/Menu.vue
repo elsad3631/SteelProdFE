@@ -147,12 +147,12 @@
           </div>
         </template>
       </template>
-      <div class="menu-item">
+      <!-- <div class="menu-item">
         <div class="menu-content">
           <div class="separator mx-1 my-4"></div>
         </div>
-      </div>
-      <div class="menu-item">
+      </div> -->
+      <!-- <div class="menu-item">
         <a
           class="menu-link"
           href="https://preview.keenthemes.com/metronic8/vue/docs/#/changelog"
@@ -172,7 +172,7 @@
             >{{ translate("changelog") }} v{{ version }}</span
           >
         </a>
-      </div>
+      </div> -->
     </div>
     <!--end::Menu-->
   </div>

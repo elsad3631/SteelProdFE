@@ -4,20 +4,20 @@
     <!--begin::Action wrapper-->
     <div class="d-flex align-items-center">
       <!--begin::Label-->
-      <span
+      <!-- <span
         class="fs-7 fw-bold text-gray-700 pe-4 text-nowrap d-none d-xxl-block"
         >Sort By:</span
-      >
+      > -->
       <!--end::Label-->
 
       <!--begin::Select-->
-      <select
+      <!-- <select
         class="form-select form-select-sm form-select-solid w-100px w-xxl-125px"
       >
         <option value="1" selected>Latest</option>
         <option value="2">In Progress</option>
         <option value="3">Done</option>
-      </select>
+      </select> -->
       <!--end::Select-->
     </div>
     <!--end::Action wrapper-->
@@ -25,17 +25,17 @@
     <!--begin::Action wrapper-->
     <div class="d-flex align-items-center">
       <!--begin::Separartor-->
-      <div class="bullet bg-secondary h-35px w-1px mx-5"></div>
+      <!-- <div class="bullet bg-secondary h-35px w-1px mx-5"></div> -->
       <!--end::Separartor-->
 
       <!--begin::Label-->
-      <span class="fs-7 text-gray-700 fw-bold d-none d-sm-block"
+      <!-- <span class="fs-7 text-gray-700 fw-bold d-none d-sm-block"
         >Impact <span class="d-none d-xxl-inline">Level</span>:</span
-      >
+      > -->
       <!--end::Label-->
 
       <!--begin::NoUiSlider-->
-      <div class="d-flex align-items-center ps-4" id="kt_toolbar">
+      <!-- <div class="d-flex align-items-center ps-4" id="kt_toolbar">
         <div
           id="kt_toolbar_slider"
           class="noUi-target noUi-target-primary w-75px w-xxl-150px noUi-sm"
@@ -49,7 +49,7 @@
           title="Set impact level"
         >
         </span>
-      </div>
+      </div> -->
       <!--end::NoUiSlider-->
 
       <!--begin::Separartor-->
@@ -61,33 +61,33 @@
     <!--begin::Action wrapper-->
     <div class="d-flex align-items-center">
       <!--begin::Label-->
-      <span class="fs-7 text-gray-700 fw-bold pe-3 d-none d-xxl-block"
+      <!-- <span class="fs-7 text-gray-700 fw-bold pe-3 d-none d-xxl-block"
         >Quick Tools:</span
-      >
+      > -->
       <!--end::Label-->
 
       <!--begin::Actions-->
       <div class="d-flex">
         <!--begin::Action-->
-        <a
+        <!-- <a
           href="#"
           class="btn btn-sm btn-icon btn-icon-muted btn-active-icon-primary"
           data-bs-toggle="modal"
           data-bs-target="#kt_modal_invite_friends"
         >
           <KTIcon icon-name="delete-files" icon-class="fs-2" />
-        </a>
+        </a> -->
         <!--end::Action-->
 
         <!--begin::Notifications-->
         <div class="d-flex align-items-center">
           <!--begin::Menu- wrapper-->
-          <router-link
+          <!-- <router-link
             to="/apps/subscriptions/add-subscription"
             class="btn btn-sm btn-icon btn-icon-muted btn-active-icon-primary"
           >
             <KTIcon icon-name="add-files" icon-class="fs-2" />
-          </router-link>
+          </router-link> -->
           <!--end::Menu wrapper-->
         </div>
         <!--end::Notifications-->
@@ -95,14 +95,14 @@
         <!--begin::Quick links-->
         <div class="d-flex align-items-center">
           <!--begin::Menu wrapper-->
-          <a
+          <!-- <a
             href="#"
             class="btn btn-sm btn-icon btn-icon-muted btn-active-icon-primary"
             data-bs-toggle="modal"
             data-bs-target="#kt_modal_create_app"
           >
             <KTIcon icon-name="file-up" icon-class="fs-2" />
-          </a>
+          </a> -->
           <!--end::Menu wrapper-->
         </div>
         <!--end::Quick links-->

@@ -5,7 +5,7 @@
       <router-link to="/dashboard">
         <img
           alt="Logo"
-          :src="getAssetPath('media/logos/default-dark.svg')"
+          :src="getAssetPath('media/logos/IlLattoniereSrl-B1-sito.png')"
           class="h-25px h-lg-25px"
         />
       </router-link>
