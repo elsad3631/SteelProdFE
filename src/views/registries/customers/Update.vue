@@ -18,8 +18,8 @@
             <!--begin::Card body-->
             <div class="card-body border-top p-9">
 
-                 <!--begin::Input group-->
-                 <div class="row mb-6">
+                <!--begin::Input group-->
+                <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label required fw-semobold fs-6">Codice</label>
                     <!--end::Label-->
@@ -48,8 +48,8 @@
                 </div>
                 <!--end::Input group-->
 
-                 <!--begin::Input group-->
-                 <div class="row mb-6">
+                <!--begin::Input group-->
+                <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label required fw-semobold fs-6">Tipologia cliente</label>
                     <!--end::Label-->
@@ -58,7 +58,8 @@
                     <div class="col-lg-8 fv-row">
                         <select as="select" name="customerType" class="form-select form-select-lg fw-semobold"
                             v-model="item.customerType">
-                            <option v-for="option in CustomerTypes" :key="option.id" :value="option.name">{{ option.name }}
+                            <option v-for="option in CustomerTypes" :key="option.id" :value="option.name">{{ option.name
+                                }}
                             </option>
                         </select>
                     </div>
@@ -66,17 +67,18 @@
                 </div>
                 <!--end::Input group-->
 
-                 <!--begin::Input group-->
-                 <div class="row mb-6">
+                <!--begin::Input group-->
+                <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label required fw-semobold fs-6">Modalità di pagamento</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <select as="select" name="paymentMethod" class="form-select form-select-lg fw-semobold"
-                            v-model="item.paymentMethod">
-                            <option v-for="option in PaymentTypes" :key="option.id" :value="option.name">{{ option.name }}
+                        <select as="select" name="paymentType" class="form-select form-select-lg fw-semobold"
+                            v-model="item.paymentType">
+                            <option v-for="option in PaymentTypes" :key="option.id" :value="option.name">{{ option.name
+                                }}
                             </option>
                         </select>
                     </div>
@@ -84,24 +86,25 @@
                 </div>
                 <!--end::Input group-->
 
-                 <!--begin::Input group-->
-                 <div class="row mb-6">
+                <!--begin::Input group-->
+                <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label required fw-semobold fs-6">Modalità di consegna</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <select as="select" name="deliveryMethod" class="form-select form-select-lg fw-semobold"
-                            v-model="item.deliveryMethod">
-                            <option v-for="option in DeliveryTypes" :key="option.id" :value="option.name">{{ option.name }}
+                        <select as="select" name="deliveryType" class="form-select form-select-lg fw-semobold"
+                            v-model="item.deliveryType">
+                            <option v-for="option in DeliveryTypes" :key="option.id" :value="option.name">{{ option.name
+                                }}
                             </option>
                         </select>
                     </div>
                     <!--end::Col-->
                 </div>
                 <!--end::Input group-->
-               
+
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
@@ -110,8 +113,8 @@
 
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="address" class="form-control form-control-lg "
-                            placeholder="Indirizzo" v-model="item.address" />
+                        <input type="text" name="address" class="form-control form-control-lg " placeholder="Indirizzo"
+                            v-model="item.address" />
                     </div>
                     <!--end::Col-->
                 </div>
@@ -140,68 +143,380 @@
 
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="city" class="form-control form-control-lg "
-                            placeholder="Città" v-model="item.city" />
+                        <input type="text" name="city" class="form-control form-control-lg " placeholder="Città"
+                            v-model="item.city" />
                     </div>
                     <!--end::Col-->
                 </div>
                 <!--end::Input group-->
 
-                  <!--begin::Input group-->
-                  <div class="row mb-6">
+                <!--begin::Input group-->
+                <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label required fw-semobold fs-6">Nazione</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="country" class="form-control form-control-lg "
-                            placeholder="Nazione" v-model="item.country" />
+                        <input type="text" name="country" class="form-control form-control-lg " placeholder="Nazione"
+                            v-model="item.country" />
                     </div>
                     <!--end::Col-->
                 </div>
                 <!--end::Input group-->
 
-                   <!--begin::Input group-->
-                   <div class="row mb-6">
+                <!--begin::Input group-->
+                <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label required fw-semobold fs-6">Provincia</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="province" class="form-control form-control-lg "
-                            placeholder="Provincia" v-model="item.province" />
+                        <input type="text" name="province" class="form-control form-control-lg " placeholder="Provincia"
+                            v-model="item.province" />
                     </div>
                     <!--end::Col-->
                 </div>
                 <!--end::Input group-->
 
-                  <!--begin::Input group-->
-                  <div class="row mb-6">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-semobold fs-6">Stato</label>
-                    <!--end::Label-->
-
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <input type="text" name="status" class="form-control form-control-lg "
-                            placeholder="Stato" v-model="item.status" />
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-
-                  <!--begin::Input group-->
-                  <div class="row mb-6">
+                <!--begin::Input group-->
+                <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label required fw-semobold fs-6">Note</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="notes" class="form-control form-control-lg "
-                            placeholder="Note" v-model="item.notes" />
+                        <input type="text" class="form-control form-control-lg " placeholder="Note"
+                            v-model="item.notes" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Indirizzo sede amministativa</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg "
+                            placeholder="Indirizzo sede amministativa" v-model="item.administrativeOfficeAddress" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Cap sede amministativa</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Cap sede amministativa"
+                            v-model="item.administrativeOfficeZipCode" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Città sede amministativa</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Città sede amministativa"
+                            v-model="item.administrativeOfficeCity" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Nazione sede amministativa</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg "
+                            placeholder="Nazione sede amministativa" v-model="item.administrativeOfficeCountry" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Provincia sede amministativa</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg "
+                            placeholder="Provincia sede amministativa" v-model="item.administrativeOfficeProvince" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Indirizzo sede operativa</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Indirizzo sede operativa"
+                            v-model="item.operatingOfficeAddress" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Cap sede operativa</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Cap sede operativa"
+                            v-model="item.operatingOfficeZipCode" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Città sede operativa</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Città sede operativa"
+                            v-model="item.operatingOfficeCity" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Nazione sede operativa</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Nazione sede operativa"
+                            v-model="item.operatingOfficeCountry" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Provincia sede operativa</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Provincia sede operativa"
+                            v-model="item.operatingOfficeProvince" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">P. IVA</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="P. IVA"
+                            v-model="item.vatNumber" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Codice ficale</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Codice ficale"
+                            v-model="item.fiscalCode" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Referente</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Referente"
+                            v-model="item.contactPerson" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Telefono</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Telefono"
+                            v-model="item.phone" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Cellulare</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Cellulare"
+                            v-model="item.mobile" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Email</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Email"
+                            v-model="item.email" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">PEC</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="PEC" v-model="item.pec" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Codice univoco</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Codice univoco"
+                            v-model="item.uniqueCode" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Agente di riferimento</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Agente di riferimento"
+                            v-model="item.referenceAgent" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Coordinate bancarie</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Coordinate bancarie"
+                            v-model="item.bankCoordinates" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Fax</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Fax" v-model="item.fax" />
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Banca</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" class="form-control form-control-lg " placeholder="Banca" v-model="item.bank" />
                     </div>
                     <!--end::Col-->
                 </div>
@@ -278,11 +593,6 @@ interface IUpdate {
     operatingOfficeCity: String,
     operatingOfficeCountry: String,
     operatingOfficeProvince: String,
-    recipientAddress: String,
-    recipientZipCode: String,
-    recipientCity: String,
-    recipientCountry: String,
-    recipientProvince: String,
     vatNumber: String,
     fiscalCode: String,
     contactPerson: String,
@@ -291,22 +601,15 @@ interface IUpdate {
     email: String,
     pec: String,
     uniqueCode: String,
-    zone: String,
     referenceAgent: String,
-    paymentMethodId: Number,
-    paymentMethod: String,
+    paymentTypeId: Number,
+    paymentType: String,
     bankCoordinates: String,
     notes: String,
     fax: String,
-    secondPhone: String,
-    activity: String,
-    discount: String,
-    increment: String,
     bank: String,
-    currency: String,
-    status: String,
-    deliveryMethodId: Number,
-    deliveryMethod: String,
+    deliveryTypeId: Number,
+    deliveryType: String,
     customerType: String,
     customerTypeId: Number,
     code: String,
@@ -351,11 +654,6 @@ export default defineComponent({
             operatingOfficeCity: "",
             operatingOfficeCountry: "",
             operatingOfficeProvince: "",
-            recipientAddress: "",
-            recipientZipCode: "",
-            recipientCity: "",
-            recipientCountry: "",
-            recipientProvince: "",
             vatNumber: "",
             fiscalCode: "",
             contactPerson: "",
@@ -364,22 +662,15 @@ export default defineComponent({
             email: "",
             pec: "",
             uniqueCode: "",
-            zone: "",
             referenceAgent: "",
-            paymentMethodId: 0,
-            paymentMethod: "",
+            paymentTypeId: 0,
+            paymentType: "",
             bankCoordinates: "",
             notes: "",
             fax: "",
-            secondPhone: "",
-            activity: "",
-            discount: "",
-            increment: "",
             bank: "",
-            currency: "",
-            status: "",
-            deliveryMethodId: 0,
-            deliveryMethod: "",
+            deliveryTypeId: 0,
+            deliveryType: "",
             customerType: "",
             customerTypeId: 0,
             code: "",
@@ -418,11 +709,6 @@ export default defineComponent({
                 operatingOfficeCity: customer?.operatingOfficeCity|| "",
                 operatingOfficeCountry: customer?.operatingOfficeCountry|| "",
                 operatingOfficeProvince: customer?.operatingOfficeProvince|| "",
-                recipientAddress: customer?.recipientAddress|| "",
-                recipientZipCode: customer?.recipientZipCode|| "",
-                recipientCity: customer?.recipientCity|| "",
-                recipientCountry: customer?.recipientCountry|| "",
-                recipientProvince: customer?.recipientProvince|| "",
                 vatNumber: customer?.vatNumber|| "",
                 fiscalCode: customer?.fiscalCode|| "",
                 contactPerson: customer?.contactPerson|| "",
@@ -431,23 +717,16 @@ export default defineComponent({
                 email: customer?.email|| "",
                 pec: customer?.pec || "",
                 uniqueCode: customer?.uniqueCode|| "",
-                zone: customer?.zone|| "",
                 referenceAgent: customer?.referenceAgent|| "",
-                paymentMethodId: customer?.paymentMethodId|| 0,
+                paymentTypeId: customer?.paymentTypeId|| 0,
                 bankCoordinates: customer?.bankCoordinates|| "",
                 notes: customer?.notes|| "",
                 fax: customer?.fax|| "",
-                secondPhone: customer?.secondPhone|| "",
-                activity: customer?.activity|| "",
-                discount: customer?.discount|| "",
-                increment: customer?.increment|| "",
                 bank: customer?.bank|| "",
-                currency: customer?.currency|| "",
-                status: customer?.status|| "",
-                deliveryMethodId: customer?.deliveryTypeId || 0,
+                deliveryTypeId: customer?.deliveryTypeId || 0,
                 customerType: customer?.customerType?.name || "",
-                deliveryMethod: customer?.deliveryType?.name || "",
-                paymentMethod: customer?.paymentType?.name || "",
+                deliveryType: customer?.deliveryType?.name || "",
+                paymentType: customer?.paymentType?.name || "",
             }
             loading.value = false;
         };
@@ -460,8 +739,8 @@ export default defineComponent({
         const saveChanges = () => {
             loading.value = true;
             const customerType = CustomerTypes.value.find(option => option.name === item.value.customerType);
-            const paymentMethod = PaymentMethods.value.find(option => option.name === item.value.paymentMethod);
-            const deliveryType = DeliveryTypes.value.find(option => option.name === item.value.deliveryMethod);
+            const paymentType = PaymentTypes.value.find(option => option.name === item.value.paymentType);
+            const deliveryType = DeliveryTypes.value.find(option => option.name === item.value.deliveryType);
             if (customerType === undefined) {
                 Swal.fire({
                     text: "Attenzione, selezionare la tipologia di cliente.",
@@ -475,7 +754,7 @@ export default defineComponent({
                 });
                 return;
             }
-            if (paymentMethod === undefined) {
+            if (paymentType === undefined) {
                 Swal.fire({
                     text: "Attenzione, selezionare la modalità di pagamento.",
                     icon: "error",

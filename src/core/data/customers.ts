@@ -21,11 +21,6 @@ interface ICustomer {
   operatingOfficeCity?: string;
   operatingOfficeCountry?: string;
   operatingOfficeProvince?: string;
-  recipientAddress?: string;
-  recipientZipCode?: string;
-  recipientCity?: string;
-  recipientCountry?: string;
-  recipientProvince?: string;
   vatNumber?: string;
   fiscalCode?: string;
   contactPerson?: string;
@@ -34,19 +29,13 @@ interface ICustomer {
   email: string;
   pec?: string;
   uniqueCode?: string;
-  zone?: string;
   referenceAgent?: string;
-  paymentMethodId?: number;
+  paymentTypeId?: number;
   bankCoordinates?: string;
   notes?: string;
   fax?: string;
-  secondPhone?: string;
   activity?: string;
-  discount?: string;
-  increment?: string;
   bank?: string;
-  currency?: string;
-  status?: string;
   deliveryTypeId?: number;
   creationDate: string;
   updateDate: string;
@@ -91,11 +80,6 @@ const getCustomers = (filterRequest: string) => {
         operatingOfficeCity: item.operatingOfficeCity,
         operatingOfficeCountry: item.operatingOfficeCountry,
         operatingOfficeProvince: item.operatingOfficeProvince,
-        recipientAddress: item.recipientAddress,
-        recipientZipCode: item.recipientZipCode,
-        recipientCity: item.recipientCity,
-        recipientCountry: item.recipientCountry,
-        recipientProvince: item.recipientProvince,
         vatNumber: item.vatNumber,
         fiscalCode: item.fiscalCode,
         contactPerson: item.contactPerson,
@@ -104,19 +88,13 @@ const getCustomers = (filterRequest: string) => {
         email: item.email,
         pec: item.pec,
         uniqueCode: item.uniqueCode,
-        zone: item.zone,
         referenceAgent: item.referenceAgent,
-        paymentMethodId: item.paymentMethodId,
+        paymentTypeId: item.paymentTypeId,
         bankCoordinates: item.bankCoordinates,
         notes: item.notes,
         fax: item.fax,
-        secondPhone: item.secondPhone,
         activity: item.activity,
-        discount: item.discount,
-        increment: item.increment,
         bank: item.bank,
-        currency: item.currency,
-        status: item.status,
         deliveryTypeId: item.deliveryTypeId,
         creationDate: item.creationDate,
         updateDate: item.updateDate,
@@ -125,8 +103,8 @@ const getCustomers = (filterRequest: string) => {
           name: item.customerType?.name,
         },
         deliveryType: {
-          id: item.deliveryMethod?.id,
-          name: item.deliveryMethod?.name,
+          id: item.deliveryType?.id,
+          name: item.deliveryType?.name,
         },
         paymentType: {
           id: item.paymentType?.id,
@@ -166,11 +144,6 @@ const getCustomer = (id) => {
         operatingOfficeCity: item.operatingOfficeCity,
         operatingOfficeCountry: item.operatingOfficeCountry,
         operatingOfficeProvince: item.operatingOfficeProvince,
-        recipientAddress: item.recipientAddress,
-        recipientZipCode: item.recipientZipCode,
-        recipientCity: item.recipientCity,
-        recipientCountry: item.recipientCountry,
-        recipientProvince: item.recipientProvince,
         vatNumber: item.vatNumber,
         fiscalCode: item.fiscalCode,
         contactPerson: item.contactPerson,
@@ -179,25 +152,19 @@ const getCustomer = (id) => {
         email: item.email,
         pec: item.pec,
         uniqueCode: item.uniqueCode,
-        zone: item.zone,
         referenceAgent: item.referenceAgent,
-        paymentMethodId: item.paymentMethodId,
+        paymentTypeId: item.paymentTypeId,
         bankCoordinates: item.bankCoordinates,
         notes: item.notes,
         fax: item.fax,
-        secondPhone: item.secondPhone,
         activity: item.activity,
-        discount: item.discount,
-        increment: item.increment,
         bank: item.bank,
-        currency: item.currency,
-        status: item.status,
         deliveryTypeId: item.deliveryTypeId,
         creationDate: item.creationDate,
         updateDate: item.updateDate,
         deliveryType: {
-          id: item.deliveryMethod?.id,
-          name: item.deliveryMethod?.name,
+          id: item.deliveryType?.id,
+          name: item.deliveryType?.name,
         },
         paymentType: {
           id: item.paymentType?.id,

@@ -127,15 +127,6 @@
                 <!--end::Input group-->  
 
                  <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Zona</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Zone" type="text" placeholder="Zone..." />
-                </div>
-                <!--end::Input group-->  
-
-                 <!--begin::Input group-->
                  <div class="fv-row mb-7">
                   <!--begin::Label-->
                   <label class="fs-6 fw-semobold mb-2">Agente di riferimento</label>
@@ -298,7 +289,6 @@
     Email?: string,
     Pec?: string,
     Fax?: string,
-    Zone?: string,
     ReferenceAgent?: string,
     PaymentTypeId?: number,
     PaymentType?: string,
@@ -329,7 +319,6 @@
         Email: "",
         Pec: "",
         Fax: "",
-        Zone: "",
         ReferenceAgent: "",
         PaymentTypeId: 0,
         PaymentType: "",

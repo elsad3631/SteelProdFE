@@ -207,7 +207,7 @@ export default defineComponent({
       },
       {
         columnName: "Payment Method",
-        columnLabel: "paymentMethod",
+        columnLabel: "paymentType",
         sortEnabled: true,
         columnWidth: 175,
       },

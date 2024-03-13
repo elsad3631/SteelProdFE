@@ -27,7 +27,6 @@ interface IMaterial {
     email: string;
     pec: string;
     fax: string;
-    zone: string;
     referenceAgent: string;
     paymentTypeId: number;
     bankDetails: string;
@@ -40,7 +39,7 @@ interface IMaterial {
   minimumStock?: number;
   quantity?: number;
   deliveryTiming?: string;
-  deliveryMethodId: number;
+  deliveryTypeId: number;
   deliveryType: {
     id: number;
     name: string;
@@ -80,7 +79,6 @@ const emptyMaterial: IMaterial = {
     email: "",
     pec: "",
     fax: "",
-    zone: "",
     referenceAgent: "",
     paymentTypeId: 0,
     bankDetails: "",
@@ -93,7 +91,7 @@ const emptyMaterial: IMaterial = {
   minimumStock: 0,
   quantity: 0,
   deliveryTiming: "",
-  deliveryMethodId: 0,
+  deliveryTypeId: 0,
   deliveryType: {
     id: 0,
     name: "",

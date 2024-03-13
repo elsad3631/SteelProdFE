@@ -249,7 +249,7 @@ interface ICreate {
   MinimumStock?: number;
   Quantity?: number;
   DeliveryTiming?: string;
-  DeliveryMethodId: number;
+  DeliveryTypeId: number;
   DeliveryType: string;
   MaterialTypeId: number;
   MaterialType: string;
@@ -276,7 +276,7 @@ export default defineComponent({
       MinimumStock: 0,
       Quantity:0,
       DeliveryTiming: "",
-      DeliveryMethodId: 0,
+      DeliveryTypeId: 0,
       DeliveryType: "",
       MaterialTypeId: 0,
       MaterialType: "",
@@ -369,7 +369,7 @@ export default defineComponent({
 
       formData.value.MaterialTypeId = materialType.id;
       formData.value.SupplierId = supplier.id;
-      formData.value.DeliveryMethodId = deliveryType.id;
+      formData.value.DeliveryTypeId = deliveryType.id;
       console.log(formData.value)
       formRef.value.validate((valid: boolean) => {
         if (valid) {

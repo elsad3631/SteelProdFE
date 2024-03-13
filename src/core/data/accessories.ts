@@ -37,7 +37,6 @@ interface IAccessory {
     email: string;
     pec: string;
     fax: string;
-    zone: string;
     referenceAgent: string;
     paymentTypeId: number;
     bankDetails: string;
@@ -45,7 +44,7 @@ interface IAccessory {
     creationDate: string;
     updateDate: string;
   };
-  deliveryMethod:{
+  deliveryType:{
     id:number;
     name: string;
   };
@@ -67,7 +66,6 @@ const getAccessory = (id) => {
   return ApiService.get(`Accessories/GetById?id=${id}`, '')
     .then(({ data }) => {
       const item = data;
-      console.log(data)
       const result: IAccessory = data;
       return result;
     })

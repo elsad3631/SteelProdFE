@@ -59,8 +59,8 @@
         <div class="card-body pt-0">
             <Datatable @on-sort="sort" @on-items-select="onItemSelect" :data="tableData" :header="tableHeader"
                 :enable-items-per-page-dropdown="true" :checkbox-enabled="true" checkbox-label="id" :loading="loading">
-                <template v-slot:code="{ row: item }">
-                    {{ item.code }}
+                <template v-slot:internalCode="{ row: item }">
+                    {{ item.internalCode }}
                 </template>
                 <template v-slot:name="{ row: item }">
                     <router-link :to="{ name: 'update-material', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
@@ -115,7 +115,7 @@ export default defineComponent({
         const tableHeader = ref([
             {
                 columnName: "Codice",
-                columnLabel: "code",
+                columnLabel: "internalCode",
                 sortEnabled: true,
                 columnWidth: 175,
             },

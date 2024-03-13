@@ -164,8 +164,8 @@
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <input type="number" name="unitOfMeasure" class="form-control form-control-lg " placeholder="Unità di misura"
-              v-model="item.packageQuantity" />
+            <input type="text" name="unitOfMeasure" class="form-control form-control-lg " placeholder="Unità di misura"
+              v-model="item.unitOfMeasure" />
           </div>
           <!--end::Col-->
         </div>
@@ -342,7 +342,7 @@ export default defineComponent({
         packageQuantity: accessory?.packageQuantity || 0,
         minimumStock: accessory?.minimumStock || 0,
         deliveryTimeframe: accessory?.deliveryTimeframe || "",
-        deliveryType: accessory?.deliveryMethod?.name || "",
+        deliveryType: accessory?.deliveryType?.name || "",
         deliveryTypeId: accessory?.deliveryTypeId || 0,
         quantity: accessory?.quantity || 0
       }

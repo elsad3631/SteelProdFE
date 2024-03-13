@@ -11,8 +11,7 @@
           <!--end::Modal title-->
 
           <!--begin::Close-->
-          <div id="kt_modal_add_close" data-bs-dismiss="modal"
-            class="btn btn-icon btn-sm btn-active-icon-primary">
+          <div id="kt_modal_add_close" data-bs-dismiss="modal" class="btn btn-icon btn-sm btn-active-icon-primary">
             <KTIcon icon-name="cross" icon-class="fs-1" />
           </div>
           <!--end::Close-->
@@ -25,8 +24,8 @@
             <!--begin::Scroll-->
             <div class="scroll-y me-n7 pe-7" id="kt_modal_add_scroll" data-kt-scroll="true"
               data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
-              data-kt-scroll-dependencies="#kt_modal_add_header"
-              data-kt-scroll-wrappers="#kt_modal_add_scroll" data-kt-scroll-offset="300px">
+              data-kt-scroll-dependencies="#kt_modal_add_header" data-kt-scroll-wrappers="#kt_modal_add_scroll"
+              data-kt-scroll-offset="300px">
               <!--begin::Input group-->
               <div class="fv-row mb-7">
                 <!--begin::Label-->
@@ -59,34 +58,34 @@
               </div>
               <!--end::Input group-->
 
-               <!--begin::Input group-->
-               <div class="d-flex flex-column mb-7 fv-row">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">
-                    <span class="required">Modalità di pagamento</span>
-                  </label>
-                  <!--end::Label-->
-                  <select class="form-select" aria-label="Select example" v-model="formData.PaymentMethod">
-                    <option value="">Seleziona la modalità di pagamento...</option>
-                    <option v-for="item in PaymentTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
-                  </select>
-                </div>
-                <!--end::Input group-->
+              <!--begin::Input group-->
+              <div class="d-flex flex-column mb-7 fv-row">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">
+                  <span class="required">Modalità di pagamento</span>
+                </label>
+                <!--end::Label-->
+                <select class="form-select" aria-label="Select example" v-model="formData.PaymentType">
+                  <option value="">Seleziona la modalità di pagamento...</option>
+                  <option v-for="item in PaymentTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
+                </select>
+              </div>
+              <!--end::Input group-->
 
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">
-                    <span class="required">Modalità di consegna</span>
-                  </label>
-                  <!--end::Label-->
-                  <select class="form-select" aria-label="Select example" v-model="formData.DeliveryMethod">
-                    <option value="">Seleziona la modalità di consegna...</option>
-                    <option v-for="item in DeliveryTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
-                  </select>
-                </div>
-                <!--end::Input group-->
-                
+              <!--begin::Input group-->
+              <div class="d-flex flex-column mb-7 fv-row">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">
+                  <span class="required">Modalità di consegna</span>
+                </label>
+                <!--end::Label-->
+                <select class="form-select" aria-label="Select example" v-model="formData.DeliveryType">
+                  <option value="">Seleziona la modalità di consegna...</option>
+                  <option v-for="item in DeliveryTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
+                </select>
+              </div>
+              <!--end::Input group-->
+
               <!--begin::Input group-->
               <div class="fv-row mb-7">
                 <!--begin::Label-->
@@ -135,15 +134,6 @@
               <!--begin::Input group-->
               <div class="fv-row mb-7">
                 <!--begin::Label-->
-                <label class="fs-6 fw-semobold mb-2">Stato</label>
-                <!--end::Label-->
-                <input class="form-control" v-model="formData.Status" type="text" placeholder="Stato..." />
-              </div>
-              <!--end::Input group-->
-
-              <!--begin::Input group-->
-              <div class="fv-row mb-7">
-                <!--begin::Label-->
                 <label class="fs-6 fw-semobold mb-2">Note</label>
                 <!--end::Label-->
                 <input class="form-control" v-model="formData.Notes" type="text" placeholder="Note..." />
@@ -152,8 +142,7 @@
 
               <!--begin::Billing toggle-->
               <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
-                href="#kt_modal_add_billing_info" role="button" aria-expanded="false"
-                aria-controls="kt_view_details">
+                href="#kt_modal_add_billing_info" role="button" aria-expanded="false" aria-controls="kt_view_details">
                 Informazioni sede amministrativa
                 <span class="ms-2 rotate-180">
                   <KTIcon icon-name="down" icon-class="fs-3" />
@@ -218,8 +207,7 @@
 
               <!--begin::Billing toggle-->
               <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
-                href="#kt_modal_add_operating_info" role="button" aria-expanded="false"
-                aria-controls="kt_view_details">
+                href="#kt_modal_add_operating_info" role="button" aria-expanded="false" aria-controls="kt_view_details">
                 Informazioni sede operativa
                 <span class="ms-2 rotate-180">
                   <KTIcon icon-name="down" icon-class="fs-3" />
@@ -282,282 +270,164 @@
               </div>
               <!--end::Billing form-->
 
-              <!--begin::Billing toggle-->
-              <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
-                href="#kt_modal_add_logistic_info" role="button" aria-expanded="false"
-                aria-controls="kt_view_details">
-                Informazioni logistiche
-                <span class="ms-2 rotate-180">
-                  <KTIcon icon-name="down" icon-class="fs-3" />
-                </span>
-              </div>
-              <!--end::Billing toggle-->
-
-              <!--begin::Billing form-->
-              <div id="kt_modal_add_logistic_info" class="collapse show">
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Indirizzo destinatario</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.RecipientAddress" type="text"
-                    placeholder="Indirizzo destinatario..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Cap destinatario</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.RecipientZipCode" type="text"
-                    placeholder="Cap destinatario..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Città destinatario</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.RecipientCity" type="text"
-                    placeholder="Città destinatario..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Nazione destinatario</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.RecipientCountry" type="text"
-                    placeholder="Nazione destinatario..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Provincia destinatario</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.RecipientProvince" type="text"
-                    placeholder="Provincia destinatario..." />
-                </div>
-                <!--end::Input group-->
-
-              </div>
-              <!--end::Billing form-->
-
-              <!--begin::Billing toggle-->
-              <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
-                href="#kt_modal_add_agency_info" role="button" aria-expanded="false"
-                aria-controls="kt_view_details">
-                Informazioni aziendali
-                <span class="ms-2 rotate-180">
-                  <KTIcon icon-name="down" icon-class="fs-3" />
-                </span>
-              </div>
-              <!--end::Billing toggle-->
-
-              <!--begin::Billing form-->
-              <div id="kt_modal_add_agency_info" class="collapse show">
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">P. IVA</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.VATNumber" type="text" placeholder="P. IVA..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Codice ficale</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.FiscalCode" type="text" placeholder="Codice ficale..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Referente</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.ContactPerson" type="text" placeholder="Referente..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Telefono</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Phone" type="text" placeholder="Telefono..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Cellulare</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Mobile" type="text" placeholder="Cellulare..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Email</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Email" type="text" placeholder="Email..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">PEC</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.PEC" type="text" placeholder="PEC..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Codice univoco</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.UniqueCode" type="text" placeholder="Codice univoco..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Zona</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Zone" type="text" placeholder="Zona..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Agente di riferimento</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.ReferenceAgent" type="text"
-                    placeholder="Agente di riferimento..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Coordinate bancarie</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.BankCoordinates" type="text"
-                    placeholder="Coordinate bancarie..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Fax</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Fax" type="text" placeholder="Fax..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Secondo telefono</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.SecondPhone" type="text" placeholder="Fax..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Attività</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Activity" type="text" placeholder="Attività..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Sconto</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Discount" type="text" placeholder="Sconto..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Incremento</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Increment" type="text" placeholder="Incremento..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Banca</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Bank" type="text" placeholder="Banca..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Valuta</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.Currency" type="text" placeholder="Valuta..." />
-                </div>
-                <!--end::Input group-->
-
-              </div>
-              <!--end::Billing form-->
             </div>
-            <!--end::Scroll-->
-          </div>
-          <!--end::Modal body-->
+            <!--end::Billing form-->
 
-          <!--begin::Modal footer-->
-          <div class="modal-footer flex-center">
-            <!--begin::Button-->
-            <button type="reset" id="kt_modal_add_cancel" class="btn btn-light me-3">
-              Scarta
-            </button>
-            <!--end::Button-->
+            <!--begin::Billing toggle-->
+            <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_add_agency_info"
+              role="button" aria-expanded="false" aria-controls="kt_view_details">
+              Informazioni aziendali
+              <span class="ms-2 rotate-180">
+                <KTIcon icon-name="down" icon-class="fs-3" />
+              </span>
+            </div>
+            <!--end::Billing toggle-->
 
-            <!--begin::Button-->
-            <button :data-kt-indicator="loading ? 'on' : null" class="btn btn-lg btn-primary" type="submit">
-              <span v-if="!loading" class="indicator-label">
-                Invia
-                <KTIcon icon-name="arrow-right" icon-class="fs-2 me-2 me-0" />
-              </span>
-              <span v-if="loading" class="indicator-progress">
-                Attendere...
-                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-              </span>
-            </button>
-            <!--end::Button-->
+            <!--begin::Billing form-->
+            <div id="kt_modal_add_agency_info" class="collapse show">
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">P. IVA</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.VATNumber" type="text" placeholder="P. IVA..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Codice ficale</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.FiscalCode" type="text" placeholder="Codice ficale..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Referente</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.ContactPerson" type="text" placeholder="Referente..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Telefono</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.Phone" type="text" placeholder="Telefono..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Cellulare</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.Mobile" type="text" placeholder="Cellulare..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Email</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.Email" type="text" placeholder="Email..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">PEC</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.PEC" type="text" placeholder="PEC..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Codice univoco</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.UniqueCode" type="text" placeholder="Codice univoco..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Agente di riferimento</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.ReferenceAgent" type="text"
+                  placeholder="Agente di riferimento..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Coordinate bancarie</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.BankCoordinates" type="text"
+                  placeholder="Coordinate bancarie..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Fax</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.Fax" type="text" placeholder="Fax..." />
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Banca</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.Bank" type="text" placeholder="Banca..." />
+              </div>
+              <!--end::Input group-->
+
+            </div>
+            <!--end::Billing form-->
           </div>
-          <!--end::Modal footer-->
-        </el-form>
-        <!--end::Form-->
+          <!--end::Scroll-->
       </div>
+      <!--end::Modal body-->
+
+      <!--begin::Modal footer-->
+      <div class="modal-footer flex-center">
+        <!--begin::Button-->
+        <button type="reset" id="kt_modal_add_cancel" class="btn btn-light me-3">
+          Scarta
+        </button>
+        <!--end::Button-->
+
+        <!--begin::Button-->
+        <button :data-kt-indicator="loading ? 'on' : null" class="btn btn-lg btn-primary" type="submit">
+          <span v-if="!loading" class="indicator-label">
+            Invia
+            <KTIcon icon-name="arrow-right" icon-class="fs-2 me-2 me-0" />
+          </span>
+          <span v-if="loading" class="indicator-progress">
+            Attendere...
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+          </span>
+        </button>
+        <!--end::Button-->
+      </div>
+      <!--end::Modal footer-->
+      </el-form>
+      <!--end::Form-->
     </div>
+  </div>
   </div>
 </template>
 
@@ -590,11 +460,6 @@ interface ICreate {
   OperatingOfficeCity: String,
   OperatingOfficeCountry: String,
   OperatingOfficeProvince: String,
-  RecipientAddress: String,
-  RecipientZipCode: String,
-  RecipientCity: String,
-  RecipientCountry: String,
-  RecipientProvince: String,
   VATNumber: String,
   FiscalCode: String,
   ContactPerson: String,
@@ -603,22 +468,16 @@ interface ICreate {
   Email: String,
   PEC: String,
   UniqueCode: String,
-  Zone: String,
   ReferenceAgent: String,
-  PaymentMethodId: Number,
-  PaymentMethod: String,
+  PaymentTypeId: Number,
+  PaymentType: String,
   BankCoordinates: String,
   Notes: String,
   Fax: String,
-  SecondPhone: String,
-  Activity: String,
-  Discount: String,
-  Increment: String,
   Bank: String,
-  Currency: String,
   Status: String,
-  DeliveryMethodId: Number,
-  DeliveryMethod: String,
+  DeliveryTypeId: Number,
+  DeliveryType: String,
   CustomerType: String,
   CustomerTypeId: Number,
   Code: String,
@@ -647,11 +506,6 @@ export default defineComponent({
       OperatingOfficeCity: "",
       OperatingOfficeCountry: "",
       OperatingOfficeProvince: "",
-      RecipientAddress: "",
-      RecipientZipCode: "",
-      RecipientCity: "",
-      RecipientCountry: "",
-      RecipientProvince: "",
       VATNumber: "",
       FiscalCode: "",
       ContactPerson: "",
@@ -660,22 +514,16 @@ export default defineComponent({
       Email: "",
       PEC: "",
       UniqueCode: "",
-      Zone: "",
       ReferenceAgent: "",
-      PaymentMethodId: 0,
-      PaymentMethod: "",
+      PaymentTypeId: 0,
+      PaymentType: "",
       BankCoordinates: "",
       Notes: "",
       Fax: "",
-      SecondPhone: "",
-      Activity: "",
-      Discount: "",
-      Increment: "",
       Bank: "",
-      Currency: "",
       Status: "",
-      DeliveryMethodId: 0,
-      DeliveryMethod: "",
+      DeliveryTypeId: 0,
+      DeliveryType: "",
       CustomerType: "",
       CustomerTypeId: 0,
       Code: "",
@@ -727,8 +575,8 @@ export default defineComponent({
 
     const submit = () => {
       const customerType = CustomerTypes.value.find(option => option.name === formData.value.CustomerType);
-      const paymentType = PaymentTypes.value.find(option => option.name === formData.value.PaymentMethod);
-      const deliveryType = DeliveryTypes.value.find(option => option.name === formData.value.DeliveryMethod);
+      const paymentType = PaymentTypes.value.find(option => option.name === formData.value.PaymentType);
+      const deliveryType = DeliveryTypes.value.find(option => option.name === formData.value.DeliveryType);
       if (!formRef.value) {
         return;
       }
@@ -774,8 +622,8 @@ export default defineComponent({
       }
 
       formData.value.CustomerTypeId = customerType.id;
-      formData.value.PaymentMethodId = paymentType.id;
-      formData.value.DeliveryMethodId = deliveryType.id;
+      formData.value.PaymentTypeId = paymentType.id;
+      formData.value.DeliveryTypeId = deliveryType.id;
 
       formRef.value.validate((valid: boolean) => {
         if (valid) {
@@ -783,22 +631,22 @@ export default defineComponent({
           console.log(formData.value)
           ApiService.post(`${controller}/Create`, formData.value)
             .then(() => {
-              
-                loading.value = false;
 
-                Swal.fire({
-                  text: "Operazione completata!",
-                  icon: "success",
-                  buttonsStyling: false,
-                  confirmButtonText: "Continua!",
-                  heightAuto: false,
-                  customClass: {
-                    confirmButton: "btn btn-primary",
-                  },
-                }).then(() => {
-                  hideModal(addCustomerModalRef.value);
-                });
-                emit('formAddSubmitted', formData.value);
+              loading.value = false;
+
+              Swal.fire({
+                text: "Operazione completata!",
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: "Continua!",
+                heightAuto: false,
+                customClass: {
+                  confirmButton: "btn btn-primary",
+                },
+              }).then(() => {
+                hideModal(addCustomerModalRef.value);
+              });
+              emit('formAddSubmitted', formData.value);
             })
             .catch(({ response }) => {
               console.log(response);

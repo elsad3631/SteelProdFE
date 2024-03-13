@@ -18,14 +18,13 @@ interface ISupplier {
   email?: string;
   pec?: string;
   fax?: string;
-  zone?: string;
   referenceAgent?: string;
   paymentTypeId: number;
   bankDetails?: string;
   notes?: string;
   creationDate?: string;
   updateDate?: string;
-  paymentMethod: {
+  paymentType: {
     id: number;
     name: string;
   };
@@ -52,16 +51,15 @@ const getSuppliers = (filterRequest: string) => {
         email: item.email,
         pec: item.pec,
         fax: item.fax,
-        zone: item.zone,
         referenceAgent: item.referenceAgent,
         paymentTypeId: item.paymentTypeId,
         bankDetails: item.bankDetails,
         notes: item.notes,
         creationDate: item.creationDate,
         updateDate: item.updateDate,
-        paymentMethod: {
-          id: item.paymentMethod.id,
-          name: item.paymentMethod.name
+        paymentType: {
+          id: item.paymentType.id,
+          name: item.paymentType.name
         }
       }));
       return results;
@@ -94,16 +92,15 @@ const getSupplier = (id) => {
         email: item.email,
         pec: item.pec,
         fax: item.fax,
-        zone: item.zone,
         referenceAgent: item.referenceAgent,
         paymentTypeId: item.paymentTypeId,
         bankDetails: item.bankDetails,
         notes: item.notes,
         creationDate: item.creationDate,
         updateDate: item.updateDate,
-        paymentMethod: {
-          id: item.paymentMethod.id,
-          name: item.paymentMethod.name
+        paymentType: {
+          id: item.paymentType.id,
+          name: item.paymentType.name
         }
       };
       return result;

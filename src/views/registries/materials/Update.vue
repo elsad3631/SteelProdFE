@@ -101,7 +101,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <select as="select" name="materialType" class="form-select form-select-lg fw-semobold"
-              v-model="item.materialType">
+              v-model="item.materialType.name">
               <option v-for="option in MaterialTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
             </select>
           </div>
@@ -117,7 +117,7 @@
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <select as="select" name="supplier" class="form-select form-select-lg fw-semobold" v-model="item.supplier">
+            <select as="select" name="supplier" class="form-select form-select-lg fw-semobold" v-model="item.supplier.name">
               <option v-for="option in Suppliers" :key="option.id" :value="option.name">{{ option.name }}</option>
             </select>
           </div>
@@ -134,7 +134,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <select as="select" name="deliveryType" class="form-select form-select-lg fw-semobold"
-              v-model="item.deliveryType">
+              v-model="item.deliveryType.name">
               <option v-for="option in DeliveryTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
             </select>
           </div>

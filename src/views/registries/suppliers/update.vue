@@ -257,21 +257,6 @@
           </div>
           <!--end::Input group-->
 
-           <!--begin::Input group-->
-           <div class="row mb-6">
-            <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Zona</label>
-            <!--end::Label-->
-  
-            <!--begin::Col-->
-            <div class="col-lg-8 fv-row">
-              <input type="text" name="zone" class="form-control form-control-lg " placeholder="Zona"
-                v-model="item.zone" />
-            </div>
-            <!--end::Col-->
-          </div>
-          <!--end::Input group-->
-
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
@@ -295,7 +280,7 @@
   
             <!--begin::Col-->
             <div class="col-lg-8 fv-row">
-              <select as="select" name="paymentMethod" class="form-select form-select-lg fw-semobold" v-model="item.paymentMethod.name">
+              <select as="select" name="paymentType" class="form-select form-select-lg fw-semobold" v-model="item.paymentType.name">
                 <option v-for="option in PaymentTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
               </select>
             </div>
@@ -414,12 +399,11 @@
   email: '',
   pec: '',
   fax: '',
-  zone: '',
   referenceAgent: '',
   paymentTypeId: 0,
   bankDetails: '',
   notes: '',
-  paymentMethod: {
+  paymentType: {
     id: 0,
     name: ''
   }
@@ -451,8 +435,8 @@
       async function getItem() {
         PaymentTypes.value = await getPaymentTypes("");
         const supplier = await getSupplier(id);
-        console.log(supplier)
-            if (supplier) {
+
+        if (supplier) {
             item.value = supplier;
            
             }
@@ -467,10 +451,10 @@
   
       const saveChanges = () => {
           loading.value = true;
-          const PaymentMethod = item.value?.paymentMethod.name;
+          const PaymentType = item.value?.paymentType.name;
           
-          const paymentType = PaymentMethod
-            ? PaymentTypes.value.find(option => option.name === PaymentMethod)
+          const paymentType = PaymentType
+            ? PaymentTypes.value.find(option => option.name === PaymentType)
             : undefined;
        
           if (paymentType === undefined) {
