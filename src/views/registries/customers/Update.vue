@@ -129,7 +129,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <input type="text" name="supplierArticleCode" class="form-control form-control-lg "
-                            placeholder="CAP" v-model="item.cap" />
+                            placeholder="CAP" v-model="item.zipCode" />
                     </div>
                     <!--end::Col-->
                 </div>
@@ -582,7 +582,7 @@ interface IUpdate {
     city: String,
     country: String,
     province: String,
-    cap: String,
+    zipCode: String,
     administrativeOfficeAddress: String,
     administrativeOfficeZipCode: String,
     administrativeOfficeCity: String,
@@ -638,7 +638,7 @@ export default defineComponent({
 
         const item = ref<IUpdate>({
             id: 0,
-            cap: "",
+            zipCode: "",
             address: "",
             zipCode: "",
             city: "",
@@ -693,7 +693,6 @@ export default defineComponent({
                 code: customer?.code|| "",
                 name: customer?.name|| "",
                 customerTypeId: customer?.customerTypeId|| 0,
-                cap: customer?.cap || "",
                 address: customer?.address|| "",
                 zipCode: customer?.zipCode|| "",
                 city: customer?.city|| "",
@@ -728,6 +727,7 @@ export default defineComponent({
                 deliveryType: customer?.deliveryType?.name || "",
                 paymentType: customer?.paymentType?.name || "",
             }
+            console.log(customer)
             loading.value = false;
         };
 
@@ -781,6 +781,10 @@ export default defineComponent({
                 return;
             }
             
+            item.value.deliveryTypeId = deliveryType.id;
+            item.value.paymentTypeId = paymentType.id;
+            item.value.customerTypeId = customerType.id;
+
             ApiService.post(`Customers/Update`, item.value)
                 .then(() => {
                     setTimeout(() => {
@@ -832,7 +836,7 @@ export default defineComponent({
                             },
                         })
                     }, 1000);
-                    router.push({ name: 'accessories-list' })
+                    router.push({ name: 'customers-list' })
                 })
                 .catch(({ response }) => {
                     console.log(response);

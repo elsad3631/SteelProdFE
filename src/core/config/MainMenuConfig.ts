@@ -47,6 +47,28 @@ const MainMenuConfig: Array<MenuItem> = [
           },
         ],
       },
+      {
+        sectionTitle: "Magazzino",
+        route: "/pages",
+        keenthemesIcon: "element-plus",
+        bootstrapIcon: "bi-archive",
+        sub: [
+          {
+            heading: "Giacenza",
+            route: "/warehouse/stocks/list",
+          },
+          {
+            heading: "Entrata merci",
+            route: "/warehouse/goods-receipt/list",
+          }
+        ],
+      },
+      {
+        heading: "DDT",
+        route: "/transport-documents/list",
+        keenthemesIcon: "element-11",
+        bootstrapIcon: "bi-app-indicator",
+      },
     ],
   },
   {

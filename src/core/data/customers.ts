@@ -5,7 +5,7 @@ interface ICustomer {
   code: string;
   name: string;
   customerTypeId?: number;
-  cap?: string;
+  zipCode?: string;
   address?: string;
   zipCode?: string;
   city?: string;
@@ -64,7 +64,6 @@ const getCustomers = (filterRequest: string) => {
         code: item.code,
         name: item.name,
         customerTypeId: item.costomerTypeId,
-        cap: item.cap,
         address: item.address,
         zipCode: item.zipCode,
         city: item.city,
@@ -128,7 +127,6 @@ const getCustomer = (id) => {
         code: item.code,
         name: item.name,
         customerTypeId: item.costomerTypeId,
-        cap: item.cap,
         address: item.address,
         zipCode: item.zipCode,
         city: item.city,
@@ -153,7 +151,7 @@ const getCustomer = (id) => {
         pec: item.pec,
         uniqueCode: item.uniqueCode,
         referenceAgent: item.referenceAgent,
-        paymentTypeId: item.paymentTypeId,
+        paymentTypeId: item.paymentMethodId,
         bankCoordinates: item.bankCoordinates,
         notes: item.notes,
         fax: item.fax,

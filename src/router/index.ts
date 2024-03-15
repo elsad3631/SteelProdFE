@@ -358,6 +358,42 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
+        path: "/warehouse/goods-receipt/list",
+        name: "goods-receipt-list",
+        component: () => import("@/views/warehouse/goods-receipt/list.vue"),
+        meta: {
+          pageTitle: "Lista entrata merci",
+          breadcrumbs: ["Apps", "Magazzino"],
+        },
+      },
+      {
+        path: "/warehouse/goods-receipt/update",
+        name: "update-goods-receipt",
+        component: () => import("@/views/warehouse/goods-receipt/update.vue"),
+        meta: {
+          pageTitle: "Entrata merci",
+          breadcrumbs: ["Apps", "Magazzino"],
+        },
+      },
+      {
+        path: "/warehouse/stocks/list",
+        name: "stocks-list",
+        component: () => import("@/views/warehouse/stocks/list.vue"),
+        meta: {
+          pageTitle: "Giacenza",
+          breadcrumbs: ["Apps", "Magazzino"],
+        },
+      },
+      {
+        path: "/transport-documents/list",
+        name: "transport-documents-list",
+        component: () => import("@/views/transport-documents/list.vue"),
+        meta: {
+          pageTitle: "Lista documenti di trasporto",
+          breadcrumbs: ["Apps", "DDT"],
+        },
+      },
+      {
         path: "/apps/subscriptions/getting-started",
         name: "apps-subscriptions-getting-started",
         component: () =>
