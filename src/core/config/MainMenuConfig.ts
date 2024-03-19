@@ -45,6 +45,10 @@ const MainMenuConfig: Array<MenuItem> = [
             heading: "Materiali",
             route: "/registries/materials/list",
           },
+          {
+            heading: "Profili",
+            route: "/registries/profiles/list",
+          },
         ],
       },
       {

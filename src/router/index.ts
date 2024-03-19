@@ -214,6 +214,24 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
+        path: "/registries/profiles/list",
+        name: "profiles-list",
+        component: () => import("@/views/registries/profiles/List.vue"),
+        meta: {
+          pageTitle: "Lista profili",
+          breadcrumbs: ["Apps", "Profili"],
+        },
+      },
+      {
+        path: "/registries/profiles/update/:id",
+        name: "update-profile",
+        component: () => import("@/views/registries/profiles/Update.vue"),
+        meta: {
+          pageTitle: "Dettagli profilo",
+          breadcrumbs: ["Apps", "Profili"],
+        },
+      },
+      {
         path: "/registries/suppliers/list",
         name: "suppliers-list",
         component: () => import("@/views/registries/suppliers/list.vue"),
@@ -367,8 +385,8 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/warehouse/goods-receipt/update",
-        name: "update-goods-receipt",
+        path: "/warehouse/goods-receipt/update/:id",
+        name: "update-good-receipt",
         component: () => import("@/views/warehouse/goods-receipt/update.vue"),
         meta: {
           pageTitle: "Entrata merci",

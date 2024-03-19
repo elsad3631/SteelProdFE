@@ -79,14 +79,14 @@
         <!--begin::Input group-->
         <div class="row mb-6">
           <!--begin::Label-->
-          <label class="col-lg-4 col-form-label required fw-semobold fs-6">Tipologia accessorio</label>
+          <label class="col-lg-4 col-form-label required fw-semobold fs-6">Tipologia profilo</label>
           <!--end::Label-->
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <select as="select" name="country" class="form-select form-select-lg fw-semobold"
-              v-model="item.accessoryType">
-              <option v-for="option in AccessoryTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
+              v-model="item.profileType">
+              <option v-for="option in ProfileTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
             </select>
           </div>
           <!--end::Col-->
@@ -246,9 +246,9 @@ import Earnings from "@/components/customers/cards/statments/Earnings.vue";
 import Statement from "@/components/customers/cards/statments/Statement.vue";
 
 import { useRoute, useRouter } from "vue-router";
-import { getAccessory } from "@/core/data/accessories";
-import {getAccessoryTypes} from "@/core/data/typologies/accessoryTypes";
-import type { IAccessoryType } from "@/core/data/typologies/accessoryTypes";
+import { getProfile } from "@/core/data/profiles";
+import {getProfileTypes} from "@/core/data/typologies/profileTypes";
+import type { IProfileType } from "@/core/data/typologies/profileTypes";
 import {getSuppliers} from "@/core/data/suppliers";
 import type { ISupplier } from "@/core/data/suppliers";
 import {getDeliveryTypes} from "@/core/data/typologies/deliveryTypes";
@@ -258,8 +258,8 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 
 interface IUpdate {
   id,
-  accessoryType: string,
-  accessoryTypeId: number,
+  profileType: string,
+  profileTypeId: number,
   code: string,
   supplierArticleCode: string,
   name: string,
@@ -277,7 +277,7 @@ interface IUpdate {
 }
 
 export default defineComponent({
-  name: "accessory-details",
+  name: "profile-details",
   components: {
     PaymentRecords,
     PaymentMethods,
@@ -298,8 +298,8 @@ export default defineComponent({
 
     const item = ref<IUpdate>({
       id: 0,
-      accessoryType: "",
-      accessoryTypeId: 0,
+      profileType: "",
+      profileTypeId: 0,
       code: "",
       supplierArticleCode: "",
       name: "",
@@ -316,34 +316,34 @@ export default defineComponent({
       quantity: 0
     });
 
-    let AccessoryTypes = ref<IAccessoryType[]>([]);
+    let ProfileTypes = ref<IProfileType[]>([]);
     let Suppliers = ref<ISupplier[]>([]);
     let DeliveryTypes = ref<IDeliveryType[]>([]);
 
     async function getItem() {
-      AccessoryTypes.value = await getAccessoryTypes("");
+      ProfileTypes.value = await getProfileTypes("");
       Suppliers.value = await getSuppliers("");
       DeliveryTypes.value = await getDeliveryTypes("");
 
-      const accessory = await getAccessory(id);
+      const profile = await getProfile(id);
       item.value = {
         id: id,
-        accessoryType: accessory?.accessoryType?.name || "",
-        accessoryTypeId: accessory?.accessoryTypeId || 0,
-        code: accessory?.code || "",
-        supplierArticleCode: accessory?.supplierArticleCode || "",
-        name: accessory?.name || "",
-        description: accessory?.description || "",
-        unitOfMeasure: accessory?.unitOfMeasure || "",
-        supplier: accessory?.supplier?.name || "",
-        supplierId: accessory?.supplierId || 0,
-        price: accessory?.price || 0,
-        packageQuantity: accessory?.packageQuantity || 0,
-        minimumStock: accessory?.minimumStock || 0,
-        deliveryTimeframe: accessory?.deliveryTimeframe || "",
-        deliveryType: accessory?.deliveryType?.name || "",
-        deliveryTypeId: accessory?.deliveryTypeId || 0,
-        quantity: accessory?.quantity || 0
+        profileType: profile?.profileType?.name || "",
+        profileTypeId: profile?.profileTypeId || 0,
+        code: profile?.code || "",
+        supplierArticleCode: profile?.supplierArticleCode || "",
+        name: profile?.name || "",
+        description: profile?.description || "",
+        unitOfMeasure: profile?.unitOfMeasure || "",
+        supplier: profile?.supplier?.name || "",
+        supplierId: profile?.supplierId || 0,
+        price: profile?.price || 0,
+        packageQuantity: profile?.packageQuantity || 0,
+        minimumStock: profile?.minimumStock || 0,
+        deliveryTimeframe: profile?.deliveryTimeframe || "",
+        deliveryType: profile?.deliveryType?.name || "",
+        deliveryTypeId: profile?.deliveryTypeId || 0,
+        quantity: profile?.quantity || 0
       }
       loading.value = false;
     };
@@ -355,10 +355,10 @@ export default defineComponent({
 
     const saveChanges = () => {
         loading.value = true;
-        const accessoryType = AccessoryTypes.value.find(option => option.name === item.value.accessoryType);
+        const profileType = ProfileTypes.value.find(option => option.name === item.value.profileType);
         const supplier = Suppliers.value.find(option => option.name === item.value.supplier);
         const deliveryType = DeliveryTypes.value.find(option => option.name === item.value.deliveryType);
-        if (accessoryType === undefined) {
+        if (profileType === undefined) {
           Swal.fire({
             text: "Attenzione, selezionare la tipologia dell'accessorio.",
             icon: "error",
@@ -398,7 +398,7 @@ export default defineComponent({
           return;
         }
         
-        ApiService.post(`Accessories/Update`, item.value)
+        ApiService.post(`Profiles/Update`, item.value)
           .then(() => {
             setTimeout(() => {
               loading.value = false;
@@ -433,7 +433,7 @@ export default defineComponent({
 
     const deleteItem = () => {
       loading.value = true;
-      ApiService.post(`Accessories/Delete?id=${id}`, {})
+      ApiService.post(`Profiles/Delete?id=${id}`, {})
         .then(() => {
           setTimeout(() => {
               loading.value = false;
@@ -449,7 +449,7 @@ export default defineComponent({
                 },
               })
             }, 1000);
-          router.push({ name: 'accessories-list' })
+          router.push({ name: 'profiles-list' })
         })
         .catch(({ response }) => {
           console.log(response);
@@ -460,7 +460,7 @@ export default defineComponent({
       getAssetPath,
       item,
       saveChanges,
-      AccessoryTypes,
+      ProfileTypes,
       Suppliers,
       DeliveryTypes,
       deleteItem,

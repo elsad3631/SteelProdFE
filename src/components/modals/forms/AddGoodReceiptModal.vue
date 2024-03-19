@@ -11,8 +11,7 @@
           <!--end::Modal title-->
 
           <!--begin::Close-->
-          <div id="kt_modal_add_close" data-bs-dismiss="modal"
-            class="btn btn-icon btn-sm btn-active-icon-primary">
+          <div id="kt_modal_add_close" data-bs-dismiss="modal" class="btn btn-icon btn-sm btn-active-icon-primary">
             <KTIcon icon-name="cross" icon-class="fs-1" />
           </div>
           <!--end::Close-->
@@ -25,14 +24,15 @@
             <!--begin::Scroll-->
             <div class="scroll-y me-n7 pe-7" id="kt_modal_add_scroll" data-kt-scroll="true"
               data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
-              data-kt-scroll-dependencies="#kt_modal_add_header"
-              data-kt-scroll-wrappers="#kt_modal_add_scroll" data-kt-scroll-offset="300px">
+              data-kt-scroll-dependencies="#kt_modal_add_header" data-kt-scroll-wrappers="#kt_modal_add_scroll"
+              data-kt-scroll-offset="300px">
               <!--begin::Input group-->
               <div class="fv-row mb-7">
                 <!--begin::Label-->
-                <label class="required fs-6 fw-semobold mb-2">Codice</label>
+                <label class="required fs-6 fw-semobold mb-2">Numero documento</label>
                 <!--end::Label-->
-                <input class="form-control" v-model="formData.Code" type="text" placeholder="Codice..." />
+                <input class="form-control" v-model="formData.DocumentNumber" type="text"
+                  placeholder="Numero documento..." />
               </div>
               <!--end::Input group-->
 
@@ -40,31 +40,12 @@
               <div class="fv-row mb-7">
                 <!--begin::Label-->
                 <label class="fs-6 fw-semobold mb-2">
-                  <span class="required">Codice articolo fornitore</span>
+                  <span class="required">Data</span>
                 </label>
                 <!--end::Label-->
-                <input class="form-control" v-model="formData.SupplierArticleCode" type="text" placeholder="Codice articolo fornitore..." />
+                <input class="form-control" v-model="formData.Date" type="date" placeholder="Data..." />
                 <!--begin::Input-->
                 <!--end::Input-->
-              </div>
-              <!--end::Input group-->
-
-              <!--begin::Input group-->
-              <div class="fv-row mb-7">
-                <!--begin::Label-->
-                <label class="required fs-6 fw-semobold mb-2">Nome</label>
-                <!--end::Label-->
-                <input class="form-control" v-model="formData.Name" type="text" placeholder="Nome..." />
-              </div>
-              <!--end::Input group-->
-
-              <!--begin::Input group-->
-              <div class="fv-row mb-7">
-                <!--begin::Label-->
-                <label class="fs-6 fw-semobold mb-2">Descrizione</label>
-                <!--end::Label-->
-                <textarea class="form-control" v-model="formData.Description" type="text" placeholder="Descrizione..."></textarea>
-                <!--begin::Input-->
               </div>
               <!--end::Input group-->
 
@@ -72,13 +53,36 @@
               <div class="d-flex flex-column mb-7 fv-row">
                 <!--begin::Label-->
                 <label class="fs-6 fw-semobold mb-2">
-                  <span class="required">Tipologia accessorio</span>
+                  <span class="required">Tipologia</span>
                 </label>
                 <!--end::Label-->
-                <select class="form-select" aria-label="Select example" v-model="formData.AccessoryType">
-                  <option value="">Seleziona la tipologia dell'accessorio...</option>
-                  <option v-for="item in AccessoryTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
+                <select class="form-select" aria-label="Select example" v-model="typeId">
+                  <option value="0">Accessorio</option>
+                  <option value="1">Profilo</option>
+                  <option value="2">Materiale</option>
                 </select>
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="d-flex flex-column mb-7 fv-row">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">
+                  <span class="required">Lotto</span>
+                </label>
+                <!--end::Label-->
+                <select class="form-select" aria-label="Select example" v-model="formData.GoodId">
+                  <option v-for="item in GoodsList" :key="item.id" :value="item.id">{{ item.name }}</option>
+                </select>
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semobold mb-2">Quantità</label>
+                <!--end::Label-->
+                <input class="form-control" v-model="formData.Quantity" type="number" placeholder="Quantità..." />
               </div>
               <!--end::Input group-->
 
@@ -96,81 +100,17 @@
               </div>
               <!--end::Input group-->
 
-              <!--begin::Input group-->
-              <div class="fv-row mb-7">
-                <!--begin::Label-->
-                <label class="fs-6 fw-semobold mb-2">Unità di misura</label>
-                <!--end::Label-->
-                <input class="form-control" v-model="formData.UnitOfMeasure" type="text" placeholder="Unità di misura..." />
-              </div>
-              <!--end::Input group-->
 
               <!--begin::Input group-->
               <div class="fv-row mb-7">
                 <!--begin::Label-->
-                <label class="fs-6 fw-semobold mb-2">Prezzo</label>
+                <label class="fs-6 fw-semobold mb-2">Descrizione</label>
                 <!--end::Label-->
-                <input class="form-control" v-model="formData.Price" type="number" placeholder="Prezzo..." />
+                <textarea class="form-control" v-model="formData.Description" type="text" placeholder="Descrizione..."></textarea>
+                <!--begin::Input-->
               </div>
               <!--end::Input group-->
 
-
-              <!--begin::Billing toggle-->
-              <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
-                href="#kt_modal_add_billing_info" role="button" aria-expanded="false"
-                aria-controls="kt_view_details">
-                Informazioni logistiche
-                <span class="ms-2 rotate-180">
-                  <KTIcon icon-name="down" icon-class="fs-3" />
-                </span>
-              </div>
-              <!--end::Billing toggle-->
-
-              <!--begin::Billing form-->
-              <div id="kt_modal_add_billing_info" class="collapse show">
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Quantità per confezione</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.PackageQuantity" type="text" placeholder="Quantità per confezione..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Giacenza minima</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.MinimumStock" type="text" placeholder="Giacenza minima..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Tempistiche di consegna</label>
-                  <!--end::Label-->
-                  <input class="form-control" v-model="formData.DeliveryTimeframe" type="text" placeholder="Tempistiche di consegna..." />
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">
-                    <span class="required">Tipologia consegna</span>
-                  </label>
-                  <!--end::Label-->
-                  <select class="form-select" aria-label="Select example" v-model="formData.DeliveryType">
-                    <option value="">Seleziona la modalità di consegna...</option>
-                    <option v-for="item in DeliveryTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
-                  </select>
-                </div>
-                <!--end::Input group-->
-
-              </div>
-              <!--end::Billing form-->
             </div>
             <!--end::Scroll-->
           </div>
@@ -207,32 +147,29 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted, watch } from "vue";
 import { hideModal } from "@/core/helpers/dom";
-import { getAccessoryTypes } from "@/core/data/typologies/accessoryTypes";
-import type { IAccessoryType } from "@/core/data/typologies/accessoryTypes";
+import { getAccessories } from "@/core/data/accessories";
+import type { IAccessory } from "@/core/data/accessories";
+import { getMaterials } from "@/core/data/materials";
+import type { IMaterial } from "@/core/data/materials";
+import { getProfiles } from "@/core/data/profiles";
+import type { IProfile } from "@/core/data/profiles";
 import { getSuppliers } from "@/core/data/suppliers";
 import type { ISupplier } from "@/core/data/suppliers";
-import { getDeliveryTypes } from "@/core/data/typologies/deliveryTypes";
-import type { IDeliveryType } from "@/core/data/typologies/deliveryTypes";
+import type { IGoodsList } from "@/core/data/goodsReceipt";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import ApiService from "@/core/services/ApiService";
 interface ICreate {
-    AccessoryType: string,
-    AccessoryTypeId: number,
-    Code: string,
-    SupplierArticleCode: string,
-    Name: string,
-    Description: string,
-    UnitOfMeasure: string,
-    Supplier: string,
-    SupplierId: number,
-    Price: number,
-    PackageQuantity: number,
-    MinimumStock: number,
-    DeliveryTimeframe: string,
-    DeliveryType: string,
-    DeliveryTypeId: number
+  DocumentNumber: number,
+  Date: string,
+  TypeId: number,
+  GoodId: number,
+  GoodName: string,
+  Quantity: number,
+  Supplier: string,
+  SupplierId: number,
+  Note: string
 }
 export default defineComponent({
   name: "add-accessory-modal",
@@ -242,64 +179,50 @@ export default defineComponent({
     const addCustomerModalRef = ref<null | HTMLElement>(null);
     const loading = ref<boolean>(false);
     const formData = ref<ICreate>({
-      AccessoryType: "",
-      AccessoryTypeId: 0,
-      Code: "",
-      SupplierArticleCode: "",
-      Name: "",
-      Description: "",
-      UnitOfMeasure: "",
+      DocumentNumber: 0,
+      Date: Date(),
+      TypeId: 0,
+      GoodId: 0,
+      GoodName: "",
+      Quantity: 0,
       Supplier: "",
       SupplierId: 0,
-      Price: 0,
-      PackageQuantity: 0,
-      MinimumStock: 0,
-      DeliveryTimeframe: "",
-      DeliveryType: "",
-      DeliveryTypeId: 0
+      Note: ""
     });
 
     const rules = ref({
-      name: [
+      DocumentNumber: [
         {
           required: true,
-          message: "Inserire il nome",
+          message: "Inserire il numero del documento",
           trigger: "change",
         },
       ],
-      Code: [
+      Quantity: [
         {
           required: true,
-          message: "Inserire il codice",
-          trigger: "change",
-        },
-      ],
-      AccessoryType: [
-        {
-          required: true,
-          message: "Selezionare la tipologia dell'accessorio",
-          trigger: "change",
-        },
-      ],
-      Supplier: [
-        {
-          required: true,
-          message: "Selezionare il fornitore",
+          message: "Inserire la quantità",
           trigger: "change",
         },
       ]
     });
 
-    const controller = "Accessories"
-    let AccessoryTypes = ref<IAccessoryType[]>([]);
+    const controller = "GoodReceipt"
+    let Accessories = ref<IAccessory[]>([]);
+    let Materials = ref<IMaterial[]>([]);
+    let Profiles = ref<IProfile[]>([]);
     let Suppliers = ref<ISupplier[]>([]);
-    let DeliveryTypes = ref<IDeliveryType[]>([]);
+    let GoodsList = ref<IGoodsList[]>([]);
+    const typeId = ref(0);
 
     async function _getTypes() {
       try {
-        AccessoryTypes.value = await getAccessoryTypes("");
         Suppliers.value = await getSuppliers("");
-        DeliveryTypes.value = await getDeliveryTypes('');
+        Accessories.value = await getAccessories("");
+        GoodsList.value = Accessories.value.map(item => ({
+          id: item.id,
+          name: item.name
+        }));
       } catch (error) {
         console.error(error);
       }
@@ -309,57 +232,74 @@ export default defineComponent({
       _getTypes();
     });
 
+    
+
+    watch(typeId, async (newTypeId, oldTypeId) => {
+      GoodsList.value = [];
+      if (newTypeId == 0 && oldTypeId != 0) {
+        Accessories.value = await getAccessories("");
+        GoodsList.value = Accessories.value.map(item => ({
+          id: item.id,
+          name: item.name
+        }));
+      } else if (newTypeId == 1&& oldTypeId != 1) {
+        Profiles.value = await getProfiles("");
+        GoodsList.value = Profiles.value.map(item => ({
+          id: item.id,
+          name: item.name
+        }));
+      } else if (newTypeId == 2&& oldTypeId != 2) {
+        Materials.value = await getMaterials("");
+        GoodsList.value = Materials.value.map(item => ({
+          id: item.id,
+          name: item.name
+        }));
+      }
+    })
+
     const submit = () => {
-      const accessoryType = AccessoryTypes.value.find(option => option.name === formData.value.AccessoryType);
-      const supplier = Suppliers.value.find(option => option.name === formData.value.Supplier);
-      const deliveryType = DeliveryTypes.value.find(option => option.name === formData.value.DeliveryType);
+      // let goodSupplierId = ref(0);
+      // if (formData.value.TypeId == 0) {
+      //   const accessory = Accessories.value.find(option => option.name === formData.value.GoodName);
+      //   formData.value.GoodId = accessory?.id || 0;
+      //   formData.value.GoodName = accessory?.name || "";
+      //   goodSupplierId.value = accessory?.supplierId || 0;
+      // } else if (formData.value.TypeId == 1) {
+      //   const profile = Profiles.value.find(option => option.name === formData.value.GoodName);
+      //   formData.value.GoodId = profile?.id || 0;
+      //   formData.value.GoodName = profile?.name || "";
+      //   goodSupplierId.value = profile?.supplierId || 0;
+      // } else if (formData.value.TypeId == 2) {
+      //   const material = Materials.value.find(option => option.name === formData.value.GoodName);
+      //   formData.value.GoodId = material?.id || 0;
+      //   formData.value.GoodName = material?.name || "";
+      //   goodSupplierId.value = material?.supplierId || 0;
+      // }
+
+      // const supplier = Suppliers.value.find(option => option.name === formData.value.Supplier);
+
+      console.log(formData.value.Date)
       if (!formRef.value) {
         return;
       }
 
-      if(accessoryType === undefined){
+      if (formData.value.GoodId == 0) {
         Swal.fire({
-                text: "Attenzione, selezionare la tipologia dell'accessorio.",
-                icon: "error",
-                buttonsStyling: false,
-                confirmButtonText: "Continua!",
-                heightAuto: false,
-                customClass: {
-                  confirmButton: "btn btn-primary",
-                },
-              });
-              return;
-      }
-      if(supplier === undefined){
-        Swal.fire({
-                text: "Attenzione, selezionare il fornitore.",
-                icon: "error",
-                buttonsStyling: false,
-                confirmButtonText: "Continua!",
-                heightAuto: false,
-                customClass: {
-                  confirmButton: "btn btn-primary",
-                },
-              });
-              return;
-      }
-      if(deliveryType === undefined){
-        Swal.fire({
-                text: "Attenzione, selezionare il metodo di pagamento.",
-                icon: "error",
-                buttonsStyling: false,
-                confirmButtonText: "Continua!",
-                heightAuto: false,
-                customClass: {
-                  confirmButton: "btn btn-primary",
-                },
-              });
-              return;
+          text: "Attenzione, selezionare il tipo di lotto.",
+          icon: "error",
+          buttonsStyling: false,
+          confirmButtonText: "Continua!",
+          heightAuto: false,
+          customClass: {
+            confirmButton: "btn btn-primary",
+          },
+        });
+        return;
       }
 
-      formData.value.AccessoryTypeId = accessoryType.id;
-      formData.value.SupplierId = supplier.id;
-      formData.value.DeliveryTypeId = deliveryType.id;
+      formData.value.GoodName = GoodsList.value.find(option => option.id === formData.value.GoodId)?.name || "";
+
+      // formData.value.SupplierId = supplier?.id || 0;
 
       formRef.value.validate((valid: boolean) => {
         if (valid) {
@@ -367,21 +307,21 @@ export default defineComponent({
           console.log(formData.value)
           ApiService.post(`${controller}/Create`, formData.value)
             .then(() => {
-                loading.value = false;
+              loading.value = false;
 
-                Swal.fire({
-                  text: "Operazione completata!",
-                  icon: "success",
-                  buttonsStyling: false,
-                  confirmButtonText: "Continua!",
-                  heightAuto: false,
-                  customClass: {
-                    confirmButton: "btn btn-primary",
-                  },
-                }).then(() => {
-                  hideModal(addCustomerModalRef.value);
-                });
-                emit('formAddSubmitted', formData.value);
+              Swal.fire({
+                text: "Operazione completata!",
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: "Continua!",
+                heightAuto: false,
+                customClass: {
+                  confirmButton: "btn btn-primary",
+                },
+              }).then(() => {
+                hideModal(addCustomerModalRef.value);
+              });
+              emit('formAddSubmitted', formData.value);
             })
             .catch(({ response }) => {
               console.log(response);
@@ -422,9 +362,9 @@ export default defineComponent({
       loading,
       addCustomerModalRef,
       getAssetPath,
-      AccessoryTypes,
       Suppliers,
-      DeliveryTypes
+      GoodsList,
+      typeId
     };
   },
 });

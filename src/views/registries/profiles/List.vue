@@ -28,7 +28,7 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#kt_modal_add">
                         <KTIcon icon-name="plus" icon-class="fs-2" />
-                        Aggiungi
+                        Aggiungi profilo
                     </button>
                     <!--end::Add customer-->
                 </div>
@@ -59,24 +59,24 @@
         <div class="card-body pt-0">
             <Datatable @on-sort="sort" @on-items-select="onItemSelect" :data="tableData" :header="tableHeader"
                 :enable-items-per-page-dropdown="true" :checkbox-enabled="true" checkbox-label="id" :loading="loading">
-                <template v-slot:documentNumber="{ row: item }">
-                    {{ item.documentNumber }}
+                <template v-slot:code="{ row: item }">
+                    {{ item.code }}
                 </template>
-                <template v-slot:goodName="{ row: item }">
-                    <router-link :to="{ name: 'update-good-receipt', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
-                        {{ item.goodName }}
+                <template v-slot:name="{ row: item }">
+                    <router-link :to="{ name: 'update-profile', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
+                        {{ item.name }}
                     </router-link>
                 </template>
-                <template v-slot:quantity="{ row: item }">
-                    {{ item.quantity }}
+                <template v-slot:price="{ row: item }">
+                    {{ item.price }}
                 </template>
-                <template v-slot:date="{ row: item }">
+                <template v-slot:description="{ row: item }">
                     {{
-                        new Date(item.date).toLocaleDateString('it-IT')
+                        item.description
                     }}
                 </template>
                 <template v-slot:actions="{ row: item }">
-                    <router-link :to="{ name: 'update-good-receipt', params: { id: item.id } }" class="btn btn-light-info me-1">Dettagli</router-link>
+                    <router-link :to="{ name: 'update-profile', params: { id: item.id } }" class="btn btn-light-info me-1">Dettagli</router-link>
                     <button @click="deleteItem(item.id)" class="btn btn-light-danger me-1">Elimina</button>
                 </template>
             </Datatable>
@@ -84,8 +84,8 @@
     </div>
 
 
-    <ExportGoodReceiptsModal></ExportGoodReceiptsModal>
-    <AddGoodReceiptModal @formAddSubmitted="getItems('')"></AddGoodReceiptModal>
+    <ExportProfilesModal></ExportProfilesModal>
+    <AddProfileModal @formAddSubmitted="getItems('')"></AddProfileModal>
 </template>
 
 <script lang="ts">
@@ -93,47 +93,47 @@ import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent, onMounted, ref } from "vue";
 import Datatable from "@/components/kt-datatable/KTDataTable.vue";
 import type { Sort } from "@/components/kt-datatable//table-partials/models";
-import ExportGoodReceiptsModal from "@/components/modals/forms/ExportGoodReceiptsModal.vue";
-import AddGoodReceiptModal from "@/components/modals/forms/AddGoodReceiptModal.vue";
+import ExportProfilesModal from "@/components/modals/forms/ExportProfilesModal.vue";
+import AddProfileModal from "@/components/modals/forms/AddProfileModal.vue";
 import arraySort from "array-sort";
 import { MenuComponent } from "@/assets/ts/components";
 import ApiService from "@/core/services/ApiService";
 import Loading from "@/components/kt-datatable/table-partials/Loading.vue"
-import { getGoodReceipts } from "@/core/data/goodsReceipt";
-import type { IGoodReceipt } from "@/core/data/goodsReceipt";
+import { getProfiles } from "@/core/data/profiles";
+import type { IProfile } from "@/core/data/profiles";
 
 export default defineComponent({
-    name: "goods-receipt-list",
+    name: "profiles-list",
     components: {
         Datatable,
-        ExportGoodReceiptsModal,
-        AddGoodReceiptModal,
+        ExportProfilesModal,
+        AddProfileModal,
         Loading
     },
     setup() {
         let loading = ref<boolean>(true);
         const tableHeader = ref([
             {
-                columnName: "Numero documento",
-                columnLabel: "documentNumber",
+                columnName: "Codice",
+                columnLabel: "code",
                 sortEnabled: true,
                 columnWidth: 175,
             },
             {
-                columnName: "Lotto",
-                columnLabel: "goodName",
+                columnName: "Nome",
+                columnLabel: "name",
                 sortEnabled: true,
                 columnWidth: 230,
             },
             {
-                columnName: "Quantità",
-                columnLabel: "quantity",
+                columnName: "Prezzo",
+                columnLabel: "price",
                 sortEnabled: true,
                 columnWidth: 175,
             },
             {
-                columnName: "Data",
-                columnLabel: "date",
+                columnName: "Descrizione",
+                columnLabel: "description",
                 sortEnabled: true,
                 columnWidth: 175,
             },
@@ -147,10 +147,10 @@ export default defineComponent({
 
         const selectedIds = ref<Array<number>>([]);
         
-        let tableData = ref<IGoodReceipt[]>([]);
+        let tableData = ref<IProfile[]>([]);
 
         async function getItems(filterRequest: string) {
-            tableData.value = await getGoodReceipts(filterRequest);
+            tableData.value = await getProfiles(filterRequest);
             loading.value = false;
         };
 
@@ -168,7 +168,7 @@ export default defineComponent({
 
         const deleteItem = (id: number) => {
             loading.value = true;
-            ApiService.post(`GoodReceipts/Delete?id=${id}`, {})
+            ApiService.post(`Profiles/Delete?id=${id}`, {})
                 .then(() => {
                     getItems("");
                 })

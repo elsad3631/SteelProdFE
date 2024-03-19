@@ -2,12 +2,16 @@ import ApiService from "@/core/services/ApiService";
 
 interface IGoodReceipt {
   id: number;
-  internalCode: string;
-  supplierArticleCode: string;
-  name: string;
-  description?: string;
-  unitOfMeasure?: string;
-  function?: string;
+  documentNumber: number;
+  date: Date;
+  typeId: number;
+  goodId: number;
+  goodName: string;
+  material: string;
+  quantity: number;
+  note: string;
+  creationDate: Date;
+  updateDate: Date;
   supplierId: number;
   supplier: {
     id: number;
@@ -34,32 +38,20 @@ interface IGoodReceipt {
     creationDate: string;
     updateDate: string;
   };
-  unitPrice?: number;
-  packagingQuantity?: number;
-  minimumStock?: number;
-  quantity?: number;
-  deliveryTiming?: string;
-  deliveryTypeId: number;
-  deliveryType: {
-    id: number;
-    name: string;
-  };
-  materialTypeId: number;
-  materialType: {
-    id: number;
-    name: string;
-  };
-  lastDeliveryDate: Date;
 }
 
-const emptyGoodReceipt: IMaterial = {
+const emptyGoodReceipt: IGoodReceipt = {
   id: 0,
-  internalCode: "",
-  supplierArticleCode: "",
-  name: "",
-  description: "",
-  unitOfMeasure: "",
-  function: "",
+  documentNumber: 0,
+  date: "",
+  typeId: 0,
+  goodId: 0,
+  goodName: 0,
+  material: "",
+  quantity: 0,
+  note: "",
+  creationDate: "",
+  updateDate: "",
   supplierId: 0,
   supplier: {
     id: 0,
@@ -85,32 +77,21 @@ const emptyGoodReceipt: IMaterial = {
     notes: "",
     creationDate: "",
     updateDate: "",
-  },
-  unitPrice: 0,
-  packagingQuantity: 0,
-  minimumStock: 0,
-  quantity: 0,
-  deliveryTiming: "",
-  deliveryTypeId: 0,
-  deliveryType: {
-    id: 0,
-    name: "",
-  },
-  materialTypeId: 0,
-  materialType: {
-    id: 0,
-    name: "",
-  },
-  lastDeliveryDate: new Date()
+  }
 }
 
-const getMaterials = (filterRequest: string) => {
+interface IGoodsList {
+  id: number;
+  name: string;
+}
+
+const getGoodReceipts = (filterRequest: string) => {
   return ApiService.get(
-    `Materials/Get?currentPage=0&filterRequest=${filterRequest}`,
+    `GoodReceipt/Get?currentPage=0&filterRequest=${filterRequest}`,
     ""
   )
     .then(({ data }) => {
-      const results: Array<IMaterial> = data.data;
+      const results: Array<IGoodReceipt> = data.data;
       return results;
     })
     .catch(({ response }) => {
@@ -119,10 +100,11 @@ const getMaterials = (filterRequest: string) => {
     });
 };
 
-const getMaterial = (id) => {
-  return ApiService.get(`Materials/GetById?id=${id}`, "")
+const getGoodReceipt = (id) => {
+  return ApiService.get(`GoodReceipt/GetById?id=${id}`, "")
     .then(({ data }) => {
-      const result: IMaterial = data;
+      const result: IGoodReceipt = data;
+      result.date =  new Date(data.date).toISOString().split('T')[0]
       return result;
     })
     .catch(({ response }) => {
@@ -131,6 +113,6 @@ const getMaterial = (id) => {
     });
 };
 
-export { getMaterials, getMaterial, emptyMaterial };
+export { getGoodReceipts, getGoodReceipt, emptyGoodReceipt };
 
-export type { IMaterial };
+export type { IGoodReceipt, IGoodsList };
