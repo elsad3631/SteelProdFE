@@ -41,7 +41,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" name="code" class="form-control form-control-lg " placeholder="Codice"
-              v-model="item.internalCode" />
+              v-model="item.code" />
           </div>
           <!--end::Col-->
         </div>

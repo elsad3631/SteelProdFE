@@ -214,12 +214,13 @@
       let Profiles = ref<IProfile[]>([]);
       let Suppliers = ref<ISupplier[]>([]);
       let GoodsList = ref<IGoodsList[]>([]);
-      const typeId = ref(0);
+      let typeId = ref(0);
   
       async function getItem() {
         Suppliers.value = await getSuppliers("");
         const goodReceipt = await getGoodReceipt(id);
         item.value = goodReceipt || emptyGoodReceipt;
+        typeId.value = item.value.typeId
         await getStock(item.value.typeId, null);
         loading.value = false;
       };
@@ -230,6 +231,7 @@
       });
   
       watch(typeId, async (newTypeId, oldTypeId) => {
+        item.value.typeId = newTypeId;
         GoodsList.value = [];
         await getStock(newTypeId, oldTypeId);
       })
@@ -285,8 +287,8 @@
             });
             return;
           }
-         
-          item.value.typeId = typeId.value;
+          item.value.goodName = GoodsList.value.find(option => option.id === item.value.goodId)?.name || "";
+
           ApiService.post(`GoodReceipt/Update`, item.value)
             .then(() => {
               setTimeout(() => {
@@ -305,7 +307,7 @@
               }, 2000);
             })
             .catch(({ response }) => {
-              console.log(response);
+              console.log(response.data.message);
               loading.value = false;
               Swal.fire({
                 text: "Attenzione, si è verificato un errore.",

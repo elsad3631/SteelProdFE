@@ -324,10 +324,10 @@ export default defineComponent({
               emit('formAddSubmitted', formData.value);
             })
             .catch(({ response }) => {
-              console.log(response);
+              console.log(response.data.message);
               loading.value = false;
               Swal.fire({
-                text: "Attenzione, si è verificato un errore.",
+                text: response.data.message,
                 icon: "error",
                 buttonsStyling: false,
                 confirmButtonText: "Continua!",

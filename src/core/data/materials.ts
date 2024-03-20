@@ -2,7 +2,7 @@ import ApiService from "@/core/services/ApiService";
 
 interface IMaterial {
   id: number;
-  internalCode: string;
+  code: string;
   supplierArticleCode: string;
   name: string;
   description?: string;
@@ -54,7 +54,7 @@ interface IMaterial {
 
 const emptyMaterial: IMaterial = {
   id: 0,
-  internalCode: "",
+  code: "",
   supplierArticleCode: "",
   name: "",
   description: "",

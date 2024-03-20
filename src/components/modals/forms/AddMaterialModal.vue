@@ -32,7 +32,7 @@
                 <!--begin::Label-->
                 <label class="required fs-6 fw-semobold mb-2">Codice interno</label>
                 <!--end::Label-->
-                <input class="form-control" v-model="formData.InternalCode" type="text" placeholder="Codice interno..." />
+                <input class="form-control" v-model="formData.Code" type="text" placeholder="Codice interno..." />
               </div>
               <!--end::Input group-->
 
@@ -236,7 +236,7 @@ import type { ISupplier } from "@/core/data/suppliers";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import ApiService from "@/core/services/ApiService";
 interface ICreate {
-  InternalCode: string;
+  Code: string;
   SupplierArticleCode: string;
   Name: string;
   Description?: string;
@@ -263,7 +263,7 @@ export default defineComponent({
     const addCustomerModalRef = ref<null | HTMLElement>(null);
     const loading = ref<boolean>(false);
     const formData = ref<ICreate>({
-      InternalCode: "",
+      Code: "",
       SupplierArticleCode: "",
       Name: "",
       Description: "",
@@ -291,7 +291,7 @@ export default defineComponent({
           trigger: "change",
         },
       ],
-      InternalCode: [
+      Code: [
         {
           required: true,
           message: "Inserire il codice interno",
