@@ -212,7 +212,7 @@ const routes: Array<RouteRecordRaw> = [
           pageTitle: "Lista fornitori",
           breadcrumbs: ["Apps", "Fornitori"],
         },
-      },
+      }, 
       {
         path: "/registries/suppliers/update/:id",
         name: "update-supplier",
