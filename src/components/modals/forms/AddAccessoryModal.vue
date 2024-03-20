@@ -213,8 +213,8 @@ import { getAccessoryTypes } from "@/core/data/typologies/accessoryTypes";
 import type { IAccessoryType } from "@/core/data/typologies/accessoryTypes";
 import { getSuppliers } from "@/core/data/suppliers";
 import type { ISupplier } from "@/core/data/suppliers";
-import { getDeliveryTypes } from "@/core/data/typologies/deliveryTypes";
-import type { IDeliveryType } from "@/core/data/typologies/deliveryTypes";
+import { getDeliveryTypes } from "@/core/data/typologies/DeliveryTypes";
+import type { IDeliveryType } from "@/core/data/typologies/DeliveryTypes";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import ApiService from "@/core/services/ApiService";
 interface ICreate {

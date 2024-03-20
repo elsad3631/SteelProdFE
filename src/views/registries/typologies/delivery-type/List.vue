@@ -85,8 +85,8 @@ import arraySort from "array-sort";
 import { MenuComponent } from "@/assets/ts/components";
 import ApiService from "@/core/services/ApiService";
 import Loading from "@/components/kt-datatable/table-partials/Loading.vue"
-import { getDeliveryTypes } from "@/core/data/typologies/deliveryTypes";
-import type { IDeliveryType } from "@/core/data/typologies/deliveryTypes";
+import { getDeliveryTypes } from "@/core/data/typologies/DeliveryTypes";
+import type { IDeliveryType } from "@/core/data/typologies/DeliveryTypes";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 export default defineComponent({

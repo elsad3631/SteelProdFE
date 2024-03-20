@@ -251,8 +251,8 @@ import {getProfileTypes} from "@/core/data/typologies/profileTypes";
 import type { IProfileType } from "@/core/data/typologies/profileTypes";
 import {getSuppliers} from "@/core/data/suppliers";
 import type { ISupplier } from "@/core/data/suppliers";
-import {getDeliveryTypes} from "@/core/data/typologies/deliveryTypes";
-import type { IDeliveryType } from "@/core/data/typologies/deliveryTypes";
+import {getDeliveryTypes} from "@/core/data/typologies/DeliveryTypes";
+import type { IDeliveryType } from "@/core/data/typologies/DeliveryTypes";
 import ApiService from "@/core/services/ApiService";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 

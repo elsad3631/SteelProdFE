@@ -227,8 +227,8 @@
 import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent, ref, onMounted } from "vue";
 import { hideModal } from "@/core/helpers/dom";
-import {getDeliveryTypes} from "@/core/data/typologies/deliveryTypes";
-import type { IDeliveryType } from "@/core/data/typologies/deliveryTypes";
+import {getDeliveryTypes} from "@/core/data/typologies/DeliveryTypes";
+import type { IDeliveryType } from "@/core/data/typologies/DeliveryTypes";
 import {getMaterialTypes} from "@/core/data/typologies/materialTypes";
 import type { IMaterialType } from "@/core/data/typologies/materialTypes";
 import {getSuppliers} from "@/core/data/suppliers";
