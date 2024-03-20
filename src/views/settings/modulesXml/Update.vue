@@ -258,7 +258,7 @@
           <!--begin::Col-->
           <div class="fv-row">
             <input required type="text" class="form-control form-control-lg " placeholder="Nome materiale"
-              v-model="item.material" />
+              v-model="item.materialName" />
           </div>
           <!--end::Col-->
         </div>

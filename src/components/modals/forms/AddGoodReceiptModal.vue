@@ -93,9 +93,9 @@
                   <span class="required">Fornitore</span>
                 </label>
                 <!--end::Label-->
-                <select class="form-select" aria-label="Select example" v-model="formData.Supplier">
+                <select class="form-select" aria-label="Select example" v-model="formData.SupplierId">
                   <option value="">Seleziona il fornitore...</option>
-                  <option v-for="item in Suppliers" :key="item.id" :value="item.name">{{ item.name }}</option>
+                  <option v-for="item in Suppliers" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
               <!--end::Input group-->
@@ -106,7 +106,7 @@
                 <!--begin::Label-->
                 <label class="fs-6 fw-semobold mb-2">Descrizione</label>
                 <!--end::Label-->
-                <textarea class="form-control" v-model="formData.Description" type="text" placeholder="Descrizione..."></textarea>
+                <textarea class="form-control" v-model="formData.Note" type="text" placeholder="Descrizione..."></textarea>
                 <!--begin::Input-->
               </div>
               <!--end::Input group-->
@@ -236,6 +236,7 @@ export default defineComponent({
 
     watch(typeId, async (newTypeId, oldTypeId) => {
       GoodsList.value = [];
+      formData.value.TypeId = newTypeId;
       if (newTypeId == 0 && oldTypeId != 0) {
         Accessories.value = await getAccessories("");
         GoodsList.value = Accessories.value.map(item => ({
@@ -278,7 +279,6 @@ export default defineComponent({
 
       // const supplier = Suppliers.value.find(option => option.name === formData.value.Supplier);
 
-      console.log(formData.value.Date)
       if (!formRef.value) {
         return;
       }

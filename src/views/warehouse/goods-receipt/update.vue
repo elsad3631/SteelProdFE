@@ -125,7 +125,7 @@
   
             <!--begin::Col-->
             <div class="col-lg-8 fv-row">
-              <textarea name="description" class="form-control form-control-lg " v-model="item.description"></textarea>
+              <textarea name="note" class="form-control form-control-lg " v-model="item.note"></textarea>
             </div>
             <!--end::Col-->
           </div>

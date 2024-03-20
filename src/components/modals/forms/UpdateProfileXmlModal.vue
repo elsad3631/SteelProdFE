@@ -119,7 +119,7 @@ export default defineComponent({
     watch(() => [props.id, props.name, props.active], ([newId, newName, newActive]) => {
       formData.value.Id = newId !== undefined ? Number(newId) : 0;
       formData.value.Name = newName !== undefined ? String(newName) : "";
-      formData.value.Active = newName !== undefined ? Boolean(newActive) : "";
+      formData.value.Active = newName !== undefined ? Boolean(newActive) : false;
     });
 
     const rules = ref({

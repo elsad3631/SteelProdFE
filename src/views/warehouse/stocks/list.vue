@@ -8,6 +8,15 @@
                     <KTIcon icon-name="magnifier" icon-class="fs-1 position-absolute ms-6" />
                     <input type="text" v-model="search" @input="searchItems()"
                         class="form-control form-control-solid w-250px ps-15" placeholder="Ricerca" />
+                        <!--begin::Col-->
+                     
+                    <select as="select" class="form-select fw-semobold" v-model="typeFilter">
+                        <option value="0">Accessorio</option>
+                        <option value="1">Profilo</option>
+                        <option value="2">Materiale</option>
+                    </select>
+                
+                <!--end::Col-->
                 </div>
                 <!--end::Search-->
             </div>
@@ -17,34 +26,31 @@
                 <!--begin::Toolbar-->
                 <div v-if="selectedIds.length === 0" class="d-flex justify-content-end"
                     data-kt-customer-table-toolbar="base">
+                     
                     <!--begin::Export-->
                     <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal"
                         data-bs-target="#kt_export_modal">
                         <KTIcon icon-name="exit-up" icon-class="fs-2" />
                         Export
                     </button>
+                    
                     <!--end::Export-->
-                    <!--begin::Add customer-->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#kt_modal_add">
-                        <KTIcon icon-name="plus" icon-class="fs-2" />
-                        Aggiungi
-                    </button>
-                    <!--end::Add customer-->
                 </div>
                 <!--end::Toolbar-->
                 <!--begin::Group actions-->
-                <div v-else class="d-flex justify-content-end align-items-center" data-kt-customer-table-toolbar="selected">
+                <div v-else class="d-flex justify-content-end align-items-center"
+                    data-kt-customer-table-toolbar="selected">
                     <div class="fw-bold me-5">
                         <span class="me-2">{{ selectedIds.length }}</span>Selezionati
                     </div>
-                    <button type="button" class="btn btn-danger" @click="deleteFewItems()">
+                    <!-- <button type="button" class="btn btn-danger" @click="deleteFewItems()">
                         Elimina Selezionati
-                    </button>
+                    </button> -->
                 </div>
                 <!--end::Group actions-->
                 <!--begin::Group actions-->
-                <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
+                <div class="d-flex justify-content-end align-items-center d-none"
+                    data-kt-customer-table-toolbar="selected">
                     <div class="fw-bold me-5">
                         <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selezionati
                     </div>
@@ -59,12 +65,13 @@
         <div class="card-body pt-0">
             <Datatable @on-sort="sort" @on-items-select="onItemSelect" :data="tableData" :header="tableHeader"
                 :enable-items-per-page-dropdown="true" :checkbox-enabled="true" checkbox-label="id" :loading="loading">
-                <template v-slot:documentNumber="{ row: item }">
-                    {{ item.documentNumber }}
+                <template v-slot:code="{ row: item }">
+                    {{ item.code }}
                 </template>
-                <template v-slot:goodName="{ row: item }">
-                    <router-link :to="{ name: 'update-good-receipt', params: { id: item.id } }" class="text-gray-600 text-hover-primary mb-1">
-                        {{ item.goodName }}
+                <template v-slot:name="{ row: item }">
+                    <router-link :to="{ name: 'update-good-receipt', params: { id: item.id } }"
+                        class="text-gray-600 text-hover-primary mb-1">
+                        {{ item.name }}
                     </router-link>
                 </template>
                 <template v-slot:quantity="{ row: item }">
@@ -72,56 +79,56 @@
                 </template>
                 <template v-slot:date="{ row: item }">
                     {{
-                        new Date(item.date).toLocaleDateString('it-IT')
+                    new Date(item.lastDeliveryDate).toLocaleDateString('it-IT')
                     }}
                 </template>
                 <template v-slot:actions="{ row: item }">
-                    <router-link :to="{ name: 'update-good-receipt', params: { id: item.id } }" class="btn btn-light-info me-1">Dettagli</router-link>
-                    <button @click="deleteItem(item.id)" class="btn btn-light-danger me-1">Elimina</button>
+                    <a href="javascript:void(0)" @click="selectStock(item.id, item.quantity)"
+                        class="btn btn-light-info me-1">Modifica quantità</a>
+                    <!-- <button @click="deleteItem(item.id)" class="btn btn-light-danger me-1">Elimina</button> -->
                 </template>
             </Datatable>
         </div>
     </div>
 
-
-    <ExportGoodReceiptsModal></ExportGoodReceiptsModal>
-    <AddGoodReceiptModal @formAddSubmitted="getItems('')"></AddGoodReceiptModal>
+    <ExportStockModal></ExportStockModal>
 </template>
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, ref, watch } from "vue";
 import Datatable from "@/components/kt-datatable/KTDataTable.vue";
 import type { Sort } from "@/components/kt-datatable//table-partials/models";
-import ExportGoodReceiptsModal from "@/components/modals/forms/ExportGoodReceiptsModal.vue";
-import AddGoodReceiptModal from "@/components/modals/forms/AddGoodReceiptModal.vue";
+import ExportStockModal from "@/components/modals/forms/ExportStockModal.vue";
 import arraySort from "array-sort";
 import { MenuComponent } from "@/assets/ts/components";
 import ApiService from "@/core/services/ApiService";
 import Loading from "@/components/kt-datatable/table-partials/Loading.vue"
-import { getGoodReceipts } from "@/core/data/goodsReceipt";
-import type { IGoodReceipt } from "@/core/data/goodsReceipt";
+import { getStocks } from "@/core/data/stocks";
+import type { IStock } from "@/core/data/stocks";
 
 export default defineComponent({
     name: "goods-receipt-list",
     components: {
         Datatable,
-        ExportGoodReceiptsModal,
-        AddGoodReceiptModal,
+        ExportStockModal,
         Loading
     },
     setup() {
         let loading = ref<boolean>(true);
+        let typeFilter = ref(0);
+        let selectedId = ref(0);
+        let selectedQuantity = ref(0);
         const tableHeader = ref([
             {
-                columnName: "Numero documento",
-                columnLabel: "documentNumber",
+                columnName: "Codice",
+                columnLabel: "code",
                 sortEnabled: true,
                 columnWidth: 175,
             },
             {
                 columnName: "Lotto",
-                columnLabel: "goodName",
+                columnLabel: "name",
                 sortEnabled: true,
                 columnWidth: 230,
             },
@@ -132,7 +139,7 @@ export default defineComponent({
                 columnWidth: 175,
             },
             {
-                columnName: "Data",
+                columnName: "Ultima spedizione",
                 columnLabel: "date",
                 sortEnabled: true,
                 columnWidth: 175,
@@ -147,39 +154,43 @@ export default defineComponent({
 
         const selectedIds = ref<Array<number>>([]);
         
-        let tableData = ref<IGoodReceipt[]>([]);
+        let tableData = ref<IStock[]>([]);
 
-        async function getItems(filterRequest: string) {
-            tableData.value = await getGoodReceipts(filterRequest);
+        async function getItems(filterRequest: string, type: number) {
+            tableData.value = await getStocks(filterRequest, type);
             loading.value = false;
         };
 
         onMounted(() => {
             loading.value = true;
-            getItems("");
+            getItems("", typeFilter.value);
         });
 
-        const deleteFewItems = () => {
-            selectedIds.value.forEach((item) => {
-                deleteItem(item);
-            });
-            selectedIds.value.length = 0;
-        };
+        watch(typeFilter, async (newTypeId, oldTypeId) => {
+            getItems("",newTypeId)
+        })
 
-        const deleteItem = (id: number) => {
-            loading.value = true;
-            ApiService.post(`GoodReceipts/Delete?id=${id}`, {})
-                .then(() => {
-                    getItems("");
-                })
-                .catch(({ response }) => {
-                    console.log(response);
-                });
-        };
+        // const deleteFewItems = () => {
+        //     selectedIds.value.forEach((item) => {
+        //         deleteItem(item);
+        //     });
+        //     selectedIds.value.length = 0;
+        // };
+
+        // const deleteItem = (id: number) => {
+        //     loading.value = true;
+        //     ApiService.post(`GoodReceipts/Delete?id=${id}`, {})
+        //         .then(() => {
+        //             getItems(typeFilter.value);
+        //         })
+        //         .catch(({ response }) => {
+        //             console.log(response);
+        //         });
+        // };
 
         const search = ref<string>("");
         const searchItems = () => {
-            getItems(search.value);
+            getItems(search.value, typeFilter.value);
             MenuComponent.reinitialization();
         };
 
@@ -193,14 +204,21 @@ export default defineComponent({
             selectedIds.value = selectedItems;
         };
 
+        function selectStock(id, quantity) {
+            selectedId.value = id;
+            selectedQuantity.value = quantity;
+        }
+
         return {
             tableData,
             tableHeader,
-            deleteItem,
+            // deleteItem,
             search,
             searchItems,
             selectedIds,
-            deleteFewItems,
+            typeFilter,
+            selectStock,
+            // deleteFewItems,
             sort,
             onItemSelect,
             getAssetPath,

@@ -7,7 +7,6 @@ interface ICustomer {
   customerTypeId?: number;
   zipCode?: string;
   address?: string;
-  zipCode?: string;
   city?: string;
   country?: string;
   province?: string;

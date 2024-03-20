@@ -1,6 +1,6 @@
 import ApiService from "@/core/services/ApiService";
 
-interface IGoodReceipt {
+interface IStock {
   id: number;
   documentNumber: number;
   date: string;
@@ -35,10 +35,11 @@ interface IGoodReceipt {
     notes: string;
     creationDate: string;
     updateDate: string;
+    LastDeliveryDate: string;
   };
 }
 
-const emptyGoodReceipt: IGoodReceipt = {
+const emptyStock: IStock = {
   id: 0,
   documentNumber: 0,
   date: "",
@@ -73,6 +74,7 @@ const emptyGoodReceipt: IGoodReceipt = {
     notes: "",
     creationDate: "",
     updateDate: "",
+    LastDeliveryDate: ""
   }
 }
 
@@ -81,13 +83,13 @@ interface IGoodsList {
   name: string;
 }
 
-const getGoodReceipts = (filterRequest: string) => {
+const getStocks = (filterRequest: string, type: number) => {
   return ApiService.get(
-    `GoodReceipt/Get?currentPage=0&filterRequest=${filterRequest}`,
+    `GoodReceipt/GetStocks?currentPage=0&filterRequest=${filterRequest}&typeFilter=${type}`,
     ""
   )
     .then(({ data }) => {
-      const results: Array<IGoodReceipt> = data.data;
+      const results: Array<IStock> = data.data;
       return results;
     })
     .catch(({ response }) => {
@@ -96,19 +98,6 @@ const getGoodReceipts = (filterRequest: string) => {
     });
 };
 
-const getGoodReceipt = (id) => {
-  return ApiService.get(`GoodReceipt/GetById?id=${id}`, "")
-    .then(({ data }) => {
-      const result: IGoodReceipt = data;
-      result.date =  new Date(data.date).toISOString().split('T')[0]
-      return result;
-    })
-    .catch(({ response }) => {
-      console.log(response);
-      return undefined;
-    });
-};
+export { getStocks, emptyStock };
 
-export { getGoodReceipts, getGoodReceipt, emptyGoodReceipt };
-
-export type { IGoodReceipt, IGoodsList };
+export type { IStock, IGoodsList };

@@ -26,7 +26,7 @@
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <input required type="text" class="form-control form-control-lg " placeholder="Nome" v-model="item.materialName" />
+            <input required type="text" class="form-control form-control-lg " placeholder="Nome" v-model="item.MaterialName" />
           </div>
           <!--end::Col-->
         </div>
@@ -41,7 +41,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input required type="text" class="form-control form-control-lg " placeholder="IdFac"
-              v-model="item.idFac" />
+              v-model="item.IdFac" />
           </div>
           <!--end::Col-->
         </div>
@@ -56,7 +56,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="DX"
-              v-model="item.dx" />
+              v-model="item.Dx" />
           </div>
           <!--end::Col-->
         </div>
@@ -71,7 +71,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="DY"
-              v-model="item.dy" />
+              v-model="item.Dy" />
           </div>
           <!--end::Col-->
         </div>
@@ -86,7 +86,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="Lung"
-              v-model="item.lung" />
+              v-model="item.Lung" />
           </div>
           <!--end::Col-->
         </div>
@@ -101,7 +101,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="Larg"
-              v-model="item.larg" />
+              v-model="item.Larg" />
           </div>
           <!--end::Col-->
         </div>
@@ -116,7 +116,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="Str"
-              v-model="item.str" />
+              v-model="item.Str" />
           </div>
           <!--end::Col-->
         </div>
@@ -135,14 +135,14 @@
           <!--begin::Col-->
           <div class="col-lg-6 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="Da"
-              v-model="item.from" />
+              v-model="item.From" />
           </div>
           <!--end::Col-->
 
            <!--begin::Col-->
            <div class="col-lg-6 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="A"
-              v-model="item.to" />
+              v-model="item.To" />
           </div>
           <!--end::Col-->
         </div>

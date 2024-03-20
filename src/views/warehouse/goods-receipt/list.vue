@@ -168,7 +168,7 @@ export default defineComponent({
 
         const deleteItem = (id: number) => {
             loading.value = true;
-            ApiService.post(`GoodReceipts/Delete?id=${id}`, {})
+            ApiService.post(`GoodReceipt/Delete?id=${id}`, {})
                 .then(() => {
                     getItems("");
                 })
