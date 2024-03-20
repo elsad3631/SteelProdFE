@@ -260,4 +260,4 @@ export default defineComponent({
     },
 });
 </script>
-  
+  ./list.vue

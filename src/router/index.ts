@@ -144,7 +144,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/orders/list",
         name: "orders-list",
-        component: () => import("@/views/orders/List.vue"),
+        component: () => import("@/views/orders/list.vue"),
         meta: {
           pageTitle: "Lista commesse",
           breadcrumbs: ["Apps", "Commesse"],
