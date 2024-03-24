@@ -1,0 +1,1 @@
+import{av as r}from"./index-9aa4c59a.js";const o=t=>r.get(`Accessories/Get?currentPage=0&filterRequest=${t}`,"").then(({data:e})=>e.data).catch(({response:e})=>(console.log(e),[])),n=t=>r.get(`Accessories/GetById?id=${t}`,"").then(({data:e})=>e).catch(({response:e})=>{console.log(e)});export{n as a,o as g};

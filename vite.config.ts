@@ -21,7 +21,7 @@ export default defineConfig({
       '.vue',
   ],
   },
-  base: "/SteelProdFE/",
+  // base: "./",
   build: {
     chunkSizeWarningLimit: 3000,
   },
