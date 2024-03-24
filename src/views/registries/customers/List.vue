@@ -103,7 +103,7 @@ import { getCustomers } from "@/core/data/customers";
 import type { ICustomer } from "@/core/data/customers";
 
 export default defineComponent({
-  name: "customers-list",
+  name: "accessories-list",
   components: {
       Datatable,
       ExportCustomersModal,
@@ -158,7 +158,17 @@ export default defineComponent({
           loading.value = true;
           getItems("");
       });
+      onMounted(() => {
+          loading.value = true;
+          getItems("");
+      });
 
+      const deleteFewItems = () => {
+          selectedIds.value.forEach((item) => {
+              deleteItem(item);
+          });
+          selectedIds.value.length = 0;
+      };
       const deleteFewItems = () => {
           selectedIds.value.forEach((item) => {
               deleteItem(item);
@@ -182,7 +192,21 @@ export default defineComponent({
           getItems(search.value);
           MenuComponent.reinitialization();
       };
+      const search = ref<string>("");
+      const searchItems = () => {
+          getItems(search.value);
+          MenuComponent.reinitialization();
+      };
 
+      const sort = (sort: Sort) => {
+          const reverse: boolean = sort.order === "asc";
+          if (sort.label) {
+              arraySort(tableData.value, sort.label, { reverse });
+          }
+      };
+      const onItemSelect = (selectedItems: Array<number>) => {
+          selectedIds.value = selectedItems;
+      };
       const sort = (sort: Sort) => {
           const reverse: boolean = sort.order === "asc";
           if (sort.label) {
