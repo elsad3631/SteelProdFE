@@ -169,12 +169,6 @@ export default defineComponent({
           });
           selectedIds.value.length = 0;
       };
-      const deleteFewItems = () => {
-          selectedIds.value.forEach((item) => {
-              deleteItem(item);
-          });
-          selectedIds.value.length = 0;
-      };
 
       const deleteItem = (id: number) => {
           loading.value = true;
@@ -192,21 +186,7 @@ export default defineComponent({
           getItems(search.value);
           MenuComponent.reinitialization();
       };
-      const search = ref<string>("");
-      const searchItems = () => {
-          getItems(search.value);
-          MenuComponent.reinitialization();
-      };
 
-      const sort = (sort: Sort) => {
-          const reverse: boolean = sort.order === "asc";
-          if (sort.label) {
-              arraySort(tableData.value, sort.label, { reverse });
-          }
-      };
-      const onItemSelect = (selectedItems: Array<number>) => {
-          selectedIds.value = selectedItems;
-      };
       const sort = (sort: Sort) => {
           const reverse: boolean = sort.order === "asc";
           if (sort.label) {

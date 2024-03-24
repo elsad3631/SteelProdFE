@@ -279,6 +279,39 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: "/",
+    component: () => import("@/layouts/AuthLayout.vue"),
+    children: [
+      {
+        path: "/sign-in",
+        name: "sign-in",
+        component: () =>
+          import("@/views/crafted/authentication/basic-flow/SignIn.vue"),
+        meta: {
+          pageTitle: "Sign In",
+        },
+      },
+      {
+        path: "/sign-up",
+        name: "sign-up",
+        component: () =>
+          import("@/views/crafted/authentication/basic-flow/SignUp.vue"),
+        meta: {
+          pageTitle: "Sign Up",
+        },
+      },
+      {
+        path: "/password-reset",
+        name: "password-reset",
+        component: () =>
+          import("@/views/crafted/authentication/basic-flow/PasswordReset.vue"),
+        meta: {
+          pageTitle: "Password reset",
+        },
+      },
+    ],
+  },
+  {
     path: "/:pathMatch(.*)*",
     redirect: "/404",
   },

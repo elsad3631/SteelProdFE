@@ -57,14 +57,9 @@ const getCustomers = (filterRequest: string) => {
     `Customers/Get?currentPage=0&filterRequest=${filterRequest}`,
     ""
   )
-  return ApiService.get(
-    `Customers/Get?currentPage=0&filterRequest=${filterRequest}`,
-    ""
-  )
     .then(({ data }) => {
       const results: Array<ICustomer> = data.data.map((item) => ({
         id: item.id,
-        code: item.code,
         code: item.code,
         name: item.name,
         customerTypeId: item.costomerTypeId,
