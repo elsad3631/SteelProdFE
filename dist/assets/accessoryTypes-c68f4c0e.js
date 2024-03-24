@@ -1,1 +1,0 @@
-import{av as s}from"./index-f4707fd9.js";const n=t=>s.get(`AccessoryType/Get?currentPage=0&filterRequest=${t}`,"").then(({data:e})=>e.data.map(r=>({id:r.id,name:r.name}))).catch(({response:e})=>(console.error(e),[]));export{n as g};

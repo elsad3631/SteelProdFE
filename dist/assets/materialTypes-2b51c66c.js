@@ -1,1 +1,0 @@
-import{av as a}from"./index-f4707fd9.js";const o=t=>a.get(`MaterialType/Get?currentPage=0&filterRequest=${t}`,"").then(({data:e})=>e.data.map(r=>({id:r.id,name:r.name}))).catch(({response:e})=>(console.error(e),[]));export{o as g};
