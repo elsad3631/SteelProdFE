@@ -1,0 +1,1 @@
+import{P as n,aA as r}from"./index-f4707fd9.js";const d=s=>{const t=s.substring(s.lastIndexOf("."),s.length),e=n().mode=="dark"?`${s.substring(0,s.lastIndexOf("."))}-dark`:s.substring(0,s.lastIndexOf("."));return`/SteelProdFE/media/illustrations/${r.value}/${e}${t}`},a=s=>"/SteelProdFE/"+s;export{d as a,a as g};
