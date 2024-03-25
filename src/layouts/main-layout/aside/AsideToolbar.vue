@@ -10,20 +10,20 @@
     <!--end::Symbol-->
 
     <!--begin::Wrapper-->
-    <div class="aside-user-info flex-row-fluid flex-wrap ms-5">
+    <div v-if="store.user.email != null"  class="aside-user-info flex-row-fluid flex-wrap ms-5">
       <!--begin::Section-->
       <div class="d-flex">
         <!--begin::Info-->
         <div class="flex-grow-1 me-2">
           <!--begin::Username-->
           <a href="#" class="text-white text-hover-primary fs-6 fw-semobold"
-            >{{userEmail}}</a
+            >{{store.user.email}}</a
           >
           <!--end::Username-->
 
           <!--begin::Description-->
           <span class="text-gray-600 fw-semobold d-block fs-8 mb-1"
-            >{{userRole}}</span
+            >{{store.user.email}}</span
           >
           <!--end::Description-->
 
@@ -81,13 +81,10 @@ export default defineComponent({
   },
   setup() {
     const store = useAuthStore();
-    const userEmail = store.user.email;
-    const userRole = store.user.role;
     
     return {
       getAssetPath,
-      userEmail,
-      userRole
+      store
     };
   },
 });
