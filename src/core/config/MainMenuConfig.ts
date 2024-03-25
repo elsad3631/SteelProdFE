@@ -20,7 +20,7 @@ const MainMenuConfig: Array<MenuItem> = [
       {
         heading: "Commesse",
         route: "/orders/list",
-        keenthemesIcon: "element-11",
+        keenthemesIcon: "tablet-text-down",
         bootstrapIcon: "bi-app-indicator",
       },
       {
@@ -54,7 +54,7 @@ const MainMenuConfig: Array<MenuItem> = [
       {
         sectionTitle: "Magazzino",
         route: "/pages",
-        keenthemesIcon: "element-plus",
+        keenthemesIcon: "cube-2",
         bootstrapIcon: "bi-archive",
         sub: [
           {
@@ -67,12 +67,12 @@ const MainMenuConfig: Array<MenuItem> = [
           }
         ],
       },
-      {
-        heading: "DDT",
-        route: "/transport-documents/list",
-        keenthemesIcon: "element-11",
-        bootstrapIcon: "bi-app-indicator",
-      },
+      // {
+      //   heading: "DDT",
+      //   route: "/transport-documents/list",
+      //   keenthemesIcon: "element-11",
+      //   bootstrapIcon: "bi-app-indicator",
+      // },
     ],
   },
   {
@@ -80,10 +80,10 @@ const MainMenuConfig: Array<MenuItem> = [
     route: "/settings",
     pages: [
       {
-        sectionTitle: "Impostazioni Xml",
+        sectionTitle: "Xml",
         route: "/xmlSettings",
-        keenthemesIcon: "element-plus",
-        bootstrapIcon: "bi-archive",
+        keenthemesIcon: "setting-2",
+        bootstrapIcon: "bi bi-gear",
         sub: [
           {
             heading: "Moduli",
@@ -103,7 +103,7 @@ const MainMenuConfig: Array<MenuItem> = [
         sectionTitle: "Tipologie",
         route: "/tpologies",
         keenthemesIcon: "element-plus",
-        bootstrapIcon: "bi-archive",
+        bootstrapIcon: "bi-gear",
         sub: [
           {
             heading: "Tipologie accessori",

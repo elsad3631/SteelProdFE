@@ -6,7 +6,7 @@
         <img
           alt="Logo"
           :src="getAssetPath('media/logos/IlLattoniereSrl-B1-sito.png')"
-          class="h-25px h-lg-25px"
+          class="h-25px h-lg-35px"
         />
       </router-link>
       <!--end::Logo-->
