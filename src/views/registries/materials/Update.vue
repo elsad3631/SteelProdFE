@@ -101,8 +101,8 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <select as="select" name="materialType" class="form-select form-select-lg fw-semobold"
-              v-model="item.materialType.name">
-              <option v-for="option in MaterialTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
+              v-model="item.materialTypeId">
+              <option v-for="option in MaterialTypes" :key="option.id" :value="option.id">{{ option.name }}</option>
             </select>
           </div>
           <!--end::Col-->
@@ -117,8 +117,8 @@
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <select as="select" name="supplier" class="form-select form-select-lg fw-semobold" v-model="item.supplier.name">
-              <option v-for="option in Suppliers" :key="option.id" :value="option.name">{{ option.name }}</option>
+            <select as="select" name="supplier" class="form-select form-select-lg fw-semobold" v-model="item.supplierId">
+              <option v-for="option in Suppliers" :key="option.id" :value="option.id">{{ option.name }}</option>
             </select>
           </div>
           <!--end::Col-->
@@ -134,8 +134,8 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <select as="select" name="deliveryType" class="form-select form-select-lg fw-semobold"
-              v-model="item.deliveryType.name">
-              <option v-for="option in DeliveryTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
+              v-model="item.deliveryTypeId">
+              <option v-for="option in DeliveryTypes" :key="option.id" :value="option.id">{{ option.name }}</option>
             </select>
           </div>
           <!--end::Col-->
@@ -331,64 +331,10 @@ export default defineComponent({
 
     const saveChanges = () => {
         loading.value = true;
-        const MaterialType = item.value?.materialType.name;
-        const materialType = MaterialTypes
-            ? MaterialTypes.value.find(option => option.name === MaterialType)
-            : undefined;
-
-            const DeliveryType = item.value?.deliveryType.name;
-        const deliveryType = DeliveryTypes
-            ? DeliveryTypes.value.find(option => option.name === DeliveryType)
-            : undefined;
-
-            const Supplier = item.value?.supplier.name;
-        const supplier = Suppliers
-            ? Suppliers.value.find(option => option.name === Supplier)
-            : undefined;
-            
-        if (materialType === undefined) {
-          Swal.fire({
-            text: "Attenzione, selezionare la tipologia del materiale.",
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Continua!",
-            heightAuto: false,
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
-          return;
-        }
-        if (supplier === undefined) {
-          Swal.fire({
-            text: "Attenzione, selezionare il fornitore.",
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Continua!",
-            heightAuto: false,
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
-          return;
-        }
-        if (deliveryType === undefined) {
-          Swal.fire({
-            text: "Attenzione, selezionare il metodo di pagamento.",
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Continua!",
-            heightAuto: false,
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
-          return;
-        }
-        
+       
         ApiService.post(`Materials/Update`, item.value)
           .then(() => {
-            setTimeout(() => {
+            
               loading.value = false;
 
               Swal.fire({
@@ -400,8 +346,9 @@ export default defineComponent({
                 customClass: {
                   confirmButton: "btn btn-primary",
                 },
-              })
-            }, 2000);
+              }) 
+              
+              router.push({ name: 'materials-list' })
           })
           .catch(({ response }) => {
             console.log(response);
@@ -423,7 +370,7 @@ export default defineComponent({
       loading.value = true;
       ApiService.post(`Materials/Delete?id=${id}`, {})
         .then(() => {
-          setTimeout(() => {
+          
               loading.value = false;
 
               Swal.fire({
@@ -436,8 +383,8 @@ export default defineComponent({
                   confirmButton: "btn btn-primary",
                 },
               })
-            }, 1000);
-          router.push({ name: 'accessories-list' })
+              
+          router.push({ name: 'materials-list' })
         })
         .catch(({ response }) => {
           console.log(response);

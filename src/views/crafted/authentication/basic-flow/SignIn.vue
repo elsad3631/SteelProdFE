@@ -84,10 +84,10 @@
           id="kt_sign_in_submit"
           class="btn btn-lg btn-primary w-100 mb-5"
         >
-          <span class="indicator-label"> Continue </span>
+          <span class="indicator-label"> Continua </span>
 
           <span class="indicator-progress">
-            Please wait...
+            Attendere...
             <span
               class="spinner-border spinner-border-sm align-middle ms-2"
             ></span>
@@ -149,10 +149,10 @@ export default defineComponent({
 
       if (error.length === 0) {
         Swal.fire({
-          text: "You have successfully logged in!",
+          text: "Accesso effettuato!",
           icon: "success",
           buttonsStyling: false,
-          confirmButtonText: "Ok, got it!",
+          confirmButtonText: "Continua",
           heightAuto: false,
           customClass: {
             confirmButton: "btn fw-semobold btn-light-primary",
@@ -166,7 +166,7 @@ export default defineComponent({
           text: error[0] as string,
           icon: "error",
           buttonsStyling: false,
-          confirmButtonText: "Try again!",
+          confirmButtonText: "Provare di nuovo!",
           heightAuto: false,
           customClass: {
             confirmButton: "btn fw-semobold btn-light-danger",

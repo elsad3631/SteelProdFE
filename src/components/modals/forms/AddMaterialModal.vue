@@ -75,9 +75,9 @@
                   <span class="required">Tipologia materiale</span>
                 </label>
                 <!--end::Label-->
-                <select class="form-select" aria-label="Select example" v-model="formData.MaterialType">
-                  <option value="">Seleziona la tipologia dell'accessorio...</option>
-                  <option v-for="item in MaterialTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
+                <select class="form-select" aria-label="Select example" v-model="formData.MaterialTypeId">
+                  <option value="0">Seleziona la tipologia dell'accessorio...</option>
+                  <option v-for="item in MaterialTypes" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
               <!--end::Input group-->
@@ -89,9 +89,9 @@
                   <span class="required">Fornitore</span>
                 </label>
                 <!--end::Label-->
-                <select class="form-select" aria-label="Select example" v-model="formData.Supplier">
-                  <option value="">Seleziona il fornitore...</option>
-                  <option v-for="item in Suppliers" :key="item.id" :value="item.name">{{ item.name }}</option>
+                <select class="form-select" aria-label="Select example" v-model="formData.SupplierId">
+                  <option value="0">Seleziona il fornitore...</option>
+                  <option v-for="item in Suppliers" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
               <!--end::Input group-->
@@ -180,9 +180,9 @@
                     <span class="required">Tipologia consegna</span>
                   </label>
                   <!--end::Label-->
-                  <select class="form-select" aria-label="Select example" v-model="formData.DeliveryType">
-                    <option value="">Seleziona la modalità di consegna...</option>
-                    <option v-for="item in DeliveryTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
+                  <select class="form-select" aria-label="Select example" v-model="formData.DeliveryTypeId">
+                    <option value="0">Seleziona la modalità di consegna...</option>
+                    <option v-for="item in DeliveryTypes" :key="item.id" :value="item.id">{{ item.name }}</option>
                   </select>
                 </div>
                 <!--end::Input group-->
@@ -320,14 +320,12 @@ export default defineComponent({
     });
 
     const submit = () => {
-      const materialType = MaterialTypes.value.find(option => option.name === formData.value.MaterialType);
-      const supplier = Suppliers.value.find(option => option.name === formData.value.Supplier);
-      const deliveryType = DeliveryTypes.value.find(option => option.name === formData.value.DeliveryType);
+      
       if (!formRef.value) {
         return;
       }
 
-      if(materialType === undefined){
+      if(formData.value.MaterialTypeId === 0){
         Swal.fire({
                 text: "Attenzione, selezionare la tipologia del materiale.",
                 icon: "error",
@@ -340,7 +338,7 @@ export default defineComponent({
               });
               return;
       }
-      if(supplier === undefined){
+      if(formData.value.SupplierId === 0){
         Swal.fire({
                 text: "Attenzione, selezionare il fornitore.",
                 icon: "error",
@@ -353,7 +351,7 @@ export default defineComponent({
               });
               return;
       }
-      if(deliveryType === undefined){
+      if(formData.value.DeliveryTypeId === 0){
         Swal.fire({
                 text: "Attenzione, selezionare il metodo di pagamento.",
                 icon: "error",
@@ -366,11 +364,7 @@ export default defineComponent({
               });
               return;
       }
-
-      formData.value.MaterialTypeId = materialType.id;
-      formData.value.SupplierId = supplier.id;
-      formData.value.DeliveryTypeId = deliveryType.id;
-      console.log(formData.value)
+      
       formRef.value.validate((valid: boolean) => {
         if (valid) {
           loading.value = true;

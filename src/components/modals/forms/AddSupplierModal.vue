@@ -39,7 +39,7 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
                   <!--begin::Label-->
-                  <label class="fs-6 fw-semobold mb-2">Codice univoco</label>
+                  <label class="required fs-6 fw-semobold mb-2">Codice univoco</label>
                   <!--end::Label-->
                   <input class="form-control" v-model="formData.UniqueCode" type="text" placeholder="Codice univoco..." />
                 </div>
@@ -221,9 +221,9 @@
                       <span class="required">Modalità di pagamento</span>
                     </label>
                     <!--end::Label-->
-                    <select class="form-select" aria-label="Select example" v-model="formData.PaymentType">
-                      <option value="">Seleziona la modalità di pagamento...</option>
-                      <option v-for="item in PaymentTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
+                    <select class="form-select" aria-label="Select example" v-model="formData.PaymentTypeId">
+                      <option value="0">Seleziona la modalità di pagamento...</option>
+                      <option v-for="item in PaymentTypes" :key="item.id" :value="item.id">{{ item.name }}</option>
                     </select>
                   </div>
                   <!--end::Input group-->
@@ -367,12 +367,12 @@
       })
   
       const submit = () => {
-        const paymentType = PaymentTypes.value.find(option => option.name === formData.value.PaymentType);
+        
         if (!formRef.value) {
           return
         }
   
-        if (paymentType === undefined) {
+        if (formData.value.PaymentTypeId === 0) {
                   Swal.fire({
                       text: "Attenzione, selezionare la modalità di pagamento.",
                       icon: "error",
@@ -386,12 +386,10 @@
                   return;
               }
   
-        formData.value.PaymentTypeId = paymentType.id
-  
         formRef.value.validate((valid: boolean) => {
           if (valid) {
             loading.value = true;
-            console.log(formData.value)
+            
             ApiService.post(`${controller}/Create`, formData.value)
               .then(() => {
                 

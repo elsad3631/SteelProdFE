@@ -2,28 +2,28 @@ import ApiService from "@/core/services/ApiService";
 
 interface IMarking {
   id: number;
-  MaterialName?: string;
-  IdFac?: string;
-  Dx?: string;
-  Dy?: string;
-  Lung?: string;
-  Larg?: string;
-  Str?: string;
-  From?: string;
-  To?: string;
+  materialName?: string;
+  idFac?: string;
+  dx?: string;
+  dy?: string;
+  lung?: string;
+  larg?: string;
+  str?: string;
+  from?: string;
+  to?: string;
 }
 
 const emptyMarking: IMarking = {
   id: 0,
-  MaterialName: "",
-  IdFac: "0",
-  Dx:  "0",
-  Dy:  "0",
-  Lung:  "0",
-  Larg:  "0",
-  Str:  "0",
-  From:  "",
-  To:  ""
+  materialName: "",
+  idFac: "0",
+  dx:  "0",
+  dy:  "0",
+  lung:  "0",
+  larg:  "0",
+  str:  "0",
+  from:  "",
+  to:  ""
 };
 
 const getMarkings = (filterRequest: string) => {

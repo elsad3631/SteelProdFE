@@ -51,9 +51,9 @@
                   <span class="required">Tipologia cliente</span>
                 </label>
                 <!--end::Label-->
-                <select class="form-select" aria-label="Select example" v-model="formData.CustomerType">
-                  <option value="">Seleziona la tipologia cliente...</option>
-                  <option v-for="item in CustomerTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
+                <select class="form-select" aria-label="Select example" v-model="formData.CustomerTypeId">
+                  <option value="0">Seleziona la tipologia cliente...</option>
+                  <option v-for="item in CustomerTypes" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
               <!--end::Input group-->
@@ -65,9 +65,9 @@
                   <span class="required">Modalità di pagamento</span>
                 </label>
                 <!--end::Label-->
-                <select class="form-select" aria-label="Select example" v-model="formData.PaymentType">
-                  <option value="">Seleziona la modalità di pagamento...</option>
-                  <option v-for="item in PaymentTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
+                <select class="form-select" aria-label="Select example" v-model="formData.PaymentTypeId">
+                  <option value="0">Seleziona la modalità di pagamento...</option>
+                  <option v-for="item in PaymentTypes" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
               <!--end::Input group-->
@@ -79,9 +79,9 @@
                   <span class="required">Modalità di consegna</span>
                 </label>
                 <!--end::Label-->
-                <select class="form-select" aria-label="Select example" v-model="formData.DeliveryType">
-                  <option value="">Seleziona la modalità di consegna...</option>
-                  <option v-for="item in DeliveryTypes" :key="item.id" :value="item.name">{{ item.name }}</option>
+                <select class="form-select" aria-label="Select example" v-model="formData.DeliveryTypeId">
+                  <option value="0">Seleziona la modalità di consegna...</option>
+                  <option v-for="item in DeliveryTypes" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
               <!--end::Input group-->
@@ -575,14 +575,12 @@ export default defineComponent({
     });
 
     const submit = () => {
-      const customerType = CustomerTypes.value.find(option => option.name === formData.value.CustomerType);
-      const paymentType = PaymentTypes.value.find(option => option.name === formData.value.PaymentType);
-      const deliveryType = DeliveryTypes.value.find(option => option.name === formData.value.DeliveryType);
+      
       if (!formRef.value) {
         return;
       }
 
-      if (customerType === undefined) {
+      if (formData.value.CustomerTypeId === 0) {
         Swal.fire({
           text: "Attenzione, selezionare la tipologia di cliente.",
           icon: "error",
@@ -595,7 +593,7 @@ export default defineComponent({
         });
         return;
       }
-      if (paymentType === undefined) {
+      if (formData.value.PaymentTypeId === 0) {
         Swal.fire({
           text: "Attenzione, selezionare il metodo di pagamento.",
           icon: "error",
@@ -608,7 +606,7 @@ export default defineComponent({
         });
         return;
       }
-      if (deliveryType === undefined) {
+      if (formData.value.DeliveryTypeId === 0) {
         Swal.fire({
           text: "Attenzione, selezionare il modalità di consegna.",
           icon: "error",
@@ -621,15 +619,11 @@ export default defineComponent({
         });
         return;
       }
-
-      formData.value.CustomerTypeId = customerType.id;
-      formData.value.PaymentTypeId = paymentType.id;
-      formData.value.DeliveryTypeId = deliveryType.id;
-
+      
       formRef.value.validate((valid: boolean) => {
         if (valid) {
           loading.value = true;
-          console.log(formData.value)
+          
           ApiService.post(`${controller}/Create`, formData.value)
             .then(() => {
 

@@ -26,7 +26,7 @@
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <input required type="text" class="form-control form-control-lg " placeholder="Nome" v-model="item.MaterialName" />
+            <input required type="text" class="form-control form-control-lg " placeholder="Nome" v-model="item.materialName" />
           </div>
           <!--end::Col-->
         </div>
@@ -41,7 +41,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input required type="text" class="form-control form-control-lg " placeholder="IdFac"
-              v-model="item.IdFac" />
+              v-model="item.idFac" />
           </div>
           <!--end::Col-->
         </div>
@@ -56,7 +56,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="DX"
-              v-model="item.Dx" />
+              v-model="item.dx" />
           </div>
           <!--end::Col-->
         </div>
@@ -71,7 +71,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="DY"
-              v-model="item.Dy" />
+              v-model="item.dy" />
           </div>
           <!--end::Col-->
         </div>
@@ -86,7 +86,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="Lung"
-              v-model="item.Lung" />
+              v-model="item.lung" />
           </div>
           <!--end::Col-->
         </div>
@@ -101,7 +101,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="Larg"
-              v-model="item.Larg" />
+              v-model="item.larg" />
           </div>
           <!--end::Col-->
         </div>
@@ -116,7 +116,7 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="Str"
-              v-model="item.Str" />
+              v-model="item.str" />
           </div>
           <!--end::Col-->
         </div>
@@ -135,14 +135,14 @@
           <!--begin::Col-->
           <div class="col-lg-6 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="Da"
-              v-model="item.From" />
+              v-model="item.from" />
           </div>
           <!--end::Col-->
 
            <!--begin::Col-->
            <div class="col-lg-6 fv-row">
             <input type="text" class="form-control form-control-lg " placeholder="A"
-              v-model="item.To" />
+              v-model="item.to" />
           </div>
           <!--end::Col-->
         </div>
@@ -185,7 +185,7 @@ import ApiService from "@/core/services/ApiService";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 export default defineComponent({
-  name: "module-xml-details",
+  name: "marking-xml-details",
   components: {
   },
   setup() {
@@ -200,6 +200,7 @@ export default defineComponent({
 
       const marking = await getMarking(id);
       item.value = marking || emptyMarking;
+      console.log(item.value)
       loading.value = false;
     };
 
@@ -225,6 +226,7 @@ export default defineComponent({
                 confirmButton: "btn btn-primary",
               },
             })
+            router.push({ name: 'markings-list' })
         })
         .catch(({ response }) => {
           console.log(response);

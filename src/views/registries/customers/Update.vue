@@ -57,8 +57,8 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <select as="select" name="customerType" class="form-select form-select-lg fw-semobold"
-                            v-model="item.customerType">
-                            <option v-for="option in CustomerTypes" :key="option.id" :value="option.name">{{ option.name
+                            v-model="item.customerTypeId">
+                            <option v-for="option in CustomerTypes" :key="option.id" :value="option.id">{{ option.name
                                 }}
                             </option>
                         </select>
@@ -76,8 +76,8 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <select as="select" name="paymentType" class="form-select form-select-lg fw-semobold"
-                            v-model="item.paymentType">
-                            <option v-for="option in PaymentTypes" :key="option.id" :value="option.name">{{ option.name
+                            v-model="item.paymentTypeId">
+                            <option v-for="option in PaymentTypes" :key="option.id" :value="option.id">{{ option.name
                                 }}
                             </option>
                         </select>
@@ -95,8 +95,8 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <select as="select" name="deliveryType" class="form-select form-select-lg fw-semobold"
-                            v-model="item.deliveryType">
-                            <option v-for="option in DeliveryTypes" :key="option.id" :value="option.name">{{ option.name
+                            v-model="item.deliveryTypeId">
+                            <option v-for="option in DeliveryTypes" :key="option.id" :value="option.id">{{ option.name
                                 }}
                             </option>
                         </select>
@@ -108,7 +108,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-semobold fs-6">Indirizzo</label>
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Indirizzo</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
@@ -123,7 +123,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-semobold fs-6">CAP</label>
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">CAP</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
@@ -138,7 +138,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-semobold fs-6">Città</label>
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Città</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
@@ -153,7 +153,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-semobold fs-6">Nazione</label>
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Nazione</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
@@ -168,7 +168,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-semobold fs-6">Provincia</label>
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Provincia</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
@@ -183,7 +183,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-semobold fs-6">Note</label>
+                    <label class="col-lg-4 col-form-label fw-semobold fs-6">Note</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
@@ -736,56 +736,10 @@ export default defineComponent({
 
         const saveChanges = () => {
             loading.value = true;
-            const customerType = CustomerTypes.value.find(option => option.name === item.value.customerType);
-            const paymentType = PaymentTypes.value.find(option => option.name === item.value.paymentType);
-            const deliveryType = DeliveryTypes.value.find(option => option.name === item.value.deliveryType);
-            if (customerType === undefined) {
-                Swal.fire({
-                    text: "Attenzione, selezionare la tipologia di cliente.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Continua!",
-                    heightAuto: false,
-                    customClass: {
-                        confirmButton: "btn btn-primary",
-                    },
-                });
-                return;
-            }
-            if (paymentType === undefined) {
-                Swal.fire({
-                    text: "Attenzione, selezionare la modalità di pagamento.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Continua!",
-                    heightAuto: false,
-                    customClass: {
-                        confirmButton: "btn btn-primary",
-                    },
-                });
-                return;
-            }
-            if (deliveryType === undefined) {
-                Swal.fire({
-                    text: "Attenzione, selezionare il metodo di consegna.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Continua!",
-                    heightAuto: false,
-                    customClass: {
-                        confirmButton: "btn btn-primary",
-                    },
-                });
-                return;
-            }
-            
-            item.value.deliveryTypeId = deliveryType.id;
-            item.value.paymentTypeId = paymentType.id;
-            item.value.customerTypeId = customerType.id;
-
+     
             ApiService.post(`Customers/Update`, item.value)
                 .then(() => {
-                    setTimeout(() => {
+                    
                         loading.value = false;
 
                         Swal.fire({
@@ -798,7 +752,8 @@ export default defineComponent({
                                 confirmButton: "btn btn-primary",
                             },
                         })
-                    }, 2000);
+
+                        router.push({ name: 'customers-list' })
                 })
                 .catch(({ response }) => {
                     console.log(response);
@@ -820,7 +775,7 @@ export default defineComponent({
             loading.value = true;
             ApiService.post(`Customers/Delete?id=${id}`, {})
                 .then(() => {
-                    setTimeout(() => {
+                    
                         loading.value = false;
 
                         Swal.fire({
@@ -833,7 +788,7 @@ export default defineComponent({
                                 confirmButton: "btn btn-primary",
                             },
                         })
-                    }, 1000);
+
                     router.push({ name: 'customers-list' })
                 })
                 .catch(({ response }) => {

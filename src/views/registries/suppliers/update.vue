@@ -80,7 +80,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Codice postale</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Codice postale</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -95,7 +95,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Città</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Città</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -110,7 +110,7 @@
            <!--begin::Input group-->
            <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Nazione</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Nazione</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -125,7 +125,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Provincia</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Provincia</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -140,7 +140,7 @@
            <!--begin::Input group-->
            <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">P. IVA</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">P. IVA</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -155,7 +155,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Codice fiscale</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Codice fiscale</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -170,7 +170,7 @@
            <!--begin::Input group-->
            <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Referente</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Referente</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -185,7 +185,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Telefono</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Telefono</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -200,7 +200,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Cellulare</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Cellulare</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -215,7 +215,7 @@
             <!--begin::Input group-->
             <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Email</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Email</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -230,7 +230,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">PEC</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">PEC</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -245,7 +245,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">FAX</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">FAX</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -260,7 +260,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Agente di riferimento</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Agente di riferimento</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -280,8 +280,8 @@
   
             <!--begin::Col-->
             <div class="col-lg-8 fv-row">
-              <select as="select" name="paymentType" class="form-select form-select-lg fw-semobold" v-model="item.paymentType.name">
-                <option v-for="option in PaymentTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
+              <select as="select" name="paymentType" class="form-select form-select-lg fw-semobold" v-model="item.paymentTypeId">
+                <option v-for="option in PaymentTypes" :key="option.id" :value="option.id">{{ option.name }}</option>
               </select>
             </div>
             <!--end::Col-->
@@ -291,7 +291,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Coordinate bancarie</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Coordinate bancarie</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -306,7 +306,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Note</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Note</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -321,7 +321,7 @@
            <!--begin::Input group-->
            <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6">Note</label>
+            <label class="col-lg-4 col-form-label fw-semobold fs-6">Note</label>
             <!--end::Label-->
   
             <!--begin::Col-->
@@ -451,29 +451,10 @@
   
       const saveChanges = () => {
           loading.value = true;
-          const PaymentType = item.value?.paymentType.name;
-          
-          const paymentType = PaymentType
-            ? PaymentTypes.value.find(option => option.name === PaymentType)
-            : undefined;
-       
-          if (paymentType === undefined) {
-            Swal.fire({
-              text: "Attenzione, selezionare la modalità di pagamento.",
-              icon: "error",
-              buttonsStyling: false,
-              confirmButtonText: "Continua!",
-              heightAuto: false,
-              customClass: {
-                confirmButton: "btn btn-primary",
-              },
-            });
-            return;
-          }
-          
+                  
           ApiService.post(`Suppliers/Update`, item.value)
             .then(() => {
-              setTimeout(() => {
+              
                 loading.value = false;
   
                 Swal.fire({
@@ -486,7 +467,8 @@
                     confirmButton: "btn btn-primary",
                   },
                 })
-              }, 2000);
+                
+                router.push({ name: 'suppliers-list' })
             })
             .catch(({ response }) => {
               console.log(response);
@@ -508,7 +490,7 @@
         loading.value = true;
         ApiService.post(`Suppliers/Delete?id=${id}`, {})
           .then(() => {
-            setTimeout(() => {
+            
                 loading.value = false;
   
                 Swal.fire({
@@ -521,7 +503,7 @@
                     confirmButton: "btn btn-primary",
                   },
                 })
-              }, 1000);
+                
             router.push({ name: 'suppliers-list' })
           })
           .catch(({ response }) => {

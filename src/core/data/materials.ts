@@ -49,7 +49,7 @@ interface IMaterial {
     id: number;
     name: string;
   };
-  lastDeliveryDate: Date;
+  lastDeliveryDate: string;
 }
 
 const emptyMaterial: IMaterial = {
@@ -101,7 +101,7 @@ const emptyMaterial: IMaterial = {
     id: 0,
     name: "",
   },
-  lastDeliveryDate: new Date()
+  lastDeliveryDate: ""
 }
 
 const getMaterials = (filterRequest: string) => {
@@ -123,6 +123,7 @@ const getMaterial = (id) => {
   return ApiService.get(`Materials/GetById?id=${id}`, "")
     .then(({ data }) => {
       const result: IMaterial = data;
+      result.lastDeliveryDate =  new Date(data.lastDeliveryDate).toISOString().split('T')[0]
       return result;
     })
     .catch(({ response }) => {
@@ -131,6 +132,7 @@ const getMaterial = (id) => {
     });
 };
 
-export { getMaterials, getMaterial, emptyMaterial };
+export { emptyMaterial, getMaterial, getMaterials };
 
-export type { IMaterial };
+  export type { IMaterial };
+

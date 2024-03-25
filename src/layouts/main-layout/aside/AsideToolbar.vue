@@ -17,13 +17,13 @@
         <div class="flex-grow-1 me-2">
           <!--begin::Username-->
           <a href="#" class="text-white text-hover-primary fs-6 fw-semobold"
-            >Admin</a
+            >{{userEmail}}</a
           >
           <!--end::Username-->
 
           <!--begin::Description-->
           <span class="text-gray-600 fw-semobold d-block fs-8 mb-1"
-            >Amministratore</span
+            >{{userRole}}</span
           >
           <!--end::Description-->
 
@@ -71,6 +71,7 @@ import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent } from "vue";
 import UserMenu from "@/layouts/main-layout/menus/UserAccountMenu.vue";
 import AsideSearch from "@/layouts/main-layout/aside/AsideSearch.vue";
+import { useAuthStore, type User } from "@/stores/auth";
 
 export default defineComponent({
   name: "kt--aside-toolbar",
@@ -79,8 +80,14 @@ export default defineComponent({
     AsideSearch,
   },
   setup() {
+    const store = useAuthStore();
+    const userEmail = store.user.email;
+    const userRole = store.user.role;
+    
     return {
       getAssetPath,
+      userEmail,
+      userRole
     };
   },
 });

@@ -85,8 +85,8 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <select as="select" name="country" class="form-select form-select-lg fw-semobold"
-              v-model="item.profileType">
-              <option v-for="option in ProfileTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
+              v-model="item.profileTypeId">
+              <option v-for="option in ProfileTypes" :key="option.id" :value="option.id">{{ option.name }}</option>
             </select>
           </div>
           <!--end::Col-->
@@ -101,8 +101,8 @@
 
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
-            <select as="select" name="supplier" class="form-select form-select-lg fw-semobold" v-model="item.supplier">
-              <option v-for="option in Suppliers" :key="option.id" :value="option.name">{{ option.name }}</option>
+            <select as="select" name="supplier" class="form-select form-select-lg fw-semobold" v-model="item.supplierId">
+              <option v-for="option in Suppliers" :key="option.id" :value="option.id">{{ option.name }}</option>
             </select>
           </div>
           <!--end::Col-->
@@ -195,8 +195,8 @@
           <!--begin::Col-->
           <div class="col-lg-8 fv-row">
             <select as="select" name="deliveryType" class="form-select form-select-lg fw-semobold"
-              v-model="item.deliveryType">
-              <option v-for="option in DeliveryTypes" :key="option.id" :value="option.name">{{ option.name }}</option>
+              v-model="item.deliveryTypeId">
+              <option v-for="option in DeliveryTypes" :key="option.id" :value="option.id">{{ option.name }}</option>
             </select>
           </div>
           <!--end::Col-->
@@ -355,52 +355,10 @@ export default defineComponent({
 
     const saveChanges = () => {
         loading.value = true;
-        const profileType = ProfileTypes.value.find(option => option.name === item.value.profileType);
-        const supplier = Suppliers.value.find(option => option.name === item.value.supplier);
-        const deliveryType = DeliveryTypes.value.find(option => option.name === item.value.deliveryType);
-        if (profileType === undefined) {
-          Swal.fire({
-            text: "Attenzione, selezionare la tipologia dell'accessorio.",
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Continua!",
-            heightAuto: false,
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
-          return;
-        }
-        if (supplier === undefined) {
-          Swal.fire({
-            text: "Attenzione, selezionare il fornitore.",
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Continua!",
-            heightAuto: false,
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
-          return;
-        }
-        if (deliveryType === undefined) {
-          Swal.fire({
-            text: "Attenzione, selezionare il metodo di pagamento.",
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Continua!",
-            heightAuto: false,
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
-          return;
-        }
-        
+      
         ApiService.post(`Profiles/Update`, item.value)
           .then(() => {
-            setTimeout(() => {
+            
               loading.value = false;
 
               Swal.fire({
@@ -413,7 +371,8 @@ export default defineComponent({
                   confirmButton: "btn btn-primary",
                 },
               })
-            }, 2000);
+              
+              router.push({ name: 'profiles-list' })
           })
           .catch(({ response }) => {
             console.log(response);
@@ -435,7 +394,7 @@ export default defineComponent({
       loading.value = true;
       ApiService.post(`Profiles/Delete?id=${id}`, {})
         .then(() => {
-          setTimeout(() => {
+          
               loading.value = false;
 
               Swal.fire({
@@ -448,7 +407,7 @@ export default defineComponent({
                   confirmButton: "btn btn-primary",
                 },
               })
-            }, 1000);
+              
           router.push({ name: 'profiles-list' })
         })
         .catch(({ response }) => {

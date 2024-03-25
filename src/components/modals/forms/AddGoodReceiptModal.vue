@@ -80,7 +80,7 @@
               <!--begin::Input group-->
               <div class="fv-row mb-7">
                 <!--begin::Label-->
-                <label class="fs-6 fw-semobold mb-2">Quantità</label>
+                <label class="required fs-6 fw-semobold mb-2">Quantità</label>
                 <!--end::Label-->
                 <input class="form-control" v-model="formData.Quantity" type="number" placeholder="Quantità..." />
               </div>
@@ -94,7 +94,7 @@
                 </label>
                 <!--end::Label-->
                 <select class="form-select" aria-label="Select example" v-model="formData.SupplierId">
-                  <option value="">Seleziona il fornitore...</option>
+                  <option value="0">Seleziona il fornitore...</option>
                   <option v-for="item in Suppliers" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
@@ -259,26 +259,7 @@ export default defineComponent({
     })
 
     const submit = () => {
-      // let goodSupplierId = ref(0);
-      // if (formData.value.TypeId == 0) {
-      //   const accessory = Accessories.value.find(option => option.name === formData.value.GoodName);
-      //   formData.value.GoodId = accessory?.id || 0;
-      //   formData.value.GoodName = accessory?.name || "";
-      //   goodSupplierId.value = accessory?.supplierId || 0;
-      // } else if (formData.value.TypeId == 1) {
-      //   const profile = Profiles.value.find(option => option.name === formData.value.GoodName);
-      //   formData.value.GoodId = profile?.id || 0;
-      //   formData.value.GoodName = profile?.name || "";
-      //   goodSupplierId.value = profile?.supplierId || 0;
-      // } else if (formData.value.TypeId == 2) {
-      //   const material = Materials.value.find(option => option.name === formData.value.GoodName);
-      //   formData.value.GoodId = material?.id || 0;
-      //   formData.value.GoodName = material?.name || "";
-      //   goodSupplierId.value = material?.supplierId || 0;
-      // }
-
-      // const supplier = Suppliers.value.find(option => option.name === formData.value.Supplier);
-
+      
       if (!formRef.value) {
         return;
       }
@@ -298,13 +279,11 @@ export default defineComponent({
       }
 
       formData.value.GoodName = GoodsList.value.find(option => option.id === formData.value.GoodId)?.name || "";
-
-      // formData.value.SupplierId = supplier?.id || 0;
-
+      
       formRef.value.validate((valid: boolean) => {
         if (valid) {
           loading.value = true;
-          console.log(formData.value)
+          
           ApiService.post(`${controller}/Create`, formData.value)
             .then(() => {
               loading.value = false;

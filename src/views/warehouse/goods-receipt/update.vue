@@ -291,7 +291,6 @@
 
           ApiService.post(`GoodReceipt/Update`, item.value)
             .then(() => {
-              setTimeout(() => {
                 loading.value = false;
   
                 Swal.fire({
@@ -304,7 +303,8 @@
                     confirmButton: "btn btn-primary",
                   },
                 })
-              }, 2000);
+                
+                router.push({ name: 'goods-receipt-list' })
             })
             .catch(({ response }) => {
               console.log(response.data.message);

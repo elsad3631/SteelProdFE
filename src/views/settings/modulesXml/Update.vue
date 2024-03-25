@@ -396,6 +396,7 @@ export default defineComponent({
                 confirmButton: "btn btn-primary",
               },
             })
+            router.push({ name: 'modules-xml-list' })
         })
         .catch(({ response }) => {
           console.log(response);
@@ -431,7 +432,7 @@ export default defineComponent({
               },
             })
           }, 1000);
-          router.push({ name: 'accessories-list' })
+          router.push({ name: 'modules-xml-list' })
         })
         .catch(({ response }) => {
           console.log(response);

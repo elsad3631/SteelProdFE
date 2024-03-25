@@ -376,7 +376,7 @@ export default defineComponent({
       formRef.value.validate((valid: boolean) => {
         if (valid) {
           loading.value = true;
-          console.log(formData.value)
+          
           ApiService.post(`${controller}/Create`, formData.value)
             .then(() => {
               loading.value = false;
